@@ -769,14 +769,18 @@ export default async function StationPage({
                     </p>
                   ) : null}
 
-                  {readingsResult.meta.cached || readingsResult.meta.degradedReason ? (
+                  {/* Only when the upstream actually failed.
+                      `meta.cached` is true for almost every request by design —
+                      the cache is what keeps upstream to ~4 calls an hour — so
+                      warning on it would tell nearly every visitor the feed was
+                      down. A notice that is always showing is a notice nobody
+                      reads. `degradedReason` is set only on a real failure. */}
+                  {readingsResult.meta.degradedReason ? (
                     <p className="text-muted-foreground text-xs">
-                      {t(dict, 'freshness.cachedNotice')}
-                      {readingsResult.meta.degradedReason
-                        ? ` ${t(dict, 'freshness.degradedReason', {
-                            reason: readingsResult.meta.degradedReason,
-                          })}`
-                        : ''}
+                      {t(dict, 'freshness.cachedNotice')}{' '}
+                      {t(dict, 'freshness.degradedReason', {
+                        reason: readingsResult.meta.degradedReason,
+                      })}
                     </p>
                   ) : null}
 
