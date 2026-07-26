@@ -18,7 +18,12 @@ import sample from '../../../../fixtures/upstream-station-sample.json';
 import { POLLUTANT_CODES, type PollutantCode } from '@/config/pollutants';
 import { STATIONS, findStation } from '@/config/stations';
 import { buildPollutantReading, calculateOverall } from '../calculate-index';
-import { ageInHours, classifyFreshness, isForecastPoint, latestObservedTimestamp } from '../freshness';
+import {
+  ageInHours,
+  classifyFreshness,
+  isForecastPoint,
+  latestObservedTimestamp,
+} from '../freshness';
 import type {
   AirQualityProvider,
   AirQualityStation,
@@ -59,17 +64,39 @@ type Point = {
 };
 
 /**
+ * Newest captured hour that carries a directly measured value.
+ *
+ * The rebase anchors on THIS, not on the newest key. The captured window is
+ * contiguous and ends ~52 hours into the CAMS forecast, so anchoring on the last
+ * key would push every real measurement two days into the past and the app would
+ * correctly — but uselessly — report the fixture as unavailable.
+ */
+const NEWEST_MEASURED_RAW = (() => {
+  for (let i = RAW_HOURS.length - 1; i >= 0; i -= 1) {
+    const row = RAW[RAW_HOURS[i]];
+    const hasMeasured = POLLUTANT_CODES.some(
+      (code) =>
+        row[`val_${code}`] !== null &&
+        row[`val_${code}`] !== undefined &&
+        row[`modelled_${code}`] === 0,
+    );
+    if (hasMeasured) return Date.parse(RAW_HOURS[i]);
+  }
+  return Date.parse(RAW_HOURS[RAW_HOURS.length - 1]);
+})();
+
+/**
  * Rebase the captured window onto the present.
  *
- * The newest captured hour becomes "two hours ago", leaving a couple of
- * forecast hours ahead — mirroring production, where the series always extends
- * into the future.
+ * The newest measured hour becomes the previous whole hour, so fixture data
+ * reads as `fresh` exactly like production does an hour after publication, and
+ * the captured forecast tail extends naturally into the future.
  */
 function buildPoints(stationId: string): Point[] {
   const station = findStation(stationId);
   const factor = stationOffset(stationId);
-  const anchor = currentHourMs() + 2 * 3_600_000;
-  const newestRaw = Date.parse(RAW_HOURS[RAW_HOURS.length - 1]);
+  const anchor = currentHourMs() - 3_600_000;
+  const newestRaw = NEWEST_MEASURED_RAW;
 
   const points: Point[] = [];
 
@@ -162,7 +189,10 @@ export class FixtureAirQualityProvider implements AirQualityProvider {
     });
   }
 
-  async getStationHistory(stationId: string, options: HistoryOptions = {}): Promise<HistoricalReading[]> {
+  async getStationHistory(
+    stationId: string,
+    options: HistoryOptions = {},
+  ): Promise<HistoricalReading[]> {
     const station = findStation(stationId);
     if (!station) return [];
 

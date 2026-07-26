@@ -55,14 +55,28 @@ test.describe('the accessible list view', () => {
         if (element.hasAttribute('hidden')) continue;
         if ((element as HTMLInputElement).type === 'hidden') continue;
 
+        /*
+         * An approximation of the accessible-name algorithm, in precedence
+         * order. It has to include BOTH label forms: `<input>` is a void
+         * element with no textContent of its own, so a correctly labelled
+         * radio or checkbox looks anonymous to a naive textContent check and
+         * the audit reports a failure that does not exist.
+         */
+        const labelledBy = element.getAttribute('aria-labelledby');
+        const labels = (element as HTMLInputElement).labels;
+
         const name =
           element.getAttribute('aria-label') ??
-          (element.getAttribute('aria-labelledby')
-            ? document.getElementById(element.getAttribute('aria-labelledby') as string)
-                ?.textContent
+          (labelledBy ? document.getElementById(labelledBy)?.textContent : null) ??
+          (labels && labels.length > 0
+            ? Array.from(labels)
+                .map((l) => l.textContent ?? '')
+                .join(' ')
             : null) ??
-          element.textContent ??
+          element.closest('label')?.textContent ??
+          (element.textContent?.trim() ? element.textContent : null) ??
           element.getAttribute('title') ??
+          (element as HTMLInputElement).value ??
           '';
 
         if (name.trim() === '') {

@@ -239,7 +239,14 @@ describe('latestObservedTimestamp', () => {
     // The captured payload's newest key really is in the future relative to the
     // newest measurement, by roughly the CAMS forecast horizon.
     expect(Date.parse(newestKey)).toBeGreaterThan(Date.parse(latest as string));
-    expect(latest).toBe('2026-07-16T04:00:00.000Z');
+
+    // Derived from the fixture rather than pinned to a literal: the capture can
+    // be refreshed, and the property under test is "the newest MEASURED hour",
+    // not one particular timestamp.
+    const expected = keys
+      .filter((k) => points.find((pt) => pt.measuredAt === k)?.hasMeasuredValue)
+      .pop();
+    expect(latest).toBe(expected);
   });
 });
 

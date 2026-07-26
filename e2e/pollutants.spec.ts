@@ -22,7 +22,16 @@ async function choosePollutant(page: Page, label: RegExp): Promise<boolean> {
     page.getByRole('button', { name: label }),
   );
   if (tab) {
-    await tab.click();
+    /*
+     * The filter styles a wrapping `<label>` and clips the radio itself to a
+     * screen-reader-only box. That is a normal, accessible pattern, but it means
+     * the input is not the thing a pointer can reach — the label sits over it.
+     * Drive the label when there is one, exactly as a person would.
+     */
+    const wrappingLabel = tab.locator('xpath=ancestor::label[1]');
+    const target = (await wrappingLabel.count()) > 0 ? wrappingLabel.first() : tab;
+    await target.scrollIntoViewIfNeeded();
+    await target.click();
     return true;
   }
 
@@ -59,11 +68,27 @@ test.describe('switching pollutants', () => {
     const filter = await findPollutantFilter(page);
     if (!filter) skipBecauseAbsent('this build has no pollutant filter');
 
-    // A control with no accessible name is unusable by a screen reader, however
-    // obvious it looks on screen.
+    /*
+     * A control with no accessible name is unusable by a screen reader, however
+     * obvious it looks on screen.
+     *
+     * `<legend>` counts. A fieldset labelled by its legend is the most
+     * conventional way to name a group of radios, and demanding `aria-label`
+     * specifically would fail the markup that needs it least — the locator above
+     * already matched this element BY its accessible name, so a name exists.
+     */
     const name = await filter.getAttribute('aria-label');
     const labelledBy = await filter.getAttribute('aria-labelledby');
-    expect(Boolean(name || labelledBy), 'the pollutant filter has no accessible name').toBe(true);
+    const legend = await filter
+      .locator('legend')
+      .first()
+      .textContent()
+      .catch(() => null);
+
+    expect(
+      Boolean(name || labelledBy || legend?.trim()),
+      'the pollutant filter has no accessible name',
+    ).toBe(true);
   });
 
   test('changes what the page shows when a pollutant is chosen', async ({ page }) => {

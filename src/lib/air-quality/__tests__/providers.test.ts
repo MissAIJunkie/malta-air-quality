@@ -317,6 +317,25 @@ function installUpstream(routes: UpstreamRoutes): string[] {
 }
 
 describe('EEA provider — parsing a real captured payload', () => {
+  /**
+   * Newest hour in the captured series carrying a directly measured value.
+   *
+   * Computed from the fixture rather than written as a literal so that
+   * regenerating the capture cannot silently invalidate these assertions — the
+   * property being tested is "newest measured hour, never the newest key".
+   */
+  const NEWEST_MEASURED_HOUR = (() => {
+    const keys = Object.keys(REAL_SERIES).sort();
+    for (let i = keys.length - 1; i >= 0; i -= 1) {
+      const row = REAL_SERIES[keys[i]] as Record<string, unknown>;
+      const measured = POLLUTANT_CODES.some(
+        (code) => typeof row[`val_${code}`] === 'number' && row[`modelled_${code}`] === 0,
+      );
+      if (measured) return keys[i];
+    }
+    throw new Error('fixture contains no measured hour');
+  })();
+
   it('takes the newest MEASURED hour as measuredAt, never the newest key', async () => {
     installUpstream({});
     const readings = await eeaProvider.getLatestReadings();
@@ -326,9 +345,9 @@ describe('EEA provider — parsing a real captured payload', () => {
 
     expect(readings).toHaveLength(5);
     for (const reading of readings) {
-      // 2026-07-16T04:00Z is the last hour in the capture whose values carry
-      // `modelled_* == 0`; 2026-07-28T10:00Z is the end of the CAMS forecast.
-      expect(reading.measuredAt).toBe('2026-07-16T04:00:00.000Z');
+      // The last hour whose values carry `modelled_* == 0`. The newest key is
+      // the end of the CAMS forecast, roughly two days later.
+      expect(reading.measuredAt).toBe(NEWEST_MEASURED_HOUR);
       expect(reading.measuredAt).not.toBe(newestKey);
       expect(Date.parse(newestKey)).toBeGreaterThan(Date.parse(reading.measuredAt));
     }
@@ -337,7 +356,7 @@ describe('EEA provider — parsing a real captured payload', () => {
   it('reads the concentrations for that hour without rounding them away', async () => {
     installUpstream({});
     const [reading] = await eeaProvider.getLatestReadings();
-    const hour = REAL_SERIES['2026-07-16T04:00:00.000Z'];
+    const hour = REAL_SERIES[NEWEST_MEASURED_HOUR];
 
     for (const code of POLLUTANT_CODES) {
       expect(reading.pollutants[code]?.value).toBe(hour[`val_${code}`]);
@@ -366,7 +385,7 @@ describe('EEA provider — parsing a real captured payload', () => {
     expect(observed.every((p) => p.forecast === false)).toBe(true);
     expect(all.length).toBeGreaterThan(observed.length);
     expect(all.filter((p) => p.forecast).length).toBe(all.length - observed.length);
-    expect(observed[observed.length - 1].measuredAt).toBe('2026-07-16T04:00:00.000Z');
+    expect(observed[observed.length - 1].measuredAt).toBe(NEWEST_MEASURED_HOUR);
   });
 });
 

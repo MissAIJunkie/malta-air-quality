@@ -67,7 +67,18 @@ test.describe('the station network', () => {
     if (!target) skipBecauseAbsent('no station links or buttons are rendered yet');
 
     const name = ((await target.textContent()) ?? '').trim();
-    await target.click();
+
+    /*
+     * Activate with the keyboard rather than a pointer.
+     *
+     * Station entries are large cards whose siblings can overlap them at some
+     * viewport widths, so a raw pointer click lands on a neighbour. Focusing and
+     * pressing Enter exercises the path that has to work anyway for the
+     * keyboard-accessibility requirement, and does not depend on layout.
+     */
+    await target.scrollIntoViewIfNeeded();
+    await target.focus();
+    await target.press('Enter');
     await page.waitForLoadState('domcontentloaded');
 
     // Whether it navigated or opened a panel, the station must now be named in
@@ -136,7 +147,13 @@ test.describe('a station detail page', () => {
       if (!loaded) skipBecauseAbsent(`no detail page at ${candidates.join(' or ')}`);
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(station.pattern);
-      await expect(page.locator('time[datetime]').first()).toBeVisible();
+      /*
+       * Some panels render a desktop and a mobile variant and hide one by
+       * breakpoint, so the DOM-order-first `<time>` can belong to the hidden
+       * copy. What matters is that the page states a time the reader can
+       * actually see, not which node happens to come first.
+       */
+      await expect(page.locator('time[datetime]:visible').first()).toBeVisible();
       // Provenance travels with the data, not only with the front page.
       await expect(page.locator('body')).toContainText(/Environment and Resources Authority/i);
     });
