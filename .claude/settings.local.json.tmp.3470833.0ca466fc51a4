@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --version)",
+      "Bash(npm --version)",
+      "Bash(corepack --version)",
+      "Bash(curl -sS -o /dev/null -w \"registry.npmjs.org: %{http_code}\\\\n\" --max-time 15 https://registry.npmjs.org/)",
+      "Bash(curl -sS -o /dev/null -w \"era.org.mt: %{http_code}\\\\n\" --max-time 20 https://era.org.mt/topic/real-time-air-quality-network/)",
+      "WebFetch(domain:era.org.mt)",
+      "WebSearch",
+      "WebFetch(domain:arja.mt)",
+      "Bash(grep -oE 'https?://[a-zA-Z0-9._~:/?#@!$&\\(\\)*+,;=%-]+' arja.html)",
+      "Bash(corepack enable *)",
+      "Bash(npm view *)",
+      "Bash(python3 -c ' *)",
+      "WebFetch(domain:airindex.eea.europa.eu)",
+      "Bash(pnpm dlx *)",
+      "Bash(pnpm add *)",
+      "Bash(node -e ' *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm install *)",
+      "Bash(python3)",
+      "Bash(python3 -)",
+      "Bash(cd *)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)"
+    ]
+  }
+}

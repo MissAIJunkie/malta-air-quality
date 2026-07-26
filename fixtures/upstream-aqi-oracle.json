@@ -1,0 +1,4307 @@
+[
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T05:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.11507,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T07:00:00.000Z",
+"pollutant": "NO2",
+"value": 43.61927,
+"upstreamSubIndex": 3.5294117647
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.95154,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T13:00:00.000Z",
+"pollutant": "PM10",
+"value": 35.97462,
+"upstreamSubIndex": 2.6896551724
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T16:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.36255,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 29.65281,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-15T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.18138,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T00:00:00.000Z",
+"pollutant": "PM10",
+"value": 31.77503,
+"upstreamSubIndex": 2.5517241379
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T03:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.78906,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 32.03458,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.77064,
+"upstreamSubIndex": 3.0588235294
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T11:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.31307,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T14:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.88931,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 25.84634,
+"upstreamSubIndex": 3.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 32.05301,
+"upstreamSubIndex": 3.4705882353
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-16T22:00:00.000Z",
+"pollutant": "PM10",
+"value": 57.70731,
+"upstreamSubIndex": 3.1621621622
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T01:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.34193,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 34.25773,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 21.39133,
+"upstreamSubIndex": 3.1470588235
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T09:00:00.000Z",
+"pollutant": "PM10",
+"value": 41.95316,
+"upstreamSubIndex": 2.8965517241
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T12:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.79511,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 13.40715,
+"upstreamSubIndex": 2.1428571429
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 36.55982,
+"upstreamSubIndex": 3.6176470588
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T20:00:00.000Z",
+"pollutant": "PM10",
+"value": 50.71138,
+"upstreamSubIndex": 3.0675675676
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-17T23:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.47271,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 22.70242,
+"upstreamSubIndex": 2.8571428571
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.36966,
+"upstreamSubIndex": 3.0588235294
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 68.71887,
+"upstreamSubIndex": 3.3108108108
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T10:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.92454,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 29.24165,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T15:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.84108,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T18:00:00.000Z",
+"pollutant": "PM10",
+"value": 75.32642,
+"upstreamSubIndex": 3.3918918919
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T21:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.1351,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-18T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 30.37613,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 29.5947,
+"upstreamSubIndex": 3.4117647059
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T05:00:00.000Z",
+"pollutant": "PM10",
+"value": 76.43017,
+"upstreamSubIndex": 3.4054054054
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T08:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.81351,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 48.77185,
+"upstreamSubIndex": 3.6764705882
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 21.11235,
+"upstreamSubIndex": 3.1470588235
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 87.71606,
+"upstreamSubIndex": 3.5675675676
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.34143,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-19T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 84.54329,
+"upstreamSubIndex": 4.6153846154
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 27.29912,
+"upstreamSubIndex": 3.3235294118
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T03:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 23.50031,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 138.32217,
+"upstreamSubIndex": 4.2297297297
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T09:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.79999,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 21.79762,
+"upstreamSubIndex": 2.7857142857
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T14:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 29.26542,
+"upstreamSubIndex": 3.3823529412
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 89.49369,
+"upstreamSubIndex": 3.5810810811
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T20:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.10152,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-20T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 46.56096,
+"upstreamSubIndex": 3.6176470588
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T01:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.55892,
+"upstreamSubIndex": 3.2647058824
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 25.69732,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 88.02015,
+"upstreamSubIndex": 3.5675675676
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T10:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.47697,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 46.2693,
+"upstreamSubIndex": 3.5882352941
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T15:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 25.87416,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T18:00:00.000Z",
+"pollutant": "PM10",
+"value": 96.87833,
+"upstreamSubIndex": 3.6891891892
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T21:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.51153,
+"upstreamSubIndex": 1.0526315789
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-21T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 58.38915,
+"upstreamSubIndex": 3.9411764706
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.39274,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T05:00:00.000Z",
+"pollutant": "PM10",
+"value": 93.03787,
+"upstreamSubIndex": 3.6351351351
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T08:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.20145,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 37.18725,
+"upstreamSubIndex": 3.3235294118
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 27.28081,
+"upstreamSubIndex": 3.3235294118
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 96.89189,
+"upstreamSubIndex": 3.6891891892
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.0921,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-22T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 26.26304,
+"upstreamSubIndex": 3.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 28.44455,
+"upstreamSubIndex": 3.3529411765
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T03:00:00.000Z",
+"pollutant": "PM10",
+"value": 62.57257,
+"upstreamSubIndex": 3.2297297297
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.11865,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T08:00:00.000Z",
+"pollutant": "NO2",
+"value": 46.47953,
+"upstreamSubIndex": 3.5882352941
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 30.25681,
+"upstreamSubIndex": 3.4117647059
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 77.47478,
+"upstreamSubIndex": 3.4189189189
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.10671,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T19:00:00.000Z",
+"pollutant": "NO2",
+"value": 13.97423,
+"upstreamSubIndex": 2.2142857143
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-23T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.51592,
+"upstreamSubIndex": 3.0588235294
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-24T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 39.57805,
+"upstreamSubIndex": 2.8275862069
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-24T04:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.18724,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-24T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 60.26053,
+"upstreamSubIndex": 3.1891891892
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-25T13:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.08097,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-25T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.08015,
+"upstreamSubIndex": 2.2068965517
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-25T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.08289,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-25T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 22.11853,
+"upstreamSubIndex": 2.7857142857
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.08055,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T03:00:00.000Z",
+"pollutant": "PM10",
+"value": 17.90432,
+"upstreamSubIndex": 2.0689655172
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 29.0,
+"upstreamSubIndex": 2.4482758621
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T09:00:00.000Z",
+"pollutant": "NO2",
+"value": 11.0,
+"upstreamSubIndex": 2.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 29.0,
+"upstreamSubIndex": 2.4482758621
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-26T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 11.0,
+"upstreamSubIndex": 2.0
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T04:00:00.000Z",
+"pollutant": "PM10",
+"value": 32.0,
+"upstreamSubIndex": 2.5517241379
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T07:00:00.000Z",
+"pollutant": "NO2",
+"value": 17.0,
+"upstreamSubIndex": 2.4285714286
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 12.0,
+"upstreamSubIndex": 2.6666666667
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T15:00:00.000Z",
+"pollutant": "PM10",
+"value": 47.0,
+"upstreamSubIndex": 3.0135135135
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.0,
+"upstreamSubIndex": 2.2857142857
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-27T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-28T02:00:00.000Z",
+"pollutant": "PM10",
+"value": 32.0,
+"upstreamSubIndex": 2.5517241379
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-28T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 20.0,
+"upstreamSubIndex": 2.6428571429
+},
+{
+"station": "MT00011",
+"measuredAt": "2026-07-28T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.0,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 41.68233,
+"upstreamSubIndex": 2.8965517241
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 12.0701,
+"upstreamSubIndex": 2.6666666667
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.78402,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T14:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.11888,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.5315,
+"upstreamSubIndex": 2.2413793103
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.6241,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T20:00:00.000Z",
+"pollutant": "O3",
+"value": 86.85508,
+"upstreamSubIndex": 2.6666666667
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-15T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 10.79573,
+"upstreamSubIndex": 2.0
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T01:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.09952,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T03:00:00.000Z",
+"pollutant": "PM10",
+"value": 30.5455,
+"upstreamSubIndex": 2.5172413793
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T05:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.50517,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T07:00:00.000Z",
+"pollutant": "O3",
+"value": 48.75876,
+"upstreamSubIndex": 1.813559322
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T09:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.12672,
+"upstreamSubIndex": 2.2857142857
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T12:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.08615,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.5265,
+"upstreamSubIndex": 2.3793103448
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T16:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.472,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T18:00:00.000Z",
+"pollutant": "O3",
+"value": 90.73712,
+"upstreamSubIndex": 2.7692307692
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.49714,
+"upstreamSubIndex": 2.5
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-16T23:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.18156,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 33.55117,
+"upstreamSubIndex": 2.6206896552
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T03:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.5895,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T05:00:00.000Z",
+"pollutant": "O3",
+"value": 43.05964,
+"upstreamSubIndex": 1.7118644068
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T07:00:00.000Z",
+"pollutant": "NO2",
+"value": 23.17925,
+"upstreamSubIndex": 2.8571428571
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T10:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.1039,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 25.04633,
+"upstreamSubIndex": 2.3103448276
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T14:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.47917,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T16:00:00.000Z",
+"pollutant": "O3",
+"value": 105.59191,
+"upstreamSubIndex": 3.2631578947
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 11.18515,
+"upstreamSubIndex": 2.0
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T21:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.10772,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-17T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 31.11333,
+"upstreamSubIndex": 2.5172413793
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T01:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.52167,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T03:00:00.000Z",
+"pollutant": "O3",
+"value": 70.57074,
+"upstreamSubIndex": 2.2564102564
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 42.14129,
+"upstreamSubIndex": 3.4705882353
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T08:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.15224,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 49.02717,
+"upstreamSubIndex": 3.0405405405
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T12:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.9485,
+"upstreamSubIndex": 3.0
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T14:00:00.000Z",
+"pollutant": "O3",
+"value": 101.71118,
+"upstreamSubIndex": 3.0526315789
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 12.83826,
+"upstreamSubIndex": 2.1428571429
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.15685,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 84.08167,
+"upstreamSubIndex": 3.5135135135
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-18T23:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 37.00417,
+"upstreamSubIndex": 3.6176470588
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T01:00:00.000Z",
+"pollutant": "O3",
+"value": 65.30293,
+"upstreamSubIndex": 2.1025641026
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 24.20683,
+"upstreamSubIndex": 2.9285714286
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.13415,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 71.02067,
+"upstreamSubIndex": 3.3378378378
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.58133,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T12:00:00.000Z",
+"pollutant": "O3",
+"value": 112.79553,
+"upstreamSubIndex": 3.6315789474
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 5.77253,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.16855,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 77.31633,
+"upstreamSubIndex": 3.4189189189
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 35.11683,
+"upstreamSubIndex": 3.5588235294
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-19T23:00:00.000Z",
+"pollutant": "O3",
+"value": 42.14212,
+"upstreamSubIndex": 1.6949152542
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 25.44962,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T04:00:00.000Z",
+"pollutant": "PM10",
+"value": 81.47083,
+"upstreamSubIndex": 3.472972973
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 27.15756,
+"upstreamSubIndex": 3.3235294118
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T08:00:00.000Z",
+"pollutant": "O3",
+"value": 97.04489,
+"upstreamSubIndex": 2.9230769231
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.80264,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T13:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.18112,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T15:00:00.000Z",
+"pollutant": "PM10",
+"value": 72.34533,
+"upstreamSubIndex": 3.3513513514
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.47067,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T19:00:00.000Z",
+"pollutant": "O3",
+"value": 85.62015,
+"upstreamSubIndex": 2.641025641
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-20T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 22.86735,
+"upstreamSubIndex": 2.8571428571
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T00:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.12195,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T02:00:00.000Z",
+"pollutant": "PM10",
+"value": 65.21183,
+"upstreamSubIndex": 3.2567567568
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 23.41633,
+"upstreamSubIndex": 3.2058823529
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T06:00:00.000Z",
+"pollutant": "O3",
+"value": 46.0047,
+"upstreamSubIndex": 1.7627118644
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T08:00:00.000Z",
+"pollutant": "NO2",
+"value": 31.86771,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T11:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.13064,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T13:00:00.000Z",
+"pollutant": "PM10",
+"value": 77.401,
+"upstreamSubIndex": 3.4189189189
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T15:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 23.53283,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T17:00:00.000Z",
+"pollutant": "O3",
+"value": 118.3249,
+"upstreamSubIndex": 3.8947368421
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T19:00:00.000Z",
+"pollutant": "NO2",
+"value": 21.97515,
+"upstreamSubIndex": 2.7857142857
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-21T22:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.20708,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T00:00:00.000Z",
+"pollutant": "PM10",
+"value": 70.98433,
+"upstreamSubIndex": 3.3378378378
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 16.13067,
+"upstreamSubIndex": 3.0
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T04:00:00.000Z",
+"pollutant": "O3",
+"value": 47.5841,
+"upstreamSubIndex": 1.7966101695
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T06:00:00.000Z",
+"pollutant": "NO2",
+"value": 78.91929,
+"upstreamSubIndex": 4.4615384615
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T09:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.18596,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T11:00:00.000Z",
+"pollutant": "PM10",
+"value": 86.3925,
+"upstreamSubIndex": 3.5405405405
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.59617,
+"upstreamSubIndex": 3.2647058824
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T15:00:00.000Z",
+"pollutant": "O3",
+"value": 111.76199,
+"upstreamSubIndex": 3.5789473684
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T17:00:00.000Z",
+"pollutant": "NO2",
+"value": 24.83996,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T20:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.12242,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-22T22:00:00.000Z",
+"pollutant": "PM10",
+"value": 66.46567,
+"upstreamSubIndex": 3.2702702703
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 29.926,
+"upstreamSubIndex": 3.4117647059
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T02:00:00.000Z",
+"pollutant": "O3",
+"value": 76.12254,
+"upstreamSubIndex": 2.3846153846
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T04:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.78311,
+"upstreamSubIndex": 1.6666666667
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T07:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.08124,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T09:00:00.000Z",
+"pollutant": "PM10",
+"value": 70.39883,
+"upstreamSubIndex": 3.3243243243
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 25.9905,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T13:00:00.000Z",
+"pollutant": "O3",
+"value": 71.72112,
+"upstreamSubIndex": 2.2820512821
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T15:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.97341,
+"upstreamSubIndex": 1.6666666667
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T18:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.09563,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T20:00:00.000Z",
+"pollutant": "PM10",
+"value": 78.1685,
+"upstreamSubIndex": 3.4324324324
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-23T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.91967,
+"upstreamSubIndex": 3.0588235294
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T00:00:00.000Z",
+"pollutant": "O3",
+"value": 59.03456,
+"upstreamSubIndex": 1.9830508475
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T02:00:00.000Z",
+"pollutant": "NO2",
+"value": 10.46026,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T05:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.08446,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 48.0525,
+"upstreamSubIndex": 3.027027027
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T09:00:00.000Z",
+"pollutant": "O3",
+"value": 60.0753,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T12:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.12716,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 55.90033,
+"upstreamSubIndex": 3.1351351351
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T16:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.1405,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T18:00:00.000Z",
+"pollutant": "O3",
+"value": 73.25355,
+"upstreamSubIndex": 2.3076923077
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 8.51077,
+"upstreamSubIndex": 1.8888888889
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-24T23:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.02626,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.5745,
+"upstreamSubIndex": 2.2413793103
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T03:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.77723,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T05:00:00.000Z",
+"pollutant": "O3",
+"value": 72.50444,
+"upstreamSubIndex": 2.3076923077
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T07:00:00.000Z",
+"pollutant": "NO2",
+"value": 8.66319,
+"upstreamSubIndex": 1.8888888889
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T10:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.07748,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 16.59333,
+"upstreamSubIndex": 2.0344827586
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T14:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 7.99253,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T16:00:00.000Z",
+"pollutant": "O3",
+"value": 83.59983,
+"upstreamSubIndex": 2.5897435897
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.76812,
+"upstreamSubIndex": 1.6666666667
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T21:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.10872,
+"upstreamSubIndex": 1
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-25T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 19.07817,
+"upstreamSubIndex": 2.1034482759
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T01:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 7.77717,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T03:00:00.000Z",
+"pollutant": "O3",
+"value": 69.38147,
+"upstreamSubIndex": 2.2051282051
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.95884,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T08:00:00.000Z",
+"pollutant": "O3",
+"value": 84.0,
+"upstreamSubIndex": 2.5897435897
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 27.0,
+"upstreamSubIndex": 2.3793103448
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 5.0,
+"upstreamSubIndex": 1.4444444444
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T19:00:00.000Z",
+"pollutant": "O3",
+"value": 84.0,
+"upstreamSubIndex": 2.5897435897
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-26T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 27.0,
+"upstreamSubIndex": 2.3793103448
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 5.0,
+"upstreamSubIndex": 1.4444444444
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T06:00:00.000Z",
+"pollutant": "O3",
+"value": 73.0,
+"upstreamSubIndex": 2.3076923077
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 37.0,
+"upstreamSubIndex": 2.724137931
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.0,
+"upstreamSubIndex": 1.2222222222
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T17:00:00.000Z",
+"pollutant": "O3",
+"value": 98.0,
+"upstreamSubIndex": 2.9487179487
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T20:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-27T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 33.0,
+"upstreamSubIndex": 2.5862068966
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-28T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 13.0,
+"upstreamSubIndex": 2.1428571429
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-28T04:00:00.000Z",
+"pollutant": "O3",
+"value": 54.0,
+"upstreamSubIndex": 1.8983050847
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-28T07:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.0,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00004",
+"measuredAt": "2026-07-28T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 35.0,
+"upstreamSubIndex": 2.6551724138
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.73783,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T08:00:00.000Z",
+"pollutant": "O3",
+"value": 64.42982,
+"upstreamSubIndex": 2.0769230769
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.22343,
+"upstreamSubIndex": 2.2857142857
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T13:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.67049,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T15:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.11433,
+"upstreamSubIndex": 2.2068965517
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.2928,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T19:00:00.000Z",
+"pollutant": "O3",
+"value": 70.497,
+"upstreamSubIndex": 2.2307692308
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-15T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.70327,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T00:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.58562,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.91483,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T05:00:00.000Z",
+"pollutant": "PM10",
+"value": 30.58367,
+"upstreamSubIndex": 2.5172413793
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T07:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.22067,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T09:00:00.000Z",
+"pollutant": "O3",
+"value": 49.53306,
+"upstreamSubIndex": 1.8305084746
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 17.53072,
+"upstreamSubIndex": 2.5
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T14:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.82112,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 24.7385,
+"upstreamSubIndex": 2.3103448276
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.17767,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T20:00:00.000Z",
+"pollutant": "O3",
+"value": 64.06566,
+"upstreamSubIndex": 2.0769230769
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-16T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 29.67556,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T01:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.5619,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 19.57723,
+"upstreamSubIndex": 2.6428571429
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 48.42183,
+"upstreamSubIndex": 3.027027027
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T08:00:00.000Z",
+"pollutant": "O3",
+"value": 50.49388,
+"upstreamSubIndex": 1.8305084746
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 25.09378,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T13:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.99296,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T15:00:00.000Z",
+"pollutant": "PM10",
+"value": 34.44083,
+"upstreamSubIndex": 2.6206896552
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 16.60567,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T19:00:00.000Z",
+"pollutant": "O3",
+"value": 46.3318,
+"upstreamSubIndex": 1.7627118644
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-17T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 36.07704,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T00:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.61274,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.39717,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T05:00:00.000Z",
+"pollutant": "PM10",
+"value": 24.44717,
+"upstreamSubIndex": 2.275862069
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T07:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.29233,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T09:00:00.000Z",
+"pollutant": "O3",
+"value": 47.35395,
+"upstreamSubIndex": 1.7796610169
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 13.9268,
+"upstreamSubIndex": 2.2142857143
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T14:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.75763,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 40.69567,
+"upstreamSubIndex": 2.8620689655
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 20.45917,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T20:00:00.000Z",
+"pollutant": "O3",
+"value": 69.16505,
+"upstreamSubIndex": 2.2051282051
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-18T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 42.23072,
+"upstreamSubIndex": 3.4705882353
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T01:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.79806,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.81916,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 61.6,
+"upstreamSubIndex": 3.2162162162
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 28.66667,
+"upstreamSubIndex": 3.3823529412
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T10:00:00.000Z",
+"pollutant": "O3",
+"value": 57.23712,
+"upstreamSubIndex": 1.9491525424
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 43.87302,
+"upstreamSubIndex": 3.5294117647
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T15:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.80076,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 68.92433,
+"upstreamSubIndex": 3.3108108108
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 28.48967,
+"upstreamSubIndex": 3.3529411765
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T21:00:00.000Z",
+"pollutant": "O3",
+"value": 37.32924,
+"upstreamSubIndex": 1.6101694915
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-19T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 31.67702,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T02:00:00.000Z",
+"pollutant": "PM10",
+"value": 60.359,
+"upstreamSubIndex": 3.1891891892
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T05:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.89576,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 96.11333,
+"upstreamSubIndex": 3.6756756757
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 31.944,
+"upstreamSubIndex": 3.4705882353
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T11:00:00.000Z",
+"pollutant": "O3",
+"value": 115.54225,
+"upstreamSubIndex": 3.7894736842
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T13:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.65325,
+"upstreamSubIndex": 2.3571428571
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T16:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.76475,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T18:00:00.000Z",
+"pollutant": "PM10",
+"value": 66.4635,
+"upstreamSubIndex": 3.2702702703
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T20:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.51233,
+"upstreamSubIndex": 3.2647058824
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-20T22:00:00.000Z",
+"pollutant": "O3",
+"value": 44.03079,
+"upstreamSubIndex": 1.7288135593
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T00:00:00.000Z",
+"pollutant": "NO2",
+"value": 16.21871,
+"upstreamSubIndex": 2.3571428571
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T03:00:00.000Z",
+"pollutant": "O3",
+"value": 92.64648,
+"upstreamSubIndex": 2.8205128205
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.15505,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 81.61733,
+"upstreamSubIndex": 3.4864864865
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 44.37383,
+"upstreamSubIndex": 3.8235294118
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T12:00:00.000Z",
+"pollutant": "O3",
+"value": 109.86421,
+"upstreamSubIndex": 3.4736842105
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 29.67513,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.92836,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 92.269,
+"upstreamSubIndex": 3.6216216216
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 29.14567,
+"upstreamSubIndex": 3.3823529412
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-21T23:00:00.000Z",
+"pollutant": "O3",
+"value": 66.64084,
+"upstreamSubIndex": 2.1538461538
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T02:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.77625,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T04:00:00.000Z",
+"pollutant": "NO2",
+"value": 37.03721,
+"upstreamSubIndex": 3.3235294118
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T07:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.64689,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T09:00:00.000Z",
+"pollutant": "PM10",
+"value": 74.89533,
+"upstreamSubIndex": 3.3918918919
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 28.6485,
+"upstreamSubIndex": 3.3823529412
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T13:00:00.000Z",
+"pollutant": "O3",
+"value": 135.37421,
+"upstreamSubIndex": 4.358974359
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T15:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.09913,
+"upstreamSubIndex": 2.2857142857
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T18:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.81303,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T20:00:00.000Z",
+"pollutant": "PM10",
+"value": 68.58133,
+"upstreamSubIndex": 3.3108108108
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-22T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 21.9645,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T00:00:00.000Z",
+"pollutant": "O3",
+"value": 63.01212,
+"upstreamSubIndex": 2.0512820513
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T03:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.09633,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 34.57742,
+"upstreamSubIndex": 3.2647058824
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T08:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.65186,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 74.96767,
+"upstreamSubIndex": 3.3918918919
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T12:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 26.138,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T14:00:00.000Z",
+"pollutant": "O3",
+"value": 79.74171,
+"upstreamSubIndex": 2.4871794872
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 31.02425,
+"upstreamSubIndex": 3.1470588235
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.35795,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 40.17783,
+"upstreamSubIndex": 2.8275862069
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-23T23:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.77883,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T01:00:00.000Z",
+"pollutant": "O3",
+"value": 64.6303,
+"upstreamSubIndex": 2.1025641026
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.68283,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T06:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.6072,
+"upstreamSubIndex": 2.3571428571
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T09:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.79536,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T11:00:00.000Z",
+"pollutant": "PM10",
+"value": 36.58033,
+"upstreamSubIndex": 2.724137931
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.3325,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T15:00:00.000Z",
+"pollutant": "O3",
+"value": 86.29188,
+"upstreamSubIndex": 2.641025641
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T17:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.54341,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T20:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.14236,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-24T22:00:00.000Z",
+"pollutant": "PM10",
+"value": 23.82283,
+"upstreamSubIndex": 2.275862069
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.42243,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T02:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.24112,
+"upstreamSubIndex": 2.5
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 74.59309,
+"upstreamSubIndex": 4.358974359
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.31735,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T10:00:00.000Z",
+"pollutant": "O3",
+"value": 101.72555,
+"upstreamSubIndex": 3.0526315789
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 19.27103,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T15:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.12867,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 34.2945,
+"upstreamSubIndex": 2.6206896552
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0742,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T21:00:00.000Z",
+"pollutant": "O3",
+"value": 32.35563,
+"upstreamSubIndex": 1.5254237288
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-25T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 61.57212,
+"upstreamSubIndex": 4.0256410256
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T02:00:00.000Z",
+"pollutant": "PM10",
+"value": 14.5105,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T05:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.00473,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T07:00:00.000Z",
+"pollutant": "O3",
+"value": 96.0,
+"upstreamSubIndex": 2.8974358974
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T13:00:00.000Z",
+"pollutant": "PM10",
+"value": 27.0,
+"upstreamSubIndex": 2.3793103448
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T15:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.0,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T18:00:00.000Z",
+"pollutant": "O3",
+"value": 96.0,
+"upstreamSubIndex": 2.8974358974
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-26T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T00:00:00.000Z",
+"pollutant": "PM10",
+"value": 27.0,
+"upstreamSubIndex": 2.3793103448
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T02:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.0,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T05:00:00.000Z",
+"pollutant": "O3",
+"value": 85.0,
+"upstreamSubIndex": 2.6153846154
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.0,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T11:00:00.000Z",
+"pollutant": "PM10",
+"value": 38.0,
+"upstreamSubIndex": 2.7586206897
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T13:00:00.000Z",
+"pollutant": "NO2",
+"value": 7.0,
+"upstreamSubIndex": 1.6666666667
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T16:00:00.000Z",
+"pollutant": "O3",
+"value": 110.0,
+"upstreamSubIndex": 3.4736842105
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-27T22:00:00.000Z",
+"pollutant": "PM10",
+"value": 25.0,
+"upstreamSubIndex": 2.3103448276
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-28T00:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.0,
+"upstreamSubIndex": 1.8888888889
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-28T03:00:00.000Z",
+"pollutant": "O3",
+"value": 76.0,
+"upstreamSubIndex": 2.3846153846
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-28T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.0,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00009",
+"measuredAt": "2026-07-28T09:00:00.000Z",
+"pollutant": "PM10",
+"value": 39.0,
+"upstreamSubIndex": 2.7931034483
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T05:00:00.000Z",
+"pollutant": "O3",
+"value": 81.89033,
+"upstreamSubIndex": 2.5384615385
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T07:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.16345,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T10:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.02801,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 15.6995,
+"upstreamSubIndex": 2.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T14:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.12748,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T16:00:00.000Z",
+"pollutant": "O3",
+"value": 90.49867,
+"upstreamSubIndex": 2.7435897436
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.25826,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T21:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.05179,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-15T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 23.86583,
+"upstreamSubIndex": 2.275862069
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T01:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.82967,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T03:00:00.000Z",
+"pollutant": "O3",
+"value": 78.56873,
+"upstreamSubIndex": 2.4615384615
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 1.12467,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T08:00:00.000Z",
+"pollutant": "SO2",
+"value": -0.02228,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 28.2655,
+"upstreamSubIndex": 2.4137931034
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T12:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 16.536,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T14:00:00.000Z",
+"pollutant": "O3",
+"value": 126.25833,
+"upstreamSubIndex": 4.1282051282
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.13288,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.02795,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 27.95817,
+"upstreamSubIndex": 2.4137931034
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-16T23:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.73767,
+"upstreamSubIndex": 3.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T01:00:00.000Z",
+"pollutant": "O3",
+"value": 117.56667,
+"upstreamSubIndex": 3.8947368421
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.01571,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.01199,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 36.08017,
+"upstreamSubIndex": 2.6896551724
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 17.394,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T12:00:00.000Z",
+"pollutant": "O3",
+"value": 107.71633,
+"upstreamSubIndex": 3.3684210526
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.98664,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.05439,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 31.79933,
+"upstreamSubIndex": 2.5517241379
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.9985,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-17T23:00:00.000Z",
+"pollutant": "O3",
+"value": 111.007,
+"upstreamSubIndex": 3.5263157895
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.19138,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T04:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.02984,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 28.33083,
+"upstreamSubIndex": 2.4137931034
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.577,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T10:00:00.000Z",
+"pollutant": "O3",
+"value": 89.353,
+"upstreamSubIndex": 2.7179487179
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T14:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.00709,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 46.566,
+"upstreamSubIndex": 3.0135135135
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.70133,
+"upstreamSubIndex": 3.2058823529
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T20:00:00.000Z",
+"pollutant": "O3",
+"value": 119.96133,
+"upstreamSubIndex": 3.99
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-18T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 1.78345,
+"upstreamSubIndex": 1.1111111111
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T01:00:00.000Z",
+"pollutant": "SO2",
+"value": -0.00899,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T03:00:00.000Z",
+"pollutant": "PM10",
+"value": 56.27117,
+"upstreamSubIndex": 3.1351351351
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T05:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 25.12883,
+"upstreamSubIndex": 3.2647058824
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T07:00:00.000Z",
+"pollutant": "O3",
+"value": 94.57867,
+"upstreamSubIndex": 2.8717948718
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T09:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.59764,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T12:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.61339,
+"upstreamSubIndex": 1.0526315789
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 57.91067,
+"upstreamSubIndex": 3.1621621622
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T16:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.0915,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T18:00:00.000Z",
+"pollutant": "O3",
+"value": 105.66867,
+"upstreamSubIndex": 3.2631578947
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.58553,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-19T23:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.85946,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 69.1215,
+"upstreamSubIndex": 3.3108108108
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T03:00:00.000Z",
+"pollutant": "O3",
+"value": 116.54895,
+"upstreamSubIndex": 3.8421052632
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 17.57547,
+"upstreamSubIndex": 2.5
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T08:00:00.000Z",
+"pollutant": "SO2",
+"value": 1.55823,
+"upstreamSubIndex": 1.0526315789
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 83.57333,
+"upstreamSubIndex": 3.5135135135
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T12:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.8875,
+"upstreamSubIndex": 3.2058823529
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T14:00:00.000Z",
+"pollutant": "O3",
+"value": 117.872,
+"upstreamSubIndex": 3.8947368421
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.45325,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T19:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.33876,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 60.39083,
+"upstreamSubIndex": 3.1891891892
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-20T23:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.08033,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T01:00:00.000Z",
+"pollutant": "O3",
+"value": 146.08967,
+"upstreamSubIndex": 4.641025641
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 2.43563,
+"upstreamSubIndex": 1.1111111111
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.07616,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 65.82333,
+"upstreamSubIndex": 3.2702702703
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 35.60417,
+"upstreamSubIndex": 3.5882352941
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T12:00:00.000Z",
+"pollutant": "O3",
+"value": 134.17867,
+"upstreamSubIndex": 4.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 2.06,
+"upstreamSubIndex": 1.1111111111
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.05754,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 67.63583,
+"upstreamSubIndex": 3.2972972973
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 20.627,
+"upstreamSubIndex": 3.1470588235
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-21T23:00:00.000Z",
+"pollutant": "O3",
+"value": 114.769,
+"upstreamSubIndex": 3.7368421053
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.77607,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T04:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.3319,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 52.90133,
+"upstreamSubIndex": 3.0945945946
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 19.74667,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T10:00:00.000Z",
+"pollutant": "O3",
+"value": 102.307,
+"upstreamSubIndex": 3.0526315789
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 1.48185,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T15:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.05654,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 70.989,
+"upstreamSubIndex": 3.3378378378
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 20.30483,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T21:00:00.000Z",
+"pollutant": "O3",
+"value": 92.89433,
+"upstreamSubIndex": 2.8205128205
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-22T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.36301,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-23T02:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.04793,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-23T04:00:00.000Z",
+"pollutant": "PM10",
+"value": 51.657,
+"upstreamSubIndex": 3.0810810811
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-23T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.44283,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-23T08:00:00.000Z",
+"pollutant": "O3",
+"value": 93.65,
+"upstreamSubIndex": 2.8461538462
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.8702,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T06:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.15624,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 28.395,
+"upstreamSubIndex": 2.4137931034
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.08217,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T12:00:00.000Z",
+"pollutant": "O3",
+"value": 123.59333,
+"upstreamSubIndex": 4.0769230769
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.33108,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T17:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.14986,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 31.10283,
+"upstreamSubIndex": 2.5172413793
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 12.13717,
+"upstreamSubIndex": 2.6666666667
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-24T23:00:00.000Z",
+"pollutant": "O3",
+"value": 107.21433,
+"upstreamSubIndex": 3.3157894737
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.95656,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T04:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.14101,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 17.0365,
+"upstreamSubIndex": 2.0344827586
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.21268,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T10:00:00.000Z",
+"pollutant": "O3",
+"value": 135.21067,
+"upstreamSubIndex": 4.358974359
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.78707,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T15:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.31767,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 16.8765,
+"upstreamSubIndex": 2.0344827586
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 7.30158,
+"upstreamSubIndex": 2.1111111111
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T21:00:00.000Z",
+"pollutant": "O3",
+"value": 107.88167,
+"upstreamSubIndex": 3.3684210526
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-25T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 0.33332,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T02:00:00.000Z",
+"pollutant": "SO2",
+"value": 0.11385,
+"upstreamSubIndex": 1.0
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T04:00:00.000Z",
+"pollutant": "PM10",
+"value": 18.0265,
+"upstreamSubIndex": 2.0689655172
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T06:00:00.000Z",
+"pollutant": "O3",
+"value": 94.0,
+"upstreamSubIndex": 2.8461538462
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.0,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.0,
+"upstreamSubIndex": 1.2222222222
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T17:00:00.000Z",
+"pollutant": "O3",
+"value": 94.0,
+"upstreamSubIndex": 2.8461538462
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T20:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-26T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.0,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.0,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T04:00:00.000Z",
+"pollutant": "O3",
+"value": 90.0,
+"upstreamSubIndex": 2.7435897436
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T07:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 30.0,
+"upstreamSubIndex": 2.4827586207
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 2.0,
+"upstreamSubIndex": 1.1111111111
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T15:00:00.000Z",
+"pollutant": "O3",
+"value": 112.0,
+"upstreamSubIndex": 3.5789473684
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 24.0,
+"upstreamSubIndex": 2.275862069
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-27T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.0,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-28T02:00:00.000Z",
+"pollutant": "O3",
+"value": 82.0,
+"upstreamSubIndex": 2.5384615385
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-28T05:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-28T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 29.0,
+"upstreamSubIndex": 2.4482758621
+},
+{
+"station": "MT00007",
+"measuredAt": "2026-07-28T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.0,
+"upstreamSubIndex": 1.2222222222
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T07:00:00.000Z",
+"pollutant": "O3",
+"value": 78.13033,
+"upstreamSubIndex": 2.4358974359
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T10:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.43073,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T13:00:00.000Z",
+"pollutant": "PM10",
+"value": 19.695,
+"upstreamSubIndex": 2.1379310345
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T15:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.28867,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T18:00:00.000Z",
+"pollutant": "O3",
+"value": 96.484,
+"upstreamSubIndex": 2.8974358974
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-15T21:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 12.74083,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T00:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.49333,
+"upstreamSubIndex": 2.2068965517
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T02:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.53904,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T05:00:00.000Z",
+"pollutant": "O3",
+"value": 40.964,
+"upstreamSubIndex": 1.6779661017
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T08:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 12.49,
+"upstreamSubIndex": 2.6666666667
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T11:00:00.000Z",
+"pollutant": "PM10",
+"value": 39.7795,
+"upstreamSubIndex": 2.8275862069
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T13:00:00.000Z",
+"pollutant": "NO2",
+"value": 22.57989,
+"upstreamSubIndex": 2.8571428571
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T16:00:00.000Z",
+"pollutant": "O3",
+"value": 114.715,
+"upstreamSubIndex": 3.7368421053
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T19:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 23.081,
+"upstreamSubIndex": 3.2058823529
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-16T22:00:00.000Z",
+"pollutant": "PM10",
+"value": 36.48083,
+"upstreamSubIndex": 2.6896551724
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T00:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.9021,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T03:00:00.000Z",
+"pollutant": "O3",
+"value": 74.49184,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T06:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 18.69017,
+"upstreamSubIndex": 3.0882352941
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T09:00:00.000Z",
+"pollutant": "PM10",
+"value": 56.01233,
+"upstreamSubIndex": 3.1351351351
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 20.60644,
+"upstreamSubIndex": 2.7142857143
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T14:00:00.000Z",
+"pollutant": "O3",
+"value": 104.48467,
+"upstreamSubIndex": 3.1578947368
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.8945,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T20:00:00.000Z",
+"pollutant": "PM10",
+"value": 46.95596,
+"upstreamSubIndex": 3.0135135135
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-17T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 28.36654,
+"upstreamSubIndex": 3.0588235294
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T01:00:00.000Z",
+"pollutant": "O3",
+"value": 94.06533,
+"upstreamSubIndex": 2.8461538462
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 14.23916,
+"upstreamSubIndex": 2.8888888889
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 40.73328,
+"upstreamSubIndex": 2.8620689655
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T09:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.25305,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T12:00:00.000Z",
+"pollutant": "O3",
+"value": 111.38067,
+"upstreamSubIndex": 3.5263157895
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T15:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 16.98031,
+"upstreamSubIndex": 3.0294117647
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T18:00:00.000Z",
+"pollutant": "PM10",
+"value": 66.71298,
+"upstreamSubIndex": 3.2837837838
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 5.23521,
+"upstreamSubIndex": 1.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-18T23:00:00.000Z",
+"pollutant": "O3",
+"value": 90.03,
+"upstreamSubIndex": 2.7435897436
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T02:00:00.000Z",
+"pollutant": "NO2",
+"value": 19.49643,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T05:00:00.000Z",
+"pollutant": "O3",
+"value": 60.275,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T08:00:00.000Z",
+"pollutant": "NO2",
+"value": 18.96365,
+"upstreamSubIndex": 2.5714285714
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 77.39275,
+"upstreamSubIndex": 3.4189189189
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.76016,
+"upstreamSubIndex": 1.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T17:00:00.000Z",
+"pollutant": "O3",
+"value": 120.995,
+"upstreamSubIndex": 4.0
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T20:00:00.000Z",
+"pollutant": "NO2",
+"value": 25.4973,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-19T23:00:00.000Z",
+"pollutant": "O3",
+"value": 60.39767,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T02:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.86696,
+"upstreamSubIndex": 3.2058823529
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T05:00:00.000Z",
+"pollutant": "PM10",
+"value": 90.70059,
+"upstreamSubIndex": 3.6081081081
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T11:00:00.000Z",
+"pollutant": "NO2",
+"value": 30.05988,
+"upstreamSubIndex": 3.1176470588
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T14:00:00.000Z",
+"pollutant": "O3",
+"value": 121.64167,
+"upstreamSubIndex": 4.0256410256
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T17:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 22.0285,
+"upstreamSubIndex": 3.1764705882
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T20:00:00.000Z",
+"pollutant": "PM10",
+"value": 65.47974,
+"upstreamSubIndex": 3.2567567568
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-20T22:00:00.000Z",
+"pollutant": "NO2",
+"value": 42.35998,
+"upstreamSubIndex": 3.4705882353
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T01:00:00.000Z",
+"pollutant": "O3",
+"value": 127.17767,
+"upstreamSubIndex": 4.1538461538
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T04:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 23.81034,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T07:00:00.000Z",
+"pollutant": "PM10",
+"value": 82.10749,
+"upstreamSubIndex": 3.4864864865
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T09:00:00.000Z",
+"pollutant": "NO2",
+"value": 16.43881,
+"upstreamSubIndex": 2.3571428571
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T12:00:00.000Z",
+"pollutant": "O3",
+"value": 140.45433,
+"upstreamSubIndex": 4.4871794872
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T15:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 26.32462,
+"upstreamSubIndex": 3.2941176471
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-21T18:00:00.000Z",
+"pollutant": "PM10",
+"value": 82.07429,
+"upstreamSubIndex": 3.4864864865
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-22T10:00:00.000Z",
+"pollutant": "O3",
+"value": 114.71883,
+"upstreamSubIndex": 3.7368421053
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-22T13:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.1005,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-22T16:00:00.000Z",
+"pollutant": "PM10",
+"value": 81.0675,
+"upstreamSubIndex": 3.472972973
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-22T18:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.85616,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-22T21:00:00.000Z",
+"pollutant": "O3",
+"value": 99.42533,
+"upstreamSubIndex": 2.9743589744
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T00:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 28.65617,
+"upstreamSubIndex": 3.3823529412
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T03:00:00.000Z",
+"pollutant": "PM10",
+"value": 66.90617,
+"upstreamSubIndex": 3.2837837838
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T05:00:00.000Z",
+"pollutant": "NO2",
+"value": 30.54519,
+"upstreamSubIndex": 3.1470588235
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T08:00:00.000Z",
+"pollutant": "O3",
+"value": 76.61067,
+"upstreamSubIndex": 2.4102564103
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T11:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 24.0415,
+"upstreamSubIndex": 3.2352941176
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T14:00:00.000Z",
+"pollutant": "PM10",
+"value": 65.83683,
+"upstreamSubIndex": 3.2702702703
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T16:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.8402,
+"upstreamSubIndex": 1.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T19:00:00.000Z",
+"pollutant": "O3",
+"value": 93.24867,
+"upstreamSubIndex": 2.8205128205
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-23T22:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.06933,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T01:00:00.000Z",
+"pollutant": "PM10",
+"value": 31.77717,
+"upstreamSubIndex": 2.5517241379
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T03:00:00.000Z",
+"pollutant": "NO2",
+"value": 1.97144,
+"upstreamSubIndex": 1.1111111111
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T06:00:00.000Z",
+"pollutant": "O3",
+"value": 103.16533,
+"upstreamSubIndex": 3.1052631579
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T09:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.35933,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T12:00:00.000Z",
+"pollutant": "PM10",
+"value": 47.60583,
+"upstreamSubIndex": 3.027027027
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T14:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.68275,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T17:00:00.000Z",
+"pollutant": "O3",
+"value": 118.558,
+"upstreamSubIndex": 3.9473684211
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T20:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 15.07967,
+"upstreamSubIndex": 2.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-24T23:00:00.000Z",
+"pollutant": "PM10",
+"value": 25.50217,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T01:00:00.000Z",
+"pollutant": "NO2",
+"value": 3.69608,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T04:00:00.000Z",
+"pollutant": "O3",
+"value": 91.06356,
+"upstreamSubIndex": 2.7692307692
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T07:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 8.98348,
+"upstreamSubIndex": 2.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T10:00:00.000Z",
+"pollutant": "PM10",
+"value": 22.86267,
+"upstreamSubIndex": 2.2413793103
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T12:00:00.000Z",
+"pollutant": "NO2",
+"value": 4.04934,
+"upstreamSubIndex": 1.3333333333
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T15:00:00.000Z",
+"pollutant": "O3",
+"value": 107.82567,
+"upstreamSubIndex": 3.3684210526
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T18:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 9.86377,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T21:00:00.000Z",
+"pollutant": "PM10",
+"value": 25.11833,
+"upstreamSubIndex": 2.3103448276
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-25T23:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.24211,
+"upstreamSubIndex": 1.8888888889
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T02:00:00.000Z",
+"pollutant": "O3",
+"value": 103.653,
+"upstreamSubIndex": 3.1578947368
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T05:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 7.6698,
+"upstreamSubIndex": 2.2222222222
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T08:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.0,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T10:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.0,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T13:00:00.000Z",
+"pollutant": "O3",
+"value": 91.0,
+"upstreamSubIndex": 2.7692307692
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T16:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T19:00:00.000Z",
+"pollutant": "PM10",
+"value": 26.0,
+"upstreamSubIndex": 2.3448275862
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-26T21:00:00.000Z",
+"pollutant": "NO2",
+"value": 6.0,
+"upstreamSubIndex": 1.5555555556
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T00:00:00.000Z",
+"pollutant": "O3",
+"value": 91.0,
+"upstreamSubIndex": 2.7692307692
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T03:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 10.0,
+"upstreamSubIndex": 2.4444444444
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T06:00:00.000Z",
+"pollutant": "PM10",
+"value": 34.0,
+"upstreamSubIndex": 2.6206896552
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T08:00:00.000Z",
+"pollutant": "NO2",
+"value": 10.0,
+"upstreamSubIndex": 1.99
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T11:00:00.000Z",
+"pollutant": "O3",
+"value": 91.0,
+"upstreamSubIndex": 2.7692307692
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T14:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 13.0,
+"upstreamSubIndex": 2.7777777778
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T17:00:00.000Z",
+"pollutant": "PM10",
+"value": 28.0,
+"upstreamSubIndex": 2.4137931034
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T19:00:00.000Z",
+"pollutant": "NO2",
+"value": 9.0,
+"upstreamSubIndex": 1.8888888889
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-27T22:00:00.000Z",
+"pollutant": "O3",
+"value": 90.0,
+"upstreamSubIndex": 2.7435897436
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-28T01:00:00.000Z",
+"pollutant": "PM2.5",
+"value": 11.0,
+"upstreamSubIndex": 2.5555555556
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-28T04:00:00.000Z",
+"pollutant": "PM10",
+"value": 29.0,
+"upstreamSubIndex": 2.4482758621
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-28T06:00:00.000Z",
+"pollutant": "NO2",
+"value": 15.0,
+"upstreamSubIndex": 2.2857142857
+},
+{
+"station": "MT00008",
+"measuredAt": "2026-07-28T09:00:00.000Z",
+"pollutant": "O3",
+"value": 95.0,
+"upstreamSubIndex": 2.8717948718
+}
+]
