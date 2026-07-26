@@ -12,9 +12,7 @@
 
 import { z } from 'zod';
 
-const booleanish = z
-  .enum(['true', 'false', '1', '0'])
-  .transform((v) => v === 'true' || v === '1');
+const booleanish = z.enum(['true', 'false', '1', '0']).transform((v) => v === 'true' || v === '1');
 
 const optionalBoolean = (fallback: boolean) =>
   z
@@ -87,6 +85,27 @@ export type Env = z.infer<typeof envSchema>;
 let cached: Env | null = null;
 
 /**
+ * Drop empty-string variables so they read as genuinely unset.
+ *
+ * A `.env` file has no way to express "absent" — `UPSTASH_REDIS_REST_URL=` sets
+ * the variable to `''`, not to `undefined`. Zod sees a string, so `.optional()`
+ * does not apply and `.url()` fails, and the whole app refuses to boot over a
+ * service nobody asked for.
+ *
+ * This is not a hypothetical: `.env.example` ships every optional key with an
+ * empty value, and the README tells people to copy it. Without this step the
+ * documented setup path is one that crashes.
+ */
+function withoutEmptyValues(source: NodeJS.ProcessEnv): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(source)) {
+    if (value === undefined || value === '') continue;
+    out[key] = value;
+  }
+  return out;
+}
+
+/**
  * Parse and cache the environment.
  *
  * A malformed REQUIRED variable throws — failing loudly at boot beats serving
@@ -95,7 +114,7 @@ let cached: Env | null = null;
 export function getEnv(): Env {
   if (cached) return cached;
 
-  const parsed = envSchema.safeParse(process.env);
+  const parsed = envSchema.safeParse(withoutEmptyValues(process.env));
   if (!parsed.success) {
     const issues = parsed.error.issues
       .map((i) => `  ${i.path.join('.') || '(root)'}: ${i.message}`)
