@@ -159,21 +159,27 @@ Band ids map to the six official categories (`data.js`), with the EEA's own colo
 
 ### 5.2 Why we recompute rather than trust `aqi_*`
 
-maqua.app derives categories **deterministically from concentrations** using the breakpoint table in `src/config/thresholds.ts`, and treats the upstream `aqi_*` values as a cross-check.
+maqua.app derives categories **deterministically from concentrations** using the breakpoint table in `src/config/thresholds.ts`, and treats the upstream `aqi_*` values as a cross-check. That keeps classification correct when the upstream index is absent, and testable in CI with no network.
 
-This is not redundancy for its own sake. It means the app still classifies correctly if the upstream index is absent, and it keeps the classification logic testable in CI without network access. The breakpoints were confirmed by **two independent methods**:
+The algorithm was **reverse-engineered from the data and then verified exhaustively**:
 
-1. **Empirical regression** over 6,760 observed (concentration, sub-index) pairs from all five Malta stations, solving `value = lo + (aqi − band) × (hi − lo)` per band.
-2. **The EEA's published threshold table.**
+```
+1. Round the concentration to the nearest whole µg/m³.
+2. Select the band whose INCLUSIVE INTEGER range contains it
+   (PM10: 1–15 Good, 16–45 Fair, 46–120 Moderate, …).
+3. subIndex = bandId + min(0.99, max(0, (v − lo) / (hi − lo)))
+```
 
-Agreement was exact to within floating-point noise. Worked example — PM10:
+**Result: 0 mismatches across all 6,760 observed (concentration, sub-index) pairs**, for all five pollutants. The test lives at `src/lib/air-quality/__tests__/calculate-index.test.ts` and runs against captured real data on every CI run.
 
-| Band | Derived from data | Published |
-|---|---|---|
-| 1 | −1.27 → 15.18 | 0 – 15 |
-| 2 | 16.01 → 45.00 | 15 – 45 |
-| 3 | 45.96 → 120.12 | 45 – 120 |
-| 4 | 120.76 → 194.93 | 120 – 195 |
+Two details are load-bearing, and both were discovered by that test rather than assumed:
+
+- **The rounding in step 1 decides the category** for any value within half a unit of a boundary. PM10 at 15.48 µg/m³ is *Good* — it rounds to 15. An earlier implementation modelled the bands as half-open real intervals `[15, 45)`, which called the same value *Fair*. That model reproduced most of the data and was wrong; the exhaustive check exposed it.
+- **The 0.99 cap in step 3** keeps `Math.floor(subIndex)` inside the correct band when a concentration lands exactly on a band ceiling, where the raw fraction is 1.0. This is why the upstream reports values like `1.99` and `2.99`.
+
+A continuous least-squares regression was tried first and is **not** the basis for these numbers — it recovered approximately the right band edges but the wrong classification rule, and is recorded here only so the superseded method is not mistaken for corroboration.
+
+**Scope of the verification:** bands 1–5 are confirmed by observation for every pollutant. The top-band ceilings (PM2.5 800, PM10 1200, NO2 1000, SO2 1000 µg/m³) have **no supporting observations** — Malta has not recorded concentrations anywhere near them; only O₃'s 600 was fitted, from three points. Those ceilings affect the *fraction* within "Extremely poor" and never the category, so the practical risk is nil, but the claim is scoped accordingly.
 
 Full table and per-pollutant results: [`AQI_METHODOLOGY.md`](./AQI_METHODOLOGY.md).
 
@@ -181,9 +187,17 @@ Full table and per-pollutant results: [`AQI_METHODOLOGY.md`](./AQI_METHODOLOGY.m
 
 ## 6. Freshness, cadence, and caching
 
-### Observed cadence
+### Observed cadence — measured, not inferred
 
-`Last-Modified` was `2026-07-26T05:51:04Z` for data covering the `05:00Z` hour — a **~51-minute publication lag**, refreshed hourly. This matches the EEA's stated "2 to 5 hours after measurement" guidance for up-to-date (E2a) data, at the fast end.
+Checked directly on 2026-07-26 at 07:01Z. For all five Malta stations, the newest hour containing a genuinely **measured** value (`modelled_* == 0`) was `06:00Z`, and the file's `Last-Modified` was `06:57Z`.
+
+> **Observation latency: ~58 minutes. Republished hourly.**
+
+The EEA's general guidance for up-to-date (E2a) data is "2 to 5 hours after measurement". Malta is comfortably at the fast end, so the freshness ladder below is built on the measured figure rather than the published range.
+
+**The critical subtlety:** the newest *key* in each file is ~51 hours in the **future** — it is forecast, not measurement. A naive "take the last key" implementation would present a CAMS forecast as a live reading. `measuredAt` is therefore always the newest hour with `modelled_* == 0`, never the newest key. See `latestObservedTimestamp` in `src/lib/air-quality/freshness.ts`.
+
+Equally, `modelled_* == 1` also appears on **past** hours, where the upstream gap-fills missing measurements. So "is this a forecast?" cannot be answered from the clock; it is answered by comparing against the newest observed hour.
 
 ### Freshness thresholds
 

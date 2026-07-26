@@ -23,8 +23,14 @@ export const FRESHNESS_THRESHOLDS = {
 
 /** Upstream publishes hourly. */
 export const UPSTREAM_CADENCE_MINUTES = 60;
-/** Observed lag between the measurement hour and its publication. */
-export const UPSTREAM_PUBLICATION_LAG_MINUTES = 55;
+/**
+ * Observed lag between a measurement hour and its publication.
+ *
+ * Measured directly on 2026-07-26: the newest genuinely measured hour across
+ * all five Malta stations was 06:00Z, published at 06:57Z. Not inferred from the
+ * EEA's general "2 to 5 hours" guidance — Malta is at the fast end of it.
+ */
+export const UPSTREAM_PUBLICATION_LAG_MINUTES = 58;
 
 export function hoursBetween(fromIso: string, toIso: string): number {
   const from = Date.parse(fromIso);
@@ -89,14 +95,48 @@ export function nextExpectedUpdate(measuredAtIso: string | null | undefined): st
 }
 
 /**
- * Whether a timestamp is in the future relative to `now` — i.e. a forecast
- * rather than an observation. Used to keep the two visually distinct.
+ * Whether a point is a forecast rather than an observation.
+ *
+ * Deliberately NOT `timestamp > now`. The upstream series carries roughly 48
+ * hours of forecast beyond the present, and it also gap-fills *past* hours with
+ * modelled values — a point eleven days old can still be estimated. The wall
+ * clock cannot tell those apart.
+ *
+ * The reliable discriminator is the data itself: anything after the newest hour
+ * that contains a real measurement is forecast. Pass the timestamp returned by
+ * `latestObservedTimestamp`.
  */
-export function isForecastPoint(measuredAtIso: string, nowIso: string): boolean {
+export function isForecastPoint(measuredAtIso: string, latestObservedIso: string | null): boolean {
+  if (!latestObservedIso) return false;
   const t = Date.parse(measuredAtIso);
-  const now = Date.parse(nowIso);
-  if (!Number.isFinite(t) || !Number.isFinite(now)) return false;
-  return t > now;
+  const latest = Date.parse(latestObservedIso);
+  if (!Number.isFinite(t) || !Number.isFinite(latest)) return false;
+  return t > latest;
+}
+
+/**
+ * Newest timestamp that carries at least one directly measured value.
+ *
+ * This — never the newest key in the payload — is a station's `measuredAt`.
+ * The newest key sits ~48 hours in the future, and because `classifyFreshness`
+ * treats future timestamps as fresh, using it would report a forecast as live
+ * measured data.
+ */
+export function latestObservedTimestamp(
+  points: Array<{ measuredAt: string; hasMeasuredValue: boolean }>,
+): string | null {
+  let latest: string | null = null;
+  let latestMs = Number.NEGATIVE_INFINITY;
+
+  for (const point of points) {
+    if (!point.hasMeasuredValue) continue;
+    const ms = Date.parse(point.measuredAt);
+    if (!Number.isFinite(ms) || ms <= latestMs) continue;
+    latestMs = ms;
+    latest = point.measuredAt;
+  }
+
+  return latest;
 }
 
 /** Worst (most degraded) freshness across a set — the summary must not flatter. */
