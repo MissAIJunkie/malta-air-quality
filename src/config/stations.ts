@@ -41,12 +41,20 @@ export type StationDefinition = {
   stationType: 'Background' | 'Traffic' | 'Industrial';
   areaClassification: 'Urban' | 'Suburban' | 'Rural' | 'Rural-Regional';
   /**
-   * Pollutants this station has been observed to report.
+   * Pollutants this station has been OBSERVED to report.
    *
-   * Advisory only, used for UI affordances such as disabling a filter. The
-   * renderer always reflects what the live payload actually contains — a
-   * station never shows a pollutant merely because it is listed here, and never
-   * hides one that unexpectedly appears.
+   * Derived from the data, not from what the station is nominally equipped to
+   * measure: each entry was confirmed to have measured hours across a ~300-hour
+   * window sampled 2026-07-26. Attard reports no SO2 and Msida reports no O3 —
+   * both consistently, with zero measured hours.
+   *
+   * Getting this list wrong is not cosmetic. It feeds the `partial` flag, so an
+   * over-optimistic list makes the API permanently report incomplete data and
+   * the health endpoint permanently report "degraded", which trains operators to
+   * ignore a signal that should mean something.
+   *
+   * Advisory only for the renderer: a station never shows a pollutant merely
+   * because it is listed here, and never hides one that unexpectedly appears.
    */
   expectedPollutants: PollutantCode[];
   operator: string;
@@ -67,7 +75,9 @@ export const STATIONS: StationDefinition[] = [
     altitudeMetres: 86,
     stationType: 'Background',
     areaClassification: 'Urban',
-    expectedPollutants: ['PM2.5', 'PM10', 'NO2', 'O3', 'SO2'],
+    // Observed to report no SO2: zero measured hours across a ~300-hour window
+    // sampled 2026-07-26, the same pattern as Msida and ozone.
+    expectedPollutants: ['PM2.5', 'PM10', 'NO2', 'O3'],
     operator: 'Environment & Resources Authority (ERA)',
     sourceUrl: 'https://era.org.mt/topic/real-time-air-quality-network/',
     active: true,
@@ -112,7 +122,7 @@ export const STATIONS: StationDefinition[] = [
     slug: 'st-pauls-bay',
     name: "St Paul's Bay",
     upstreamName: "St. Paul's Bay Station",
-    locality: "San Pawl il-Baħar",
+    locality: 'San Pawl il-Baħar',
     island: 'Malta',
     latitude: 35.944845,
     longitude: 14.385739,

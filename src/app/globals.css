@@ -1,26 +1,739 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/**
+ * maqua.app design tokens.
+ *
+ * Palette: deep Mediterranean blue, warm limestone, sea-glass accents. Calm and
+ * institutional rather than dashboard-neon, because the subject is public health
+ * information.
+ *
+ * The six air-quality colours are the EEA's own published index colours. They
+ * are RESERVED for air-quality status and are identical in light and dark: a
+ * band must look the same everywhere, so they are never theme-inverted and never
+ * borrowed for buttons, links or form states.
+ */
+
+/* -------------------------------------------------------------------------- */
+/*  Dark mode                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Class strategy, driven by next-themes.
+ *
+ * There is deliberately NO `prefers-color-scheme` rule anywhere in this file.
+ * next-themes already resolves the system preference into the `.dark` class, so
+ * a media query would additionally fight an explicit user choice — someone who
+ * picks light on a dark-set device would get dark back on the next repaint.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -------------------------------------------------------------------------- */
+/*  Fixed tokens                                                              */
+/* -------------------------------------------------------------------------- */
+
+@theme {
+  /* Brand ramps ---------------------------------------------------------- */
+
+  --color-sea-50: #eef6fb;
+  --color-sea-100: #d6e9f5;
+  --color-sea-200: #aed3ea;
+  --color-sea-300: #7ab5db;
+  --color-sea-400: #4593c6;
+  --color-sea-500: #2775a9;
+  --color-sea-600: #1c5c89;
+  --color-sea-700: #17496d;
+  --color-sea-800: #143c59;
+  --color-sea-900: #102f45;
+  --color-sea-950: #08192a;
+
+  --color-limestone-50: #faf8f3;
+  --color-limestone-100: #f3eee3;
+  --color-limestone-200: #e7dfcd;
+  --color-limestone-300: #d6c9ae;
+  --color-limestone-400: #bcab8b;
+  --color-limestone-500: #a08d69;
+  --color-limestone-600: #827054;
+  --color-limestone-700: #675943;
+  --color-limestone-800: #4a4033;
+  --color-limestone-900: #322b22;
+  --color-limestone-950: #1c1813;
+
+  --color-seaglass-50: #eefaf6;
+  --color-seaglass-100: #d2f2e7;
+  --color-seaglass-200: #a6e3d1;
+  --color-seaglass-300: #71ceb6;
+  --color-seaglass-400: #42b298;
+  --color-seaglass-500: #28957e;
+  --color-seaglass-600: #1d7767;
+  --color-seaglass-700: #1a5f54;
+  --color-seaglass-800: #184c44;
+  --color-seaglass-900: #163f39;
+  --color-seaglass-950: #072622;
+
+  /* Air-quality band colours -------------------------------------------- */
+  /* Mirrors CATEGORY_PRESENTATION in src/config/thresholds.ts. Band 0 is the
+     absence of an index, which is a different thing from Good. */
+
+  --color-aq-good: #50f0e6;
+  --color-aq-good-on: #04322f;
+  --color-aq-fair: #50ccaa;
+  --color-aq-fair-on: #043024;
+  --color-aq-moderate: #f0e641;
+  --color-aq-moderate-on: #3a3405;
+  --color-aq-poor: #ff5050;
+  --color-aq-poor-on: #3d0000;
+  --color-aq-very-poor: #960032;
+  --color-aq-very-poor-on: #ffe4ec;
+  --color-aq-extremely-poor: #7d2181;
+  --color-aq-extremely-poor-on: #fbe9fc;
+  --color-aq-no-data: #9aa5b1;
+  --color-aq-no-data-on: #1f2933;
+
+  /* Shape and motion ----------------------------------------------------- */
+
+  --radius-card: 0.875rem;
+  --radius-panel: 1.125rem;
+
+  --shadow-card: 0 1px 2px rgb(8 25 42 / 0.06), 0 8px 24px -16px rgb(8 25 42 / 0.28);
+  --shadow-panel: 0 2px 8px rgb(8 25 42 / 0.08), 0 24px 48px -32px rgb(8 25 42 / 0.4);
+  --shadow-marker: 0 1px 2px rgb(8 25 42 / 0.45);
+
+  /* Minimum comfortable pointer target (WCAG 2.2 AA target size). */
+  --size-tap: 2.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* -------------------------------------------------------------------------- */
+/*  Motion tokens                                                             */
+/* -------------------------------------------------------------------------- */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/**
+ * Enter/exit animations for the Radix primitives, defined here rather than
+ * pulled from an animation plugin so there is exactly one place that decides how
+ * quickly this application moves. Durations are short: this is a reference tool,
+ * and the global reduced-motion rule collapses them to nothing when asked.
+ */
+@theme {
+  --animate-fade-in: maqua-fade-in 140ms ease-out;
+  --animate-fade-out: maqua-fade-out 120ms ease-in;
+  --animate-scale-in: maqua-scale-in 140ms ease-out;
+  --animate-scale-out: maqua-scale-out 120ms ease-in;
+  --animate-slide-in-from-right: maqua-slide-in-from-right 180ms ease-out;
+  --animate-slide-out-to-right: maqua-slide-out-to-right 160ms ease-in;
+  --animate-slide-in-from-left: maqua-slide-in-from-left 180ms ease-out;
+  --animate-slide-out-to-left: maqua-slide-out-to-left 160ms ease-in;
+  --animate-slide-in-from-bottom: maqua-slide-in-from-bottom 180ms ease-out;
+  --animate-slide-out-to-bottom: maqua-slide-out-to-bottom 160ms ease-in;
+  --animate-slide-in-from-top: maqua-slide-in-from-top 180ms ease-out;
+  --animate-slide-out-to-top: maqua-slide-out-to-top 160ms ease-in;
+  --animate-accordion-down: maqua-accordion-down 180ms ease-out;
+  --animate-accordion-up: maqua-accordion-up 160ms ease-in;
+
+  @keyframes maqua-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes maqua-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Animates the standalone `scale` and `translate` properties rather than
+     `transform`. Tailwind v4's translate utilities also write to `translate`,
+     and a keyframe that set `transform: translate(...)` would stack on top of
+     the utility's centring, throwing a centred dialog off by half its size. */
+  @keyframes maqua-scale-in {
+    from {
+      opacity: 0;
+      scale: 0.96;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes maqua-scale-out {
+    from {
+      opacity: 1;
+      scale: 1;
+    }
+    to {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
+  @keyframes maqua-slide-in-from-right {
+    from {
+      translate: 100% 0;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes maqua-slide-out-to-right {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 100% 0;
+    }
+  }
+
+  @keyframes maqua-slide-in-from-left {
+    from {
+      translate: -100% 0;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes maqua-slide-out-to-left {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: -100% 0;
+    }
+  }
+
+  @keyframes maqua-slide-in-from-bottom {
+    from {
+      translate: 0 100%;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes maqua-slide-out-to-bottom {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 0 100%;
+    }
+  }
+
+  @keyframes maqua-slide-in-from-top {
+    from {
+      translate: 0 -100%;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes maqua-slide-out-to-top {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 0 -100%;
+    }
+  }
+
+  /* Radix measures the panel and exposes its height as a custom property. */
+  @keyframes maqua-accordion-down {
+    from {
+      block-size: 0;
+      opacity: 0;
+    }
+    to {
+      block-size: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes maqua-accordion-up {
+    from {
+      block-size: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      block-size: 0;
+      opacity: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
+/* -------------------------------------------------------------------------- */
+/*  Semantic tokens                                                           */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * `inline` so the utilities resolve through to the custom properties below,
+ * which the `.dark` class re-points. Without it, a theme switch would not reach
+ * utilities generated at build time.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-overlay: var(--overlay);
+
+  --font-sans: var(
+    --font-app-sans,
+    var(
+      --font-geist-sans,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif
+    )
+  );
+  --font-mono: var(
+    --font-app-mono,
+    var(
+      --font-geist-mono,
+      ui-monospace,
+      SFMono-Regular,
+      'SF Mono',
+      Menlo,
+      Consolas,
+      'Liberation Mono',
+      monospace
+    )
+  );
+}
+
+/**
+ * Light theme.
+ *
+ * Every foreground/background pair here was checked to at least 4.5:1
+ * (3:1 for the focus ring against its neighbours).
+ */
+:root {
+  color-scheme: light;
+
+  --background: #faf8f3;
+  --foreground: #08192a;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f3eee3;
+  --muted: #f3eee3;
+  --muted-foreground: #4c5b66;
+  --subtle: #5a6875;
+  --border: #e2d9c7;
+  --border-strong: #94886f;
+  --input: #ffffff;
+  --ring: #1c5c89;
+  --primary: #17496d;
+  --primary-hover: #102f45;
+  --primary-foreground: #ffffff;
+  --secondary: #f3eee3;
+  --secondary-foreground: #102f45;
+  --accent: #1a5f54;
+  --accent-foreground: #ffffff;
+  --danger: #9a2318;
+  --danger-foreground: #ffffff;
+  --success: #1a5f54;
+  --success-foreground: #ffffff;
+  --overlay: rgb(8 25 42 / 0.48);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #08192a;
+  --foreground: #e9f1f7;
+  --surface: #0e2436;
+  --surface-raised: #143045;
+  --surface-sunken: #06121f;
+  --muted: #143045;
+  --muted-foreground: #a9bccb;
+  --subtle: #8ba2b4;
+  --border: #23425a;
+  --border-strong: #54788f;
+  --input: #0e2436;
+  --ring: #7ab5db;
+  --primary: #aed3ea;
+  --primary-hover: #d6e9f5;
+  --primary-foreground: #08192a;
+  --secondary: #143045;
+  --secondary-foreground: #e9f1f7;
+  --accent: #71ceb6;
+  --accent-foreground: #072622;
+  --danger: #ffb3aa;
+  --danger-foreground: #3d0a05;
+  --success: #71ceb6;
+  --success-foreground: #072622;
+  --overlay: rgb(3 10 18 / 0.68);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Base                                                                      */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    /* Kerning and ligatures on: long-form health copy is read, not scanned. */
+    font-feature-settings: 'kern', 'liga';
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    letter-spacing: -0.011em;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  /**
+   * A single visible focus style for everything.
+   *
+   * `:focus-visible` rather than `:focus` so a pointer click does not leave a
+   * ring behind, and an explicit `outline` rather than a box-shadow so it
+   * survives forced-colours mode.
+   */
+  :where(
+    a,
+    button,
+    summary,
+    input,
+    select,
+    textarea,
+    [tabindex]:not([tabindex='-1'])
+  ):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--ring) 26%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Long station and pollutant names must not overflow narrow panels. */
+  :where(h1, h2, h3, h4, p, li, dd, dt, figcaption) {
+    overflow-wrap: break-word;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Skip link                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * `.skip-link` is applied to the first focusable element in the document, in
+ * `src/app/layout.tsx`. It is off-screen until focused rather than
+ * `display: none`, because a hidden element cannot receive focus at all.
+ */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-tap);
+  padding-inline: 1rem;
+  border-radius: var(--radius-card);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  box-shadow: var(--shadow-panel);
+  /* Moved out of view, but still focusable and still announced in order.
+     The standalone `translate` property, to match the keyframes above and to
+     stay clear of anything Tailwind writes to `transform`. */
+  translate: 0 -200%;
+  transition: translate 120ms ease-out;
+}
+
+/* `:focus` as well as `:focus-visible`: this must appear for every route into
+   it, including browsers that do not classify the first Tab as "visible". */
+.skip-link:focus,
+.skip-link:focus-visible {
+  translate: 0 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Air-quality band presentation                                             */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Band → colour pair.
+ *
+ * Keyed on the numeric band id (`CATEGORY_PRESENTATION[category].bandId`) rather
+ * than on the category name, because the names contain spaces and change with
+ * the language, whereas the band id is stable data. Band 0 is "no index".
+ */
+[data-aq-band='0'] {
+  --aq-color: var(--color-aq-no-data);
+  --aq-on-color: var(--color-aq-no-data-on);
+}
+
+[data-aq-band='1'] {
+  --aq-color: var(--color-aq-good);
+  --aq-on-color: var(--color-aq-good-on);
+}
+
+[data-aq-band='2'] {
+  --aq-color: var(--color-aq-fair);
+  --aq-on-color: var(--color-aq-fair-on);
+}
+
+[data-aq-band='3'] {
+  --aq-color: var(--color-aq-moderate);
+  --aq-on-color: var(--color-aq-moderate-on);
+}
+
+[data-aq-band='4'] {
+  --aq-color: var(--color-aq-poor);
+  --aq-on-color: var(--color-aq-poor-on);
+}
+
+[data-aq-band='5'] {
+  --aq-color: var(--color-aq-very-poor);
+  --aq-on-color: var(--color-aq-very-poor-on);
+}
+
+[data-aq-band='6'] {
+  --aq-color: var(--color-aq-extremely-poor);
+  --aq-on-color: var(--color-aq-extremely-poor-on);
+}
+
+/**
+ * A filled band surface: colour, plus a texture, plus whatever icon and label
+ * the component puts inside it. Colour never travels alone.
+ */
+.aq-swatch {
+  position: relative;
+  isolation: isolate;
+  /* Falls back to the no-data pair if a caller forgets `data-aq-band`, so a
+     missing attribute can never render as an unstyled "Good"-looking chip. */
+  background-color: var(--aq-color, var(--color-aq-no-data));
+  color: var(--aq-on-color, var(--color-aq-no-data-on));
+  box-shadow: inset 0 0 0 var(--aq-pattern-ring, 0) currentColor;
+}
+
+.aq-swatch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--aq-pattern-image, none);
+  background-size: var(--aq-pattern-size, auto);
+  background-position: center;
+  opacity: var(--aq-pattern-opacity, 0.4);
+  pointer-events: none;
+}
+
+/**
+ * The six textures named by `CATEGORY_PRESENTATION[...].pattern`, plus the
+ * no-data texture. `aq-pattern-none` is a real class, not an omission, so that
+ * a template building `aq-pattern-${pattern}` always resolves.
+ *
+ * Textures are drawn in `currentColor`, which `.aq-swatch` has already set to
+ * the band's contrast colour, so each one is legible on its own fill.
+ */
+.aq-pattern-none {
+  --aq-pattern-image: none;
+}
+
+.aq-pattern-dots {
+  --aq-pattern-image: radial-gradient(currentColor 1.1px, transparent 1.2px);
+  --aq-pattern-size: 7px 7px;
+  --aq-pattern-opacity: 0.42;
+}
+
+.aq-pattern-diagonal {
+  --aq-pattern-image: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 8px);
+  --aq-pattern-opacity: 0.38;
+}
+
+.aq-pattern-grid {
+  --aq-pattern-image:
+    repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 8px);
+  --aq-pattern-opacity: 0.36;
+}
+
+.aq-pattern-dense {
+  --aq-pattern-image: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 4px);
+  --aq-pattern-opacity: 0.34;
+}
+
+.aq-pattern-solid-ring {
+  --aq-pattern-image: none;
+  --aq-pattern-ring: 2px;
+}
+
+/**
+ * Outlined variant: the band colour as an accent on a normal surface, for dense
+ * lists where six saturated fills would be overwhelming. The texture still
+ * appears, at low opacity, behind the text.
+ */
+.aq-outline {
+  position: relative;
+  isolation: isolate;
+  background-color: color-mix(
+    in oklab,
+    var(--aq-color, var(--color-aq-no-data)) 16%,
+    var(--surface)
+  );
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: inset 0 0 0 1px
+    color-mix(in oklab, var(--aq-color, var(--color-aq-no-data)) 55%, var(--border));
+}
+
+.aq-outline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--aq-pattern-image, none);
+  background-size: var(--aq-pattern-size, auto);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/** Small colour chip for legends and map keys. */
+.aq-dot {
+  display: inline-block;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--aq-color, var(--color-aq-no-data));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--aq-on-color, #000) 45%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Utilities                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/** Guarantees the WCAG 2.2 minimum target size on compact icon controls. */
+@utility tap-target {
+  min-inline-size: var(--size-tap);
+  min-block-size: var(--size-tap);
+}
+
+/** Numeric columns that must line up: concentrations, sub-indices, times. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Motion                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Honour a reduced-motion preference globally.
+ *
+ * Animations are reduced to an imperceptible duration rather than removed, so
+ * anything that waits for `animationend` or `transitionend` — several Radix
+ * primitives do — still receives its event and does not hang half-open.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Forced colours                                                            */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * In forced-colours mode the browser would otherwise replace the band fills with
+ * the user's own palette, collapsing six distinct bands into one. `forced-color-adjust:
+ * none` keeps them, because the fill is information rather than decoration — and
+ * the icon, texture and written label still carry the same meaning for anyone
+ * whose palette makes the fill unreadable. An explicit border is added so each
+ * swatch keeps a visible boundary against the forced background.
+ */
+@media (forced-colors: active) {
+  .aq-swatch,
+  .aq-outline,
+  .aq-dot {
+    border: 1px solid CanvasText;
+    forced-color-adjust: none;
+  }
+
+  .skip-link {
+    border: 2px solid CanvasText;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Print                                                                     */
+/* -------------------------------------------------------------------------- */
+
+@media print {
+  .skip-link,
+  [data-print-hidden] {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* Keep band fills and textures when printed — they are the information. */
+  .aq-swatch,
+  .aq-outline,
+  .aq-dot {
+    print-color-adjust: exact;
+  }
 }

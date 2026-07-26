@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    { "path": "/api/cron/refresh-air-quality", "schedule": "5 * * * *" },
+    { "path": "/api/cron/refresh-weather", "schedule": "10,40 * * * *" },
+    { "path": "/api/cron/refresh-context", "schedule": "25,55 * * * *" },
+    { "path": "/api/cron/generate-forecasts", "schedule": "15 * * * *" },
+    { "path": "/api/cron/evaluate-alerts", "schedule": "20,50 * * * *" },
+    { "path": "/api/cron/cleanup", "schedule": "30 3 * * *" }
+  ]
+}
