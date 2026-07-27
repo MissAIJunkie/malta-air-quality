@@ -21,14 +21,23 @@ describe('CategoryBadge', () => {
     expect(screen.queryByText('Good')).not.toBeInTheDocument();
   });
 
-  it('carries the band id and its texture class, so colour is never alone', () => {
+  it('carries the band id, the icon and the written label, so colour is never alone', () => {
     const { container } = render(<CategoryBadge category="Poor" />);
     const badge = container.querySelector('[data-slot="category-badge"]');
 
     expect(badge).toHaveAttribute('data-aq-band', String(CATEGORY_PRESENTATION.Poor.bandId));
-    expect(badge?.className).toContain(`aq-pattern-${CATEGORY_PRESENTATION.Poor.pattern}`);
-    // The icon is the third redundant cue.
+    // Icon and written label are the colour-independent cues on a badge.
     expect(badge?.querySelector('svg')).toBeTruthy();
+    expect(screen.getByText('Poor')).toBeInTheDocument();
+  });
+
+  it('does not apply a texture, which belongs to the label-less map marker', () => {
+    const { container } = render(<CategoryBadge category="Poor" />);
+    const badge = container.querySelector('[data-slot="category-badge"]');
+
+    // A marker has only colour, icon and texture. A badge spells the band out in
+    // words, so the texture carries no extra information and tiles as noise.
+    expect(badge?.className).not.toMatch(/aq-pattern-/);
   });
 
   it('uses band 0 for no data, which is not a category', () => {

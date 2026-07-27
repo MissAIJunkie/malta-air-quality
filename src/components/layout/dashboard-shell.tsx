@@ -169,7 +169,14 @@ export function DashboardShell({
         {/* --- Map view --------------------------------------------------- */}
         <TabsContent value="map" className="flex flex-1 flex-col gap-4">
           <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
-            <div className="flex min-h-0 flex-col gap-4">
+            {/* `min-w-0` is load-bearing. This is a grid item, and a grid item's
+                default `min-width: auto` refuses to shrink below its content's
+                max-content width — which, thanks to the snap-scrolling station
+                row below, is five 17rem cards wide. The `lg:` column template
+                says `minmax(0,1fr)` and so is already safe; the implicit single
+                column below `lg` is not, and without this the whole page scrolls
+                sideways on a phone. */}
+            <div className="flex min-h-0 min-w-0 flex-col gap-4">
               <AirQualityMap
                 readings={readings}
                 stations={mapStations}
@@ -200,7 +207,11 @@ export function DashboardShell({
                 <ul
                   tabIndex={0}
                   aria-label={t(dict, 'station.allStations')}
-                  className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
+                  /* `relative` for the same reason as the list table: these
+                     cards carry absolutely-positioned `sr-only` pollutant
+                     labels, which escape the clip without a containing block
+                     here. */
+                  className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
                 >
                   {entries.map((entry) => (
                     <li key={entry.station.id} className="w-[17rem] shrink-0 snap-start">
@@ -245,7 +256,13 @@ export function DashboardShell({
             dict={dict}
           />
 
-          <div className="grid gap-4 lg:grid-cols-2">
+          {/* `grid-cols-1` is not redundant. Tailwind expands it to
+              `repeat(1,minmax(0,1fr))`, and it is that explicit 0 floor that
+              matters: with no base column declared, the implicit track is
+              `auto`, which will not shrink an item below its content's
+              max-content width — and these panels contain snap-scrolling rows
+              far wider than a phone. Same bug as the map column above. */}
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {guidance}
             {context}
             {forecast}

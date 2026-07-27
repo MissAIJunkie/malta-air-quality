@@ -111,7 +111,14 @@ export function ContextWidget({
             tabIndex={0}
             role="group"
             aria-label={localised(dict, 'context.listLabel', 'Leading environmental conditions')}
-            className="-mx-1 overflow-x-auto px-1 pb-1 lg:overflow-visible"
+            /* `relative` is not decoration. The cards carry `sr-only` source
+               labels, and `sr-only` is `position: absolute`; with every ancestor
+               static their containing block would be the initial one, so they
+               keep their static position out in the scrolled-away region and
+               escape this element's clip entirely — dragging the *document's*
+               scroll width out with them. Making this the containing block
+               brings them back under the clip. */
+            className="relative -mx-1 overflow-x-auto px-1 pb-1 lg:overflow-visible"
           >
             <ul className="flex snap-x snap-mandatory gap-3 lg:snap-none lg:flex-col">
               {primary.map((event) => (

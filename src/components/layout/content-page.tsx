@@ -134,7 +134,10 @@ export function TableScroll({ children, label }: { children: ReactNode; label: s
       role="region"
       aria-label={label}
       tabIndex={0}
-      className="border-border rounded-card overflow-x-auto border"
+      /* `relative`: see station-list. Absolutely-positioned `sr-only` content
+         inside a wide table would otherwise escape this clip and widen the
+         document rather than scrolling within this region. */
+      className="border-border rounded-card relative overflow-x-auto border"
     >
       {children}
     </div>

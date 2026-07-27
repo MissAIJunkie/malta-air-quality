@@ -225,7 +225,12 @@ export function StationList({
 
   return (
     <div data-slot="station-list" className={cn('flex flex-col gap-2', className)} {...props}>
-      <div className="overflow-x-auto">
+      {/* `relative` so this box is the containing block for the `sr-only`
+          pollutant labels in the cells. They are `position: absolute`, and
+          without it they resolve against the initial containing block, keep
+          their static position out in the scrolled-away part of the table and
+          escape this clip — which makes the whole document scroll sideways. */}
+      <div className="relative overflow-x-auto">
         <table className="w-full border-collapse text-left text-sm">
           <caption className="text-muted-foreground pb-3 text-left text-sm">
             {caption ?? t(dict, 'station.allStations')}

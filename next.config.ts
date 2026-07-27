@@ -1,3 +1,4 @@
+import { networkInterfaces } from 'node:os';
 import type { NextConfig } from 'next';
 
 /**
@@ -64,23 +65,49 @@ const contentSecurityPolicy = [
   `connect-src 'self' ${OPENSTREETMAP_TILES}${isDevelopment ? ' ws: wss:' : ''}`,
   "manifest-src 'self'",
   "media-src 'none'",
-  'upgrade-insecure-requests',
-].join('; ');
+  /**
+   * Production only, and deliberately so.
+   *
+   * This upgrades every http subresource to https. `http://localhost:3000`
+   * escapes it not through a carve-out in this directive but because loopback
+   * is already a potentially trustworthy origin (Secure Contexts §3.1), so
+   * there is nothing insecure left to upgrade. That list is `127.0.0.0/8`,
+   * `::1/128` and `localhost` — it does NOT include the RFC1918 ranges, so the
+   * LAN URL `next dev` also prints, the one you open to test on a phone, is
+   * ordinary insecure http. There every stylesheet, font and script is upgraded
+   * to https, the dev server only speaks plain HTTP, and the page arrives with
+   * no CSS at all behind a wall of ERR_SSL_PROTOCOL_ERROR.
+   */
+  isDevelopment ? null : 'upgrade-insecure-requests',
+]
+  // Drops the directive above when it is null, so the serialised policy never
+  // contains an empty segment or a trailing separator.
+  .filter(Boolean)
+  .join('; ');
 
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value: contentSecurityPolicy,
   },
-  {
-    /**
-     * Two years, subdomains included. `preload` is deliberately omitted: getting
-     * onto the preload list is easy and getting off it is not, so it is a
-     * commitment to make explicitly rather than by inheriting a snippet.
-     */
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains',
-  },
+  /**
+   * Two years, subdomains included. `preload` is deliberately omitted: getting
+   * onto the preload list is easy and getting off it is not, so it is a
+   * commitment to make explicitly rather than by inheriting a snippet.
+   *
+   * Production only. A browser ignores an HSTS header received over plain HTTP
+   * (RFC 6797 §8.1), so this never bound anything in development — but a dev
+   * server has no business announcing a two-year pin, and it would start
+   * binding the moment `next dev` sat behind an HTTPS proxy.
+   */
+  ...(isDevelopment
+    ? []
+    : [
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=63072000; includeSubDomains',
+        },
+      ]),
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff',
@@ -117,11 +144,41 @@ const securityHeaders = [
   },
 ];
 
+/**
+ * This machine's own LAN addresses, so the dev server can be opened on a phone.
+ *
+ * Next blocks cross-origin requests to `/_next/*` in development, allowing only
+ * `localhost` and the bind hostname. A same-origin `<script>` or `<link>` sends
+ * no `Origin` header and slips through, but a WebSocket handshake ALWAYS sends
+ * one — so opening `http://<lan-ip>:3000` gets a 403 on the HMR socket alone.
+ * Under Turbopack that socket is also how the dev runtime pulls further chunks,
+ * so `next/dynamic` never resolves and the map sits on its loading skeleton for
+ * ever. Fast Refresh and the map both come back once the host is allowed.
+ *
+ * Enumerated rather than hard-coded because a DHCP lease changes, and empty
+ * outside development so this can never widen anything in production.
+ */
+const lanDevOrigins = isDevelopment
+  ? [
+      ...new Set(
+        Object.values(networkInterfaces())
+          .flat()
+          .filter(
+            (iface): iface is NonNullable<typeof iface> =>
+              iface !== undefined && iface.family === 'IPv4' && !iface.internal,
+          )
+          .map((iface) => iface.address),
+      ),
+    ]
+  : [];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   // The framework version is not a secret, but announcing it in every response
   // only helps somebody scanning for a version-specific weakness.
   poweredByHeader: false,
+
+  allowedDevOrigins: lanDevOrigins,
 
   async headers() {
     return [

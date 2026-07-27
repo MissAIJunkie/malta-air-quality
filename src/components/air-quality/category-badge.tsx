@@ -111,7 +111,13 @@ export function CategoryBadge({
       className={cn(
         'inline-flex w-fit items-center font-semibold',
         variant === 'filled' ? 'aq-swatch' : 'aq-outline',
-        patternClassFor(category),
+        /* Deliberately NO `patternClassFor(category)` here.
+           The texture is a colour-independent channel, and it earns that on a
+           map marker, which carries no visible text — colour, icon and texture
+           are all a sighted colour-blind reader gets there. This badge always
+           renders the band in words next to the icon, so the texture adds no
+           information and, tiled across a pill this small, reads as noise. The
+           other three channels are untouched. */
         SIZE_CLASSES[size],
         className,
       )}
