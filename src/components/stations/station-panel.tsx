@@ -64,6 +64,20 @@ export type StationPanelProps = Omit<React.ComponentProps<'div'>, 'children'> & 
    * twice, word for word, whenever the selected station was the driving one.
    */
   showGuidance?: boolean;
+  /**
+   * How much of the station's record to render.
+   *
+   * `full` is everything: every pollutant at reading size, the EU-limit and WHO
+   * comparison, and the site metadata. `summary` keeps the band, the rail and
+   * the measured values and drops the rest, because the rest is reference
+   * material that the station's own page already carries in full.
+   *
+   * The map sidebar uses `summary`. At `full` the panel ran to some 2,200px in
+   * a 384px column — three screens of it — which forced the sidebar to become
+   * its own scrolling region, and a panel with its own scrollbar beside a map
+   * reads as a widget wedged into a hole rather than part of the page.
+   */
+  detail?: 'summary' | 'full';
   showStationLink?: boolean;
   headingLevel?: HeadingLevel;
   dict?: Dictionary;
@@ -87,6 +101,7 @@ export function StationPanel({
   showHeader = true,
   announceDanger = true,
   showGuidance = true,
+  detail = 'full',
   showStationLink = true,
   headingLevel = 'h2',
   dict = getDictionary(),
@@ -104,6 +119,7 @@ export function StationPanel({
   const dominant = reading?.dominantPollutant ?? null;
   const dominantReading = dominant ? (reading?.pollutants[dominant] ?? null) : null;
 
+  const isSummary = detail === 'summary';
   const typeExplanation = stationTypeExplanation(station.stationType, dict);
   const resolvedHref = href ?? stationHref(station);
   const sourceIsSafe = isSafeExternalLink(station.sourceUrl);
@@ -203,7 +219,10 @@ export function StationPanel({
             {t(dict, 'station.overallExplain')}
           </p>
 
-          {reading.overallSubIndex !== null ? (
+          {/* What a sub-index of 3.3 means, in words. Kept for the station's own
+              page; dropped from the sidebar, where the rail directly above has
+              just shown the same thing as a position. */}
+          {reading.overallSubIndex !== null && !isSummary ? (
             <p className="text-muted-foreground text-xs leading-relaxed">
               {t(dict, 'station.subIndex', {
                 value: formatSubIndex(reading.overallSubIndex, dict),
@@ -264,14 +283,27 @@ export function StationPanel({
             {t(dict, 'station.noPollutants')}
           </p>
         ) : (
-          <ul className="flex flex-col gap-3">
+          <ul className={cn('flex flex-col', isSummary ? 'gap-0' : 'gap-3')}>
             {codes.map((code) => (
-              <li key={code} className="border-border rounded-card border p-3">
+              <li
+                key={code}
+                className={cn(
+                  isSummary
+                    ? 'border-border flex items-center border-b py-2 last:border-b-0'
+                    : 'border-border rounded-card border p-3',
+                )}
+              >
                 <PollutantValue
                   pollutant={code}
                   reading={reading?.pollutants[code] ?? null}
-                  variant="detail"
+                  /* `inline` in the sidebar: `detail` sets the concentration at
+                     24px and prints the averaging period and the threshold
+                     reference under every pollutant — five repetitions of
+                     "European Air Quality Index (EEA), verified 2026-07-26" in
+                     a column narrow enough that each one wraps to two lines. */
+                  variant={isSummary ? 'inline' : 'detail'}
                   dominant={code === dominant}
+                  className={isSummary ? 'w-full' : undefined}
                   dict={dict}
                 />
               </li>
@@ -280,7 +312,10 @@ export function StationPanel({
         )}
       </section>
 
-      {dominant && dominantReading ? (
+      {/* The EU limit values and WHO guidelines. Long, legally careful reading
+          that the station's own page renders in full — it is not something
+          anyone takes in from a column beside a map. */}
+      {!isSummary && dominant && dominantReading ? (
         <ThresholdComparison
           pollutant={dominant}
           value={dominantReading.value}
@@ -300,7 +335,13 @@ export function StationPanel({
       <section className="border-border flex flex-col gap-3 border-t pt-4">
         <SubHeading className="sr-only">{t(dict, 'station.panelTitle')}</SubHeading>
 
-        <dl className="grid gap-x-4 gap-y-2 text-sm sm:grid-cols-2">
+        {/* Site metadata — type, area, altitude, coordinates, operator.
+            Hidden in the sidebar, where the two facts that matter beside a map
+            (the station's type and its area) are already badges in the header
+            above and the rest is provenance for the station's own page. The
+            actions below stay: this is the link to that page, and dropping it
+            with the metadata would strand everything this mode defers. */}
+        <dl className={cn('grid gap-x-4 gap-y-2 text-sm sm:grid-cols-2', isSummary && 'hidden')}>
           <div className="flex flex-col">
             <dt className="text-muted-foreground text-xs font-medium">{t(dict, 'station.type')}</dt>
             <dd>{stationTypeLabel(station.stationType, dict)}</dd>
@@ -337,7 +378,7 @@ export function StationPanel({
           </div>
         </dl>
 
-        {typeExplanation ? (
+        {typeExplanation && !isSummary ? (
           <p className="text-muted-foreground text-xs leading-relaxed">{typeExplanation}</p>
         ) : null}
 

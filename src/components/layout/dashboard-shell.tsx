@@ -131,6 +131,11 @@ export function DashboardShell({
          reporting station and so never laxer than this one's. Rendering the
          panel's copy too printed the same paragraphs twice on one screen. */
       showGuidance={false}
+      /* A preview, not the dossier. See `StationPanel`'s `detail` prop: at
+         `full` this ran to roughly 2,200px in a 384px column and had to be
+         given its own scrollbar. Everything dropped here is one click away
+         through the "View details" link the panel still ends with. */
+      detail="summary"
       dict={dict}
     />
   ) : (
@@ -269,22 +274,22 @@ export function DashboardShell({
                 left. They are full-width sections below the grid now. */}
             <aside
               aria-label={t(dict, 'a11y.complementary')}
-              /* Pinned beside the map and scrolled on its own.
-                 The panel is a detailed read — pollutants, thresholds, guidance,
-                 site metadata — and is reliably taller than the map column next
-                 to it. Left to grow it sets the grid row height and reinstates
-                 the empty gutter this layout exists to remove. Capping it to the
-                 viewport bounds the row, and `sticky` means the station you
-                 picked stays next to the marker you picked it from instead of
-                 scrolling away.
-                 `top-20` clears the sticky site header. `tabIndex` because a
-                 scroll container that only responds to a mouse wheel is not
-                 reachable from a keyboard — same reason the station card row
-                 above carries one. The `print:` resets undo all of it on paper,
-                 where there is no viewport to cap against and a capped panel
-                 would simply lose everything below the fold. */
-              tabIndex={0}
-              className="hidden min-w-0 flex-col gap-4 lg:sticky lg:top-20 lg:flex lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto lg:overscroll-contain print:static print:max-h-none print:overflow-visible"
+              /* Pinned beside the map, and NOT a scrolling region.
+                 It used to be one: the panel rendered the full station dossier
+                 — every pollutant at reading size, the EU-limit comparison, the
+                 site metadata — which came to some 2,200px in this 384px
+                 column, so it was capped to the viewport and given
+                 `overflow-y-auto`. That traded a layout problem for a worse
+                 visual one, a widget with its own scrollbar sitting beside the
+                 map. The panel is passed `detail="summary"` instead and now
+                 fits, so there is nothing to cap and no scrollbar to look at.
+                 No `tabIndex` either: that only existed because a scroll
+                 container which answers to a mouse wheel alone is unreachable
+                 from a keyboard. With no scroll container there is nothing to
+                 scroll, and a focusable wrapper around static content is one
+                 more stop on the way to the links inside it.
+                 `top-20` clears the sticky site header. */
+              className="hidden min-w-0 flex-col gap-4 lg:sticky lg:top-20 lg:flex"
             >
               {stationPanel}
             </aside>
