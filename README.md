@@ -14,6 +14,10 @@
 
 [What it does](#what-it-does) · [Quick start](#quick-start) · [Optional services](#optional-services) · [API](#api) · [Architecture](#architecture) · [Docs](#documentation)
 
+<img src="docs/maqua-hero.png" alt="The maqua.app dashboard: a Malta-wide summary, a map of the five monitoring stations coloured by air-quality band, the station list, and a detail panel showing each pollutant measured at Attard." width="900">
+
+<sub><a href="docs/maqua-overview.png">See the full page, top to bottom</a></sub>
+
 </div>
 
 ---
@@ -32,7 +36,9 @@ A map-first dashboard that answers, in about five seconds:
 
 Technical measurements are translated into cautious, plain-language guidance. No scientific background is needed to understand whether the air is safe.
 
-Alongside the map: per-station history charts, a 5-day modelled outlook, environmental context (Saharan dust, wind, temperature inversions), optional email alerts, and an optional AI "Explain this" that puts the numbers into words without ever computing them.
+The map is one view of the same data, not the only one: a **map / list toggle** switches to a plain station list for anyone who would rather read than pan, and a **band rail** places a station's reading on the full Good-to-Extremely-poor scale, so a rating is shown as a position rather than a bare word. Selecting a station — from either view — opens a summary panel beside the map with its band and every pollutant it measured; its own page carries the rest, including how each value compares to EU limit values and WHO guidelines.
+
+Alongside that: per-station history charts, a 5-day modelled outlook, environmental context (Saharan dust, wind, temperature inversions), optional email alerts, and an optional AI "Explain this" that puts the numbers into words without ever computing them.
 
 ## Where the data comes from
 
@@ -57,13 +63,16 @@ Everything below assumes a terminal. If you have never used one, the steps are s
 
 ### 1. Install the prerequisites
 
-You need **Node.js 20 or newer** and **pnpm** (the package manager this project uses instead of npm).
+You need **Node.js 20.9 or newer** (the minimum Next.js 16 accepts) and **pnpm** (the package manager this project uses instead of npm).
 
 ```bash
-node --version   # must print v20.x or higher
+node --version   # must print v20.9.0 or higher
 ```
 
 If that command fails or prints an older version, install Node from [nodejs.org](https://nodejs.org/) (pick the LTS download) and run it again.
+
+> [!NOTE]
+> `v20.9` is a real floor, not a rounded-up suggestion: v20.0–v20.8 will install and then fail at build time. If you are on Node 22 or 24, you are fine — newer is not a problem.
 
 Then enable pnpm, which ships with Node:
 
@@ -107,6 +116,9 @@ pnpm dev
 
 Open <http://localhost:3000>. You should see the map of Malta and Gozo with the five stations plotted and coloured, a headline summary, and a station list. **No credentials are needed**: with no database, no Redis, no AI key and no email key, the app still serves the live map, the station list and the full API.
 
+> [!TIP]
+> Next to `Local:`, `pnpm dev` prints a `Network:` address such as `http://192.168.1.20:3000`. Open that one on a phone on the same Wi-Fi to check the layout on a small screen — the dev server allows your machine's own LAN addresses on purpose, so the map and hot reload both work there.
+
 ### 5. Confirm it actually worked
 
 Two checks tell you everything:
@@ -119,7 +131,7 @@ curl -s http://localhost:3000/api/health | head -c 600
 curl -s http://localhost:3000/api/air-quality | head -c 600
 ```
 
-On a fresh checkout with no keys, `/api/health` looks like this:
+On a fresh checkout with no keys, the interesting part of `/api/health` looks like this (abridged — the real response also reports the weather provider, success rates and last-fetch timestamps):
 
 ```jsonc
 {
@@ -288,6 +300,8 @@ These are the routes the app's own front end calls — no key, no session. The b
 
 `stationId` accepts either an upstream code (`MT00011`) or a slug (`msida`). Pollutant slugs are `pm25`, `pm10`, `no2`, `o3`, `so2`.
 
+Two more routes exist and are deliberately absent from the table: `/api/alerts/confirm` and `/api/alerts/unsubscribe` are reached only through the signed links in an alert email, never called by the front end. The six `/api/cron/*` jobs are likewise not public — they require `CRON_SECRET` and answer 401 without it.
+
 The four data routes — `air-quality`, `stations`, `forecast`, `context` — share one envelope, and every successful response carries a `meta` block:
 
 ```jsonc
@@ -348,7 +362,7 @@ These are tested, not aspirational:
 - **A missing value is never zero.** `value === null` renders as _Not available_.
 - **Stale data is never called live.** Every reading carries measured-at, retrieved-at, and an age.
 - **A forecast is never shown as an observation.** The upstream feed gap-fills _past_ hours too, so the wall clock cannot distinguish them — the `modelled` flag does.
-- **Colour is never the only signal.** Every category pairs colour with a text label, an icon and a pattern.
+- **Colour is never the only signal.** Every category carries an icon and a written label alongside its colour, and wherever the band is shown _without_ text — map markers, the map legend, the danger banner — a texture is added as a fourth, colour-independent channel.
 - **AI never computes anything scientific.** It explains; it does not calculate AQI, thresholds, or timestamps. All output is schema-validated and falls back to deterministic prose.
 - **One hourly reading never proves an annual legal breach.** Threshold comparisons carry a `conclusive` flag that the UI must respect.
 
