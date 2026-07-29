@@ -60,6 +60,14 @@ export type HealthGuidanceProps = Omit<React.ComponentProps<'section'>, 'childre
    * Defaults to `full` for the bands that warrant a warning.
    */
   detail?: 'brief' | 'full';
+  /**
+   * Show the band's one-sentence summary at the top of the panel.
+   *
+   * Set false where the page has already given it — the home page prints it
+   * under the headline, and without this the same sentence appeared twice on
+   * one screen. The rest of the panel is unaffected; nothing else is optional.
+   */
+  showLead?: boolean;
   dict?: Dictionary;
 };
 
@@ -80,6 +88,7 @@ export function HealthGuidance({
   category,
   headingLevel = 'h3',
   detail,
+  showLead = true,
   dict = getDictionary(),
   className,
   ...props
@@ -103,7 +112,7 @@ export function HealthGuidance({
     >
       <Heading className="text-base font-semibold">{t(dict, 'health.sectionTitle')}</Heading>
 
-      <p className="text-sm leading-relaxed">{lead}</p>
+      {showLead ? <p className="text-sm leading-relaxed">{lead}</p> : null}
 
       <div className="flex flex-col gap-1">
         <SubHeading className="text-sm font-semibold">{t(dict, 'health.forEveryone')}</SubHeading>

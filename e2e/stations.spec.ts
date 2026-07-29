@@ -132,19 +132,18 @@ test.describe('a station detail page', () => {
 
   for (const station of STATIONS) {
     test(`shows ${station.name} with its measurement time and provenance`, async ({ page }) => {
-      // Slug-addressable detail pages are the shareable, linkable form of the
-      // data. Both plausible URL shapes are tried before giving up.
-      const candidates = [`/stations/${station.slug}`, `/station/${station.slug}`];
-
-      let loaded = false;
-      for (const path of candidates) {
-        const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
-        if (response && response.status() < 400) {
-          loaded = true;
-          break;
-        }
-      }
-      if (!loaded) skipBecauseAbsent(`no detail page at ${candidates.join(' or ')}`);
+      /*
+       * The one canonical URL, asserted rather than probed.
+       *
+       * This used to try `/stations/<slug>` and then `/station/<slug>` and skip
+       * if neither answered. That tolerance hid a real bug: `stationHref` built
+       * the plural form, so every link on the site 404'd, and this test simply
+       * fell through to the singular URL and passed. A detail page has exactly
+       * one address and the suite should fail when it moves.
+       */
+      const path = `/station/${station.slug}`;
+      const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
+      expect(response?.status(), `${path} must serve the detail page`).toBeLessThan(400);
 
       await expect(page.getByRole('heading', { level: 1 })).toContainText(station.pattern);
       /*
@@ -162,8 +161,8 @@ test.describe('a station detail page', () => {
   test('says so plainly when a station does not measure a pollutant', async ({ page }) => {
     // Msida measures no ozone. The detail page must say that in words rather
     // than printing 0 µg/m³ or quietly omitting the row.
-    const response = await page.goto('/stations/msida', { waitUntil: 'domcontentloaded' });
-    if (!response || response.status() >= 400) skipBecauseAbsent('no Msida detail page');
+    const response = await page.goto('/station/msida', { waitUntil: 'domcontentloaded' });
+    expect(response?.status(), '/station/msida must serve the detail page').toBeLessThan(400);
 
     const body = page.locator('body');
     const text = await body.innerText();
@@ -177,7 +176,7 @@ test.describe('a station detail page', () => {
   });
 
   test('returns a real 404 for a station that does not exist', async ({ page }) => {
-    const response = await page.goto('/stations/atlantis', { waitUntil: 'domcontentloaded' });
+    const response = await page.goto('/station/atlantis', { waitUntil: 'domcontentloaded' });
     if (!response) skipBecauseAbsent('no response for the unknown-station URL');
     // Either a 404 status or a 404 page — but never a page pretending the
     // station exists with empty readings.
@@ -191,15 +190,15 @@ test.describe('deep links', () => {
   guardAgainstPageErrors();
 
   test('a shared station URL loads that station directly', async ({ page }) => {
-    const response = await page.goto('/stations/gharb', { waitUntil: 'domcontentloaded' });
-    if (!response || response.status() >= 400) skipBecauseAbsent('no slug-addressable detail page');
+    const response = await page.goto('/station/gharb', { waitUntil: 'domcontentloaded' });
+    expect(response?.status(), '/station/gharb must serve the detail page').toBeLessThan(400);
 
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/G(ħ|h)arb/i);
     // Gozo, not Malta — the island is part of what makes the reading meaningful.
     await expect(page.locator('body')).toContainText(/Gozo/i);
   });
 
-  test('a station link on the front page points at that station', async ({ page }) => {
+  test('a station link on the front page follows through to that station', async ({ page }) => {
     await visit(page, '/');
     await revealListing(page);
 
@@ -208,6 +207,20 @@ test.describe('deep links', () => {
 
     const href = await link.getAttribute('href');
     if (href === null) skipBecauseAbsent('the station affordance is a button, not a link');
-    expect(href).toContain('msida');
+
+    /*
+     * Follow the link instead of pattern-matching the string.
+     *
+     * `expect(href).toContain('msida')` was the whole assertion here, and
+     * `/stations/msida` satisfies it perfectly while serving a 404. A link is
+     * only correct if it arrives somewhere, so this now navigates to the href
+     * the page actually published and requires the station's own page at the
+     * other end.
+     */
+    const response = await page.goto(href, { waitUntil: 'domcontentloaded' });
+    expect(response?.status(), `the front page links to ${href}, which must load`).toBeLessThan(
+      400,
+    );
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Msida/i);
   });
 });

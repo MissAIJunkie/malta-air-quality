@@ -134,12 +134,13 @@ export function HeaderStatus({ className }: { className?: string }) {
             t(dict, 'errors.dataUnavailable')
           )}
         </span>
-        <span className="truncate">
-          {t(dict, 'header.reportingStations', {
-            reporting: data.reportingStations,
-            total: data.totalStations,
-          })}
-        </span>
+        {/* The station roll-call deliberately does NOT appear here.
+            This bar is sticky and its job is the band and how old it is —
+            the two facts that still matter once the headline has scrolled
+            away. "5 of 5 stations reporting" is a property of the reading
+            rather than of its currency, it is stated in the headline a
+            screenful below, and printing it in both put the same sentence
+            twice in one view. */}
       </span>
     </div>
   );

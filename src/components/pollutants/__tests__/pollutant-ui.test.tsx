@@ -176,7 +176,9 @@ describe('StationCard', () => {
   it('links to the station and shows its band', () => {
     render(<StationCard station={MSIDA} reading={READING} />);
 
-    expect(screen.getByRole('link', { name: 'Msida' })).toHaveAttribute('href', '/stations/msida');
+    // Singular: this is the address the route actually serves. The assertion
+    // read `/stations/msida` and so held the 404 in place rather than catching it.
+    expect(screen.getByRole('link', { name: 'Msida' })).toHaveAttribute('href', '/station/msida');
     expect(screen.getByText('Moderate')).toBeInTheDocument();
   });
 

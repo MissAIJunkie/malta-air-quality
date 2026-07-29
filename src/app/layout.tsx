@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Archivo, IBM_Plex_Mono, Public_Sans } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { SiteFooter } from '@/components/layout/footer';
@@ -13,20 +13,45 @@ import { Providers } from './providers';
 import './globals.css';
 
 /**
- * Inter for the interface, JetBrains Mono for figures.
+ * Three faces, three jobs.
+ *
+ * Archivo states the reading. It is a grotesque drawn for signage and headlines,
+ * and it gives the one sentence at the top of the page the flat, civic authority
+ * of a public notice rather than the soft neutrality of a product dashboard.
+ * Used large and sparingly — headings only, never body copy.
+ *
+ * Public Sans carries the prose. It was commissioned for public-information text
+ * and is drawn for legibility at small sizes, which is what long health guidance
+ * actually needs; its open apertures and wide default tracking keep a paragraph
+ * of caveats readable where a tighter UI face turns grey.
+ *
+ * IBM Plex Mono sets the figures. Concentrations, sub-indices and timestamps are
+ * compared down a column, so they need fixed advance widths; Plex Mono's is a
+ * measured, instrument-like drawing rather than a coding face.
+ *
+ * `latin-ext` on both text faces is not optional: Maltese uses ħ, ġ, ż and ċ, and
+ * Għarb and Żejtun are station names that must not fall back mid-word.
  *
  * `display: 'swap'` so a slow font never blanks a health-relevant reading, and
- * both are self-hosted by `next/font` — no request leaves the browser for Google
- * Fonts, which is one fewer third party for the privacy page to declare.
+ * all three are self-hosted by `next/font` — no request leaves the browser for
+ * Google Fonts, which is one fewer third party for the privacy page to declare.
  */
-const sans = Inter({
+const display = Archivo({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-app-display',
+  display: 'swap',
+});
+
+const sans = Public_Sans({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-app-sans',
   display: 'swap',
 });
 
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
+const mono = IBM_Plex_Mono({
+  subsets: ['latin', 'latin-ext'],
+  // Not a variable font, so the weights actually used are listed explicitly.
+  weight: ['400', '500', '600'],
   variable: '--font-app-mono',
   display: 'swap',
 });
@@ -108,9 +133,11 @@ export const viewport: Viewport = {
    * map carries its own zoom controls that do not depend on it.
    */
   maximumScale: 5,
+  // Kept in step with `--background` in globals.css, so the browser chrome does
+  // not sit on a different colour from the page beneath it.
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#faf8f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#08192a' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f7f9' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1015' },
   ],
   // The map runs edge to edge; the header and footer add their own safe-area padding.
   viewportFit: 'cover',
@@ -184,7 +211,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       lang="en"
       dir="ltr"
       suppressHydrationWarning
-      className={`${sans.variable} ${mono.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <script

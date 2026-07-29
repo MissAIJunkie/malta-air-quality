@@ -61,6 +61,13 @@ const LEGEND_ROWS: LegendRow[] = [...CATEGORY_ROWS, NO_DATA_ROW];
  * greyscale, or with any form of colour vision, the rows remain distinguishable
  * from one another.
  *
+ * Drawn as a strip rather than a panel. The headline band rail now names all six
+ * bands to scale, so this is no longer where a reader learns the scale — what is
+ * left is the marker encoding, the "No data" state the rail has no room for, the
+ * pollutant currently filtered, and the attribution the upstream terms require.
+ * That is footnote material, and it was previously occupying a card the size of
+ * the health guidance next to it.
+ *
  * A server component: no state, no interaction, nothing that needs the browser.
  * The page can render it beside a map that has not loaded, or in place of one
  * that never will.
@@ -84,47 +91,53 @@ export function MapLegend({
       data-slot="map-legend"
       id={id}
       aria-labelledby={headingId}
-      className={cn(
-        'rounded-card border-border bg-surface shadow-card border p-4 text-sm',
-        className,
-      )}
+      className={cn('border-border flex flex-col gap-3 border-t pt-4', className)}
       {...props}
     >
-      <Heading id={headingId} className="text-base font-semibold">
-        {t(dict, 'map.legendTitle')}
-      </Heading>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <Heading
+          id={headingId}
+          className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase"
+        >
+          {t(dict, 'map.legendTitle')}
+        </Heading>
 
-      <p className="text-muted-foreground mt-1 text-sm">{t(dict, 'map.legendDescription')}</p>
+        {/* The filter is stated in words rather than implied by the markers
+            changing colour, so it is impossible to read a single-pollutant map as
+            though it were the overall picture. */}
+        <p className="text-sm font-medium">
+          <span className="text-muted-foreground">{t(dict, 'pollutant.selectorLabel')}: </span>
+          {pollutantDefinition ? (
+            <span>
+              <span aria-hidden="true">{pollutantDefinition.label}</span>
+              <span className="sr-only">{pollutantDefinition.ariaLabel}</span>
+            </span>
+          ) : (
+            <span>{t(dict, 'pollutant.allPollutants')}</span>
+          )}
+        </p>
+      </div>
 
-      {/* The filter is stated in words rather than implied by the markers
-          changing colour, so it is impossible to read a single-pollutant map as
-          though it were the overall picture. */}
-      <p className="mt-2 text-sm font-medium">
-        <span className="text-muted-foreground">{t(dict, 'pollutant.selectorLabel')}: </span>
-        {pollutantDefinition ? (
-          <span>
-            <span aria-hidden="true">{pollutantDefinition.label}</span>
-            <span className="sr-only">{pollutantDefinition.ariaLabel}</span>
-          </span>
-        ) : (
-          <span>{t(dict, 'pollutant.allPollutants')}</span>
-        )}
-      </p>
-
-      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+      {/* One wrapping row of chips rather than a two-column grid of tall rows.
+          The same seven entries, in roughly a fifth of the height. */}
+      <ul className="flex flex-wrap gap-x-4 gap-y-2">
         {LEGEND_ROWS.map((row) => {
           const Icon = CATEGORY_ICONS[row.iconName] ?? CircleHelp;
 
           return (
-            <li key={row.key} data-aq-band={row.bandId} className="flex items-center gap-2">
+            <li
+              key={row.key}
+              data-aq-band={row.bandId}
+              className="flex items-center gap-1.5 text-xs"
+            >
               <span
                 aria-hidden="true"
                 className={cn(
-                  'aq-swatch ring-border flex size-6 shrink-0 items-center justify-center rounded-full ring-1',
+                  'aq-swatch ring-border flex size-4 shrink-0 items-center justify-center rounded-full ring-1',
                   row.patternClass,
                 )}
               >
-                <Icon className="size-3.5" />
+                <Icon className="size-2.5" />
               </span>
               <span className="min-w-0">{t(dict, row.labelKey)}</span>
             </li>
@@ -132,11 +145,11 @@ export function MapLegend({
         })}
       </ul>
 
-      <p className="text-muted-foreground mt-3 text-xs">{t(dict, 'category.patternNote')}</p>
+      <p className="text-subtle text-xs">{t(dict, 'category.patternNote')}</p>
       <p className="sr-only">{t(dict, 'a11y.colourNotAlone')}</p>
 
       {showAttribution ? (
-        <div className="border-border text-muted-foreground mt-4 space-y-2 border-t pt-3 text-xs">
+        <div className="text-subtle flex flex-col gap-1 text-xs">
           {/* Fixed text required by the upstream terms of use. Reproduced
               verbatim through the dictionary — never paraphrased, never
               abbreviated to fit a corner of the map. */}

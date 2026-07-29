@@ -2,6 +2,7 @@ import { ExternalLink, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import type * as React from 'react';
 
+import { BandRail } from '@/components/air-quality/band-rail';
 import { CategoryBadge } from '@/components/air-quality/category-badge';
 import { FreshnessIndicator } from '@/components/air-quality/freshness-indicator';
 import { ThresholdComparison } from '@/components/air-quality/threshold-comparison';
@@ -54,6 +55,15 @@ export type StationPanelProps = Omit<React.ComponentProps<'div'>, 'children'> & 
   showHeader?: boolean;
   /** Set false where the panel opens inside something that announces itself. */
   announceDanger?: boolean;
+  /**
+   * Set false where the surrounding page already gives health guidance.
+   *
+   * The home page does: its headline carries the islands-wide advice, which is
+   * taken from the worst reporting station and is therefore never laxer than
+   * this station's own. Rendering both put "What this means for you" on the page
+   * twice, word for word, whenever the selected station was the driving one.
+   */
+  showGuidance?: boolean;
   showStationLink?: boolean;
   headingLevel?: HeadingLevel;
   dict?: Dictionary;
@@ -76,6 +86,7 @@ export function StationPanel({
   href,
   showHeader = true,
   announceDanger = true,
+  showGuidance = true,
   showStationLink = true,
   headingLevel = 'h2',
   dict = getDictionary(),
@@ -176,6 +187,18 @@ export function StationPanel({
             ) : null}
           </div>
 
+          {/* The same scale as the headline, at the same size, so a reader who
+              has taken in the islands-wide rail can place this station against
+              it without relearning anything. This is also where the sub-index
+              in the sentence below stops being an abstract figure. */}
+          <BandRail
+            subIndex={reading.overallSubIndex}
+            category={reading.overallCategory}
+            size="lg"
+            forLabel={station.name}
+            dict={dict}
+          />
+
           <p className="text-muted-foreground text-xs leading-relaxed">
             {t(dict, 'station.overallExplain')}
           </p>
@@ -266,11 +289,13 @@ export function StationPanel({
         />
       ) : null}
 
-      <HealthGuidance
-        category={reading?.overallCategory ?? null}
-        headingLevel={SUB_HEADING[headingLevel]}
-        dict={dict}
-      />
+      {showGuidance ? (
+        <HealthGuidance
+          category={reading?.overallCategory ?? null}
+          headingLevel={SUB_HEADING[headingLevel]}
+          dict={dict}
+        />
+      ) : null}
 
       <section className="border-border flex flex-col gap-3 border-t pt-4">
         <SubHeading className="sr-only">{t(dict, 'station.panelTitle')}</SubHeading>

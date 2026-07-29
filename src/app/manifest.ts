@@ -27,8 +27,11 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: '/',
     display: 'standalone',
     orientation: 'any',
-    background_color: '#faf8f3',
-    theme_color: '#143c59',
+    /* Kept in step with `--background` (light) in globals.css and with
+       `viewport.themeColor` in layout.tsx. When these drift, an installed copy
+       shows a splash screen in one palette and a title bar in another. */
+    background_color: '#f6f7f9',
+    theme_color: '#f6f7f9',
     lang: 'en-GB',
     dir: 'ltr',
     categories: ['health', 'weather', 'utilities'],

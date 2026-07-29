@@ -282,14 +282,30 @@ export default async function HomePage() {
       summary={
         <MaltaSummary
           summary={summary}
+          /* The driving station's own continuous index, so the rail points at
+             the reading that actually set the headline. Derived from the same
+             station the summary names, never from the band — a band cannot be
+             turned back into a position. */
+          subIndex={drivingReading?.overallSubIndex ?? null}
           fetchedAt={fetchedAt}
           nowIso={nowIso}
           headingLevel="h1"
+          /* The band's one-sentence advice, printed under the headline so the
+             page answers "can I go out?" without a scroll. The guidance panel
+             below is given `showLead={false}` so it is said once. */
+          showAdvice
           dict={dict}
         />
       }
       guidance={
-        <HealthGuidance category={summary.category} headingLevel="h2" detail="brief" dict={dict} />
+        <HealthGuidance
+          category={summary.category}
+          headingLevel="h2"
+          detail="brief"
+          showLead={false}
+          className="rounded-panel border-border bg-surface p-5"
+          dict={dict}
+        />
       }
       context={
         contextEvents.length > 0 ? (

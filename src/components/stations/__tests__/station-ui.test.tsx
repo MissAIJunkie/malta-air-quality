@@ -341,9 +341,10 @@ describe('StationList', () => {
       expect(within(table).getByRole('columnheader', { name: header })).toBeInTheDocument();
     }
 
+    // Singular: the address the route actually serves. See `stationHref`.
     expect(within(table).getByRole('link', { name: 'Msida' })).toHaveAttribute(
       'href',
-      '/stations/msida',
+      '/station/msida',
     );
   });
 

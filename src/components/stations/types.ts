@@ -113,7 +113,13 @@ export function areaLabel(area: string, dict: Dictionary = getDictionary()): str
  * Kept here so the list, the card, the panel and the sheet cannot drift apart.
  * Every component that links to a station also accepts an `href` override, for
  * callers that mount the routes elsewhere.
+ *
+ * SINGULAR. The route is `src/app/station/[stationId]`, and the sitemap, the
+ * `canonical` metadata and the not-found page all say `/station/` too. This
+ * helper said `/stations/` and so produced a 404 from every card, row and
+ * panel on the site. Only `/api/stations` is plural — that is the collection
+ * endpoint, and it is a different namespace.
  */
 export function stationHref(station: Pick<StationDescriptor, 'slug'>): string {
-  return `/stations/${station.slug}`;
+  return `/station/${station.slug}`;
 }

@@ -53,6 +53,7 @@ import {
   type Dictionary,
 } from '@/lib/i18n';
 import { cn } from '@/lib/utils/cn';
+import { BandRail } from '@/components/air-quality/band-rail';
 import { CategoryBadge } from '@/components/air-quality/category-badge';
 import { FreshnessIndicator } from '@/components/air-quality/freshness-indicator';
 import { Badge } from '@/components/ui/badge';
@@ -717,6 +718,18 @@ export default async function StationPage({
                       </Badge>
                     ) : null}
                   </div>
+
+                  {/* The islands-wide scale, with this station on it. Same
+                      component and same six bands as the home page, so a
+                      reading here can be placed against the headline without
+                      re-reading the key. */}
+                  <BandRail
+                    subIndex={reading.overallSubIndex}
+                    category={category}
+                    size="lg"
+                    forLabel={station.name}
+                    dict={dict}
+                  />
 
                   {/* Poor and worse get a callout rather than a paragraph. The
                       band colour already says it; this says it again in a form

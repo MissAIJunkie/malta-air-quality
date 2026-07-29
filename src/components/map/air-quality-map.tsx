@@ -217,6 +217,15 @@ export type AirQualityMapProps = {
   onSelectStation?: (stationId: string) => void;
   /** Render the legend beneath the map. */
   showLegend?: boolean;
+  /**
+   * Heading level for the fallback that replaces the map when it cannot run.
+   *
+   * The map itself contributes no heading, so this only shows up in the failure
+   * path — which is exactly where it went wrong: the default of 3 put an `h3`
+   * directly beneath the page `h1`, a gap that leaves a screen-reader user
+   * guessing at the structure. Callers know their own depth, so they set it.
+   */
+  fallbackHeadingLevel?: 2 | 3 | 4;
   /** Height utilities for the map surface. */
   heightClassName?: string;
   dict?: Dictionary;
@@ -250,6 +259,7 @@ export function AirQualityMap({
   defaultSelectedStationId = null,
   onSelectStation,
   showLegend = true,
+  fallbackHeadingLevel = 2,
   heightClassName = DEFAULT_HEIGHT,
   dict = getDictionary(),
   className,
@@ -610,6 +620,7 @@ export function AirQualityMap({
           pollutant={pollutant}
           selectedStationId={selection}
           onSelectStation={handleSelect}
+          headingLevel={fallbackHeadingLevel}
           dict={dict}
           id={`${id}-fallback`}
         />

@@ -330,6 +330,23 @@ const en = {
   'category.patternNote':
     'Each band also has its own texture, so the bands can be told apart without colour.',
 
+  /* --- Band rail ---------------------------------------------------------
+     Short forms exist for the scale axis only, where six labels share the
+     width of the rail. Everywhere the band is stated as a fact rather than
+     drawn as an axis, the full `category.*.label` is used. */
+
+  'rail.scaleName': 'European Air Quality Index',
+  'rail.reading': '{category}, {value} on a scale of 1 to 7',
+  'rail.readingFor': '{station}: {category}, {value} on a scale of 1 to 7',
+  'rail.noReading': 'No reading, so no position on the scale',
+  'rail.noReadingFor': '{station}: no reading, so no position on the scale',
+  'rail.short.good': 'Good',
+  'rail.short.fair': 'Fair',
+  'rail.short.moderate': 'Mod',
+  'rail.short.poor': 'Poor',
+  'rail.short.veryPoor': 'V.poor',
+  'rail.short.extremelyPoor': 'Extreme',
+
   /* --- Freshness --------------------------------------------------------- */
 
   'freshness.fresh.label': 'Live',

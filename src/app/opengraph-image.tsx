@@ -44,8 +44,11 @@ export default function OpengraphImage() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        background: 'linear-gradient(135deg, #08192a 0%, #143c59 55%, #17496d 100%)',
-        color: '#f3eee3',
+        /* The dark theme's own neutrals, not the old navy. Same reasoning as
+           globals.css: the six band colours below are fixed and unadjustable,
+           and a deep neutral is what lets all six keep their chroma. */
+        background: 'linear-gradient(135deg, #0b1015 0%, #141c24 60%, #1c262f 100%)',
+        color: '#e8edf2',
         padding: '72px 80px',
         fontFamily: 'sans-serif',
       }}
@@ -61,9 +64,9 @@ export default function OpengraphImage() {
           <div style={{ display: 'flex', fontSize: 60, fontWeight: 700, letterSpacing: '-0.02em' }}>
             <span>ma</span>
             <span style={{ color: '#71ceb6' }}>qua</span>
-            <span style={{ color: '#aed3ea', fontWeight: 400 }}>.app</span>
+            <span style={{ color: '#9cc8f0', fontWeight: 400 }}>.app</span>
           </div>
-          <div style={{ fontSize: 26, color: '#aed3ea' }}>Malta Air Quality Map</div>
+          <div style={{ fontSize: 26, color: '#9cc8f0' }}>Malta Air Quality Map</div>
         </div>
       </div>
 
@@ -71,13 +74,18 @@ export default function OpengraphImage() {
         <div style={{ fontSize: 46, lineHeight: 1.2, maxWidth: 900, fontWeight: 600 }}>
           What is in the air over Malta and Gozo, hour by hour
         </div>
-        <div style={{ fontSize: 26, color: '#aed3ea', maxWidth: 880, lineHeight: 1.4 }}>
+        <div style={{ fontSize: 26, color: '#a3b1bf', maxWidth: 880, lineHeight: 1.4 }}>
           Readings from all five official monitoring stations, on the European Air Quality Index.
         </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-        <div style={{ display: 'flex', gap: 10 }}>
+        {/* The band rail, drawn as one continuous axis rather than six
+            separate chips — the same figure the site is built around, so a
+            shared link and the page it opens read as the same object. No
+            pointer: a share card is cached for days and must not appear to
+            report a reading. */}
+        <div style={{ display: 'flex', borderRadius: 8, overflow: 'hidden' }}>
           {AIR_QUALITY_CATEGORIES.map((category) => {
             const band = CATEGORY_PRESENTATION[category];
             return (
@@ -89,11 +97,12 @@ export default function OpengraphImage() {
                   justifyContent: 'center',
                   flex: 1,
                   height: 54,
-                  borderRadius: 10,
                   background: band.color,
                   color: band.onColor,
                   fontSize: 20,
-                  fontWeight: 600,
+                  fontWeight: 700,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
                 }}
               >
                 {category}
@@ -101,7 +110,7 @@ export default function OpengraphImage() {
             );
           })}
         </div>
-        <div style={{ fontSize: 18, color: '#8ba2b4' }}>
+        <div style={{ fontSize: 18, color: '#8b99a8' }}>
           Data from Malta&apos;s Environment and Resources Authority (ERA), disseminated via the
           European Environment Agency (EEA). An independent project.
         </div>

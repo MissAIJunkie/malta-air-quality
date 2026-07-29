@@ -72,7 +72,10 @@ export function buildEmailLinks(options: {
 }): EmailLinks {
   return {
     appUrl: appUrl(),
-    detailUrl: options.station ? `${appUrl()}/stations/${options.station.slug}` : appUrl(),
+    // Singular, matching the route and `stationHref`. This said `/stations/`,
+    // so every alert email sent a reader to a 404 — the one link in the message
+    // that the alert exists to deliver.
+    detailUrl: options.station ? `${appUrl()}/station/${options.station.slug}` : appUrl(),
     sourceUrl: options.station?.sourceUrl ?? SOURCE_URL,
     unsubscribeUrl: unsubscribeUrl(options.unsubscribeToken),
     managePreferencesUrl: `${appUrl()}/alerts`,

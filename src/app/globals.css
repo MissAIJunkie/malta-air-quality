@@ -303,6 +303,20 @@
   --color-success-foreground: var(--success-foreground);
   --color-overlay: var(--overlay);
 
+  --font-display: var(
+    --font-app-display,
+    var(
+      --font-app-sans,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif
+    )
+  );
   --font-sans: var(
     --font-app-sans,
     var(
@@ -335,65 +349,85 @@
 /**
  * Light theme.
  *
+ * The chrome is a COOL neutral, and that is a decision about the band colours
+ * rather than a taste in paper. The six EEA colours run cyan → mint → yellow →
+ * red → maroon → purple; laid on the warm cream this file used to specify, the
+ * cyan and mint end fought the background and the yellow all but dissolved into
+ * it. A neutral with a faint blue-grey cast is the ground those six were drawn
+ * to sit on, so the data reads as data and the page around it recedes.
+ *
+ * `--primary` is decisively BLUE for the same reason. Blue is the one hue the
+ * European AQI scale does not use anywhere, so a blue control can never be
+ * misread as a band. The previous green `--accent` sat between the Good and Fair
+ * colours and had to be looked at twice.
+ *
  * Every foreground/background pair here was checked to at least 4.5:1
- * (3:1 for the focus ring against its neighbours).
+ * (3:1 for the focus ring and strong border against their neighbours).
  */
 :root {
   color-scheme: light;
 
-  --background: #faf8f3;
-  --foreground: #08192a;
+  --background: #f6f7f9;
+  --foreground: #0f151b;
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --surface-sunken: #f3eee3;
-  --muted: #f3eee3;
-  --muted-foreground: #4c5b66;
-  --subtle: #5a6875;
-  --border: #e2d9c7;
-  --border-strong: #94886f;
+  --surface-sunken: #edf0f3;
+  --muted: #edf0f3;
+  --muted-foreground: #525c69;
+  --subtle: #616c7a;
+  --border: #dde2e8;
+  --border-strong: #8a96a4;
   --input: #ffffff;
-  --ring: #1c5c89;
-  --primary: #17496d;
-  --primary-hover: #102f45;
+  --ring: #1256a0;
+  --primary: #0e4a8a;
+  --primary-hover: #0a3768;
   --primary-foreground: #ffffff;
-  --secondary: #f3eee3;
-  --secondary-foreground: #102f45;
-  --accent: #1a5f54;
+  --secondary: #edf0f3;
+  --secondary-foreground: #0f151b;
+  --accent: #115c46;
   --accent-foreground: #ffffff;
-  --danger: #9a2318;
+  --danger: #9b221a;
   --danger-foreground: #ffffff;
-  --success: #1a5f54;
+  --success: #115c46;
   --success-foreground: #ffffff;
-  --overlay: rgb(8 25 42 / 0.48);
+  --overlay: rgb(15 21 27 / 0.5);
 }
 
+/**
+ * Dark theme.
+ *
+ * Near-black rather than the navy this file used to specify. The band colours
+ * are fixed and cannot be darkened for a dark theme, so the background is what
+ * has to do the accommodating: a deep neutral gives all six their full chroma,
+ * where a saturated navy tinted the cool end and muddied the maroon.
+ */
 .dark {
   color-scheme: dark;
 
-  --background: #08192a;
-  --foreground: #e9f1f7;
-  --surface: #0e2436;
-  --surface-raised: #143045;
-  --surface-sunken: #06121f;
-  --muted: #143045;
-  --muted-foreground: #a9bccb;
-  --subtle: #8ba2b4;
-  --border: #23425a;
-  --border-strong: #54788f;
-  --input: #0e2436;
-  --ring: #7ab5db;
-  --primary: #aed3ea;
-  --primary-hover: #d6e9f5;
-  --primary-foreground: #08192a;
-  --secondary: #143045;
-  --secondary-foreground: #e9f1f7;
-  --accent: #71ceb6;
-  --accent-foreground: #072622;
-  --danger: #ffb3aa;
+  --background: #0b1015;
+  --foreground: #e8edf2;
+  --surface: #141c24;
+  --surface-raised: #1c262f;
+  --surface-sunken: #070b0f;
+  --muted: #1c262f;
+  --muted-foreground: #a3b1bf;
+  --subtle: #8b99a8;
+  --border: #28333d;
+  --border-strong: #5a6875;
+  --input: #141c24;
+  --ring: #7fb6e8;
+  --primary: #9cc8f0;
+  --primary-hover: #c6dff7;
+  --primary-foreground: #0b1015;
+  --secondary: #1c262f;
+  --secondary-foreground: #e8edf2;
+  --accent: #6fd3ac;
+  --accent-foreground: #07231a;
+  --danger: #ffaea4;
   --danger-foreground: #3d0a05;
-  --success: #71ceb6;
-  --success-foreground: #072622;
-  --overlay: rgb(3 10 18 / 0.68);
+  --success: #6fd3ac;
+  --success-foreground: #07231a;
+  --overlay: rgb(3 6 9 / 0.7);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -419,12 +453,29 @@
     text-rendering: optimizeLegibility;
   }
 
+  /**
+   * Headings are set in the display face; body copy is not.
+   *
+   * The split is by role, not by size. Archivo is drawn for headlines and gets
+   * tighter as it gets larger, which is why the tracking is negative here and
+   * left alone on `p`. Long health guidance stays in Public Sans, whose looser
+   * default fit is what makes a paragraph of caveats readable at 14px.
+   */
   h1,
   h2,
   h3,
   h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
     text-wrap: balance;
-    letter-spacing: -0.011em;
+    letter-spacing: -0.02em;
+  }
+
+  /* Small headings do not need optical tightening, and at 14–16px the negative
+     tracking above starts to close the counters. */
+  h3,
+  h4 {
+    letter-spacing: -0.01em;
   }
 
   p,
@@ -642,6 +693,234 @@
   pointer-events: none;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Band rail                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * The European AQI scale, drawn as an instrument.
+ *
+ * The index is a CONTINUOUS quantity — `calculate-index.ts` produces a sub-index
+ * from 1.00 to 6.99, where the integer part is the band and the fraction is the
+ * position inside it. The application already computes that number and, before
+ * this component existed, printed it in parentheses after the band name. The
+ * rail is the honest presentation of the same value: six bands to scale, with
+ * the reading marked where it actually falls.
+ *
+ * Deliberately NOT keyed on `data-aq-band`. That attribute is contracted by
+ * `e2e/accessibility.spec.ts`, which requires every element carrying it to also
+ * spell the band out in text; a rail segment is one sixth of an axis and has no
+ * business making that promise. `data-rail-band` is a separate channel with the
+ * same colour source, and the rail as a whole is labelled instead — it is a
+ * `role="img"` with an `aria-label` naming the band and the position, which is
+ * what a graphic scale should expose.
+ */
+.aq-rail {
+  /* Set by the component from the sub-index. 0% is the floor of Good, 100% the
+     ceiling of Extremely poor. */
+  --aq-rail-position: 0%;
+  position: relative;
+  isolation: isolate;
+  /**
+   * A query container, because the labels have to fit the RAIL rather than the
+   * window. The same component is drawn at 1230px across the headline, ~700px on
+   * a station page and 384px in the home sidebar, all at the same desktop
+   * viewport — so a viewport breakpoint gave the sidebar the full band names and
+   * clipped "Extremely poor" to "Extremely poo".
+   *
+   * `inline-size` containment establishes a containing block for the absolutely
+   * positioned marker as well, which is exactly what it needs, and does not clip
+   * it the way `contain: paint` would.
+   */
+  container-type: inline-size;
+  container-name: aq-rail;
+}
+
+.aq-rail-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.aq-rail-seg {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--seg-color);
+  color: var(--seg-on-color);
+}
+
+/* The same six textures the swatches use, so a reader who cannot separate the
+   fills still sees six distinct segments. Drawn in the segment's own contrast
+   colour and kept faint: this is an axis, not a warning. */
+.aq-rail-seg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--seg-pattern-image, none);
+  background-size: var(--seg-pattern-size, auto);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.aq-rail-seg[data-rail-band='1'] {
+  --seg-color: var(--color-aq-good);
+  --seg-on-color: var(--color-aq-good-on);
+}
+
+.aq-rail-seg[data-rail-band='2'] {
+  --seg-color: var(--color-aq-fair);
+  --seg-on-color: var(--color-aq-fair-on);
+}
+
+.aq-rail-seg[data-rail-band='3'] {
+  --seg-color: var(--color-aq-moderate);
+  --seg-on-color: var(--color-aq-moderate-on);
+  --seg-pattern-image: radial-gradient(currentColor 1.1px, transparent 1.2px);
+  --seg-pattern-size: 7px 7px;
+}
+
+.aq-rail-seg[data-rail-band='4'] {
+  --seg-color: var(--color-aq-poor);
+  --seg-on-color: var(--color-aq-poor-on);
+  --seg-pattern-image: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 8px);
+}
+
+.aq-rail-seg[data-rail-band='5'] {
+  --seg-color: var(--color-aq-very-poor);
+  --seg-on-color: var(--color-aq-very-poor-on);
+  --seg-pattern-image: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 4px);
+}
+
+.aq-rail-seg[data-rail-band='6'] {
+  --seg-color: var(--color-aq-extremely-poor);
+  --seg-on-color: var(--color-aq-extremely-poor-on);
+  --seg-pattern-image: repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 6px);
+}
+
+/** The band name, set inside its own segment. This is what retires the legend. */
+.aq-rail-label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  padding-inline: 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/**
+ * Short names by default, full names once the rail is wide enough to set them.
+ *
+ * The threshold is the width at which "Extremely poor" — the longest of the six
+ * — fits inside one sixth of the rail with its tracking and padding intact.
+ * Below it the abbreviations are shown instead, which is not a degradation: the
+ * band is always written out in full in the heading beside the rail.
+ */
+.aq-rail-label-full {
+  display: none;
+}
+
+@container aq-rail (width >= 46rem) {
+  .aq-rail-label {
+    font-size: 0.6875rem;
+  }
+
+  .aq-rail-label-full {
+    display: inline;
+  }
+
+  .aq-rail-label-short {
+    display: none;
+  }
+}
+
+/**
+ * The pointer.
+ *
+ * `clamp()` keeps it wholly on the rail at both extremes — a sub-index of 1.00
+ * sits at 0% and 6.99 at 99.8%, and an un-clamped centred marker would be half
+ * cut off at each end. The half-marker of positional error this introduces is
+ * confined to the two points where the band is least ambiguous anyway.
+ *
+ * Drawn as a dark bar with a light casing (or the reverse in dark mode) so it
+ * stays visible against all six fills, none of which it may assume.
+ */
+.aq-rail-marker {
+  position: absolute;
+  /**
+   * A tick at the top of the rail, not a bar through it.
+   *
+   * A full-height bar struck through the band label at almost every reading —
+   * not as an edge case but as the normal one, since a reading is by definition
+   * inside its own band and that is exactly where the band's label is centred.
+   * "MODERATE" was reliably rendered as "M|DERATE". Confining the tick to the
+   * top of the track, with the caret above it carrying the position, clears the
+   * text at every position without moving the pointer a pixel.
+   */
+  inset-block-start: -0.25rem;
+  block-size: 0.9375rem;
+  inset-inline-start: clamp(0.3125rem, var(--aq-rail-position), calc(100% - 0.3125rem));
+  z-index: 2;
+  inline-size: 0.1875rem;
+  translate: -50% 0;
+  border-radius: 9999px;
+  background-color: var(--foreground);
+  box-shadow: 0 0 0 0.125rem var(--surface);
+  pointer-events: none;
+}
+
+/** Caret above the pointer, so the exact position is readable at a glance. */
+.aq-rail-marker::before {
+  content: '';
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline-start: 50%;
+  margin-block-end: 0.125rem;
+  translate: -50% 0;
+  border-inline: 0.25rem solid transparent;
+  border-block-start: 0.3125rem solid var(--foreground);
+}
+
+/** Compact rail for station cards: colours and pointer, no labels. */
+.aq-rail-sm .aq-rail-track {
+  border-radius: 9999px;
+}
+
+/* The compact rail has no labels to clear, so its tick spans the whole track. */
+.aq-rail-sm .aq-rail-marker {
+  inset-block: -0.1875rem;
+  block-size: auto;
+  inline-size: 0.125rem;
+  box-shadow: 0 0 0 0.09375rem var(--surface);
+}
+
+.aq-rail-sm .aq-rail-marker::before {
+  content: none;
+}
+
+/* Forced colours flattens the six fills to one, which would turn the rail into
+   a single grey bar. Same reasoning as the swatches: the fill is information. */
+@media (forced-colors: active) {
+  .aq-rail-seg {
+    forced-color-adjust: none;
+    border-inline-end: 1px solid CanvasText;
+  }
+
+  .aq-rail-marker {
+    forced-color-adjust: none;
+    background-color: CanvasText;
+    box-shadow: 0 0 0 0.125rem Canvas;
+  }
+}
+
 /** Small colour chip for legends and map keys. */
 .aq-dot {
   display: inline-block;
@@ -733,7 +1012,9 @@
   /* Keep band fills and textures when printed — they are the information. */
   .aq-swatch,
   .aq-outline,
-  .aq-dot {
+  .aq-dot,
+  .aq-rail-seg,
+  .aq-rail-marker {
     print-color-adjust: exact;
   }
 }

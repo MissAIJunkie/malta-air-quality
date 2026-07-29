@@ -115,6 +115,17 @@ test.describe('the accessible list view', () => {
   });
 
   test('keeps heading levels in order, with no gaps', async ({ page }) => {
+    /*
+     * Deliberately not synchronised with the map.
+     *
+     * This check used to pass or fail on identical code depending on whether
+     * the client-side map had mounted yet, because the fallback it swaps in
+     * carried an `h3` directly beneath the page `h1`. That was a real gap in
+     * the structure, not a flaky test, and it is fixed at the source: the
+     * fallback is an `h2` now. Every state the page passes through — map
+     * pending, map ready, map replaced by the fallback — is gap-free, so there
+     * is nothing to wait for and no wait to go stale.
+     */
     const levels = await page.evaluate(() =>
       Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6')).map((h) =>
         Number(h.tagName.slice(1)),

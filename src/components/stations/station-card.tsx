@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type * as React from 'react';
 
+import { BandRail } from '@/components/air-quality/band-rail';
 import { CategoryBadge } from '@/components/air-quality/category-badge';
 import { FreshnessIndicator } from '@/components/air-quality/freshness-indicator';
 import {
@@ -135,11 +136,33 @@ export function StationCard({
         </div>
       )}
 
+      {/* The same scale as the headline, at 6px.
+          Five cards in a row become directly comparable: the pointers line up
+          against one shared axis, so "which station is worst, and by how much"
+          is answered by eye rather than by reading five sub-indices. Only drawn
+          for the overall band — under a pollutant filter the card shows that
+          pollutant's own value, and a rail built from the station's overall
+          index would be measuring something else. */}
+      {!pollutant ? (
+        <BandRail
+          subIndex={reading?.overallSubIndex ?? null}
+          category={category}
+          size="sm"
+          forLabel={station.name}
+          dict={dict}
+        />
+      ) : null}
+
       {reading ? (
         <FreshnessIndicator
           freshness={reading.freshness}
           measuredAt={reading.measuredAt}
           ageHours={reading.ageHours}
+          /* The headline states the measurement hour for the whole page. A
+             fresh station shares it by definition, so repeating it on all five
+             cards printed the same timestamp six times; anything not fresh is
+             exactly the case where the reader does need its own time. */
+          showTimestamp={reading.freshness !== 'fresh'}
           size="sm"
           dict={dict}
         />

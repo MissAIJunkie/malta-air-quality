@@ -29,11 +29,16 @@ import { cn } from '@/lib/utils/cn';
  * list view, which IS server-rendered, so a reader whose map never loads has
  * lost a convenience rather than the information.
  */
+const MAP_HEIGHT = 'h-[60vh] min-h-[24rem] lg:h-[32rem] xl:h-[36rem]';
+
 const AirQualityMap = dynamic(
   () => import('@/components/map/air-quality-map').then((module) => module.AirQualityMap),
   {
     ssr: false,
-    loading: () => <MapLoading heightClassName="h-[60vh] min-h-[24rem] lg:h-full" />,
+    /* The same height as the map itself, or the page reflows the moment the
+       chunk lands. Shared constant rather than a repeated string precisely
+       because the two drifted apart before. */
+    loading: () => <MapLoading heightClassName={MAP_HEIGHT} />,
   },
 );
 
@@ -51,6 +56,7 @@ export type DashboardShellProps = {
   /* Server-rendered regions, passed as slots. They do not depend on any client
      state, so rendering them here would move work into the browser for nothing. */
   banner?: ReactNode;
+  /** The islands-wide headline, including the band's one-sentence advice. */
   summary: ReactNode;
   serviceStatus?: ReactNode;
   context?: ReactNode;
@@ -121,6 +127,10 @@ export function DashboardShell({
       /* The sidebar copy is a summary; the station's own page announces the
          danger banner, and two live regions for one event is noise. */
       announceDanger={false}
+      /* The headline above already gives health guidance, taken from the worst
+         reporting station and so never laxer than this one's. Rendering the
+         panel's copy too printed the same paragraphs twice on one screen. */
+      showGuidance={false}
       dict={dict}
     />
   ) : (
@@ -131,17 +141,24 @@ export function DashboardShell({
 
   return (
     <main id="main" className="flex flex-1 flex-col">
-      {/* --- Headline, always server-rendered and always first ------------- */}
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-3 pt-4 sm:px-6 sm:pt-6">
-        {serviceStatus}
-        {banner}
-        {summary}
+      {/* --- Headline, always server-rendered and always first -------------
+          Drawn on its own surface with a rule beneath it, so the page opens
+          with one clearly-bounded answer instead of a stack of same-weight
+          cards. The health guidance sits beside the headline rather than in a
+          panel far below it: "is it safe to go out" is the question the
+          headline raises, and the answer belongs in the same eyeful. */}
+      <div className="border-border bg-surface border-b">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
+          {serviceStatus}
+          {banner}
+          {summary}
+        </div>
       </div>
 
       <Tabs
         value={view}
         onValueChange={(next) => setView(next === 'list' ? 'list' : 'map')}
-        className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 px-3 py-4 sm:px-6 sm:py-6"
+        className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8"
       >
         {/* --- Controls --------------------------------------------------- */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -168,7 +185,11 @@ export function DashboardShell({
 
         {/* --- Map view --------------------------------------------------- */}
         <TabsContent value="map" className="flex flex-1 flex-col gap-4">
-          <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
+          {/* `items-start`, not the default `stretch`: a stretched grid item
+              cannot be `position: sticky`, and the sidebar below depends on
+              being able to stick. It also means the row is sized by the taller
+              column honestly rather than by a stretch nobody can see. */}
+          <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem]">
             {/* `min-w-0` is load-bearing. This is a grid item, and a grid item's
                 default `min-width: auto` refuses to shrink below its content's
                 max-content width — which, thanks to the snap-scrolling station
@@ -176,7 +197,7 @@ export function DashboardShell({
                 says `minmax(0,1fr)` and so is already safe; the implicit single
                 column below `lg` is not, and without this the whole page scrolls
                 sideways on a phone. */}
-            <div className="flex min-h-0 min-w-0 flex-col gap-4">
+            <div className="flex min-w-0 flex-col gap-4">
               <AirQualityMap
                 readings={readings}
                 stations={mapStations}
@@ -187,7 +208,12 @@ export function DashboardShell({
                    floating over it: an overlay covers the islands on a phone,
                    which is the whole of the map at that size. */
                 showLegend={false}
-                heightClassName="h-[60vh] min-h-[24rem] lg:h-full"
+                /* A definite height at every width. `lg:h-full` used to be here,
+                   resolving against a grid item whose own height came from its
+                   content — circular, so the map silently fell back to auto and
+                   never filled the row. The sidebar no longer drives the row
+                   height either, so there is nothing left to fill. */
+                heightClassName={MAP_HEIGHT}
                 dict={dict}
               />
 
@@ -201,7 +227,7 @@ export function DashboardShell({
                   The scroll container is focusable so it can be panned from the
                   keyboard as well as by touch. */}
               <div>
-                <h2 className="text-foreground mb-2 text-sm font-semibold">
+                <h2 className="text-muted-foreground mb-2.5 font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
                   {t(dict, 'station.allStations')}
                 </h2>
                 <ul
@@ -234,15 +260,33 @@ export function DashboardShell({
               <MapLegend pollutant={pollutant} headingLevel={2} dict={dict} />
             </div>
 
-            {/* --- Sidebar (wide screens only) ---------------------------- */}
+            {/* --- Sidebar (wide screens only) ----------------------------
+                The selected station and nothing else. The islands-wide
+                guidance, context and forecast used to sit here too, and between
+                them they were several times taller than the map column beside
+                them — so the page ran for thousands of pixels with a single
+                22rem column of content and an empty half-width gutter to its
+                left. They are full-width sections below the grid now. */}
             <aside
               aria-label={t(dict, 'a11y.complementary')}
-              className="hidden min-w-0 flex-col gap-4 lg:flex"
+              /* Pinned beside the map and scrolled on its own.
+                 The panel is a detailed read — pollutants, thresholds, guidance,
+                 site metadata — and is reliably taller than the map column next
+                 to it. Left to grow it sets the grid row height and reinstates
+                 the empty gutter this layout exists to remove. Capping it to the
+                 viewport bounds the row, and `sticky` means the station you
+                 picked stays next to the marker you picked it from instead of
+                 scrolling away.
+                 `top-20` clears the sticky site header. `tabIndex` because a
+                 scroll container that only responds to a mouse wheel is not
+                 reachable from a keyboard — same reason the station card row
+                 above carries one. The `print:` resets undo all of it on paper,
+                 where there is no viewport to cap against and a capped panel
+                 would simply lose everything below the fold. */
+              tabIndex={0}
+              className="hidden min-w-0 flex-col gap-4 lg:sticky lg:top-20 lg:flex lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto lg:overscroll-contain print:static print:max-h-none print:overflow-visible"
             >
               {stationPanel}
-              {guidance}
-              {context}
-              {forecast}
             </aside>
           </div>
         </TabsContent>
@@ -255,20 +299,34 @@ export function DashboardShell({
             caption={t(dict, 'map.listFallbackHeading')}
             dict={dict}
           />
-
-          {/* `grid-cols-1` is not redundant. Tailwind expands it to
-              `repeat(1,minmax(0,1fr))`, and it is that explicit 0 floor that
-              matters: with no base column declared, the implicit track is
-              `auto`, which will not shrink an item below its content's
-              max-content width — and these panels contain snap-scrolling rows
-              far wider than a phone. Same bug as the map column above. */}
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {guidance}
-            {context}
-            {forecast}
-          </div>
         </TabsContent>
       </Tabs>
+
+      {/* --- Islands-wide panels ------------------------------------------
+          Outside both tab panels, because neither depends on the view: the
+          context and the forecast describe the islands, not the way the
+          stations happen to be displayed. Rendering them once here keeps the
+          two tabs consistent, stops the forecast remounting on every toggle,
+          and means a phone in map view sees them at all — they once lived in a
+          `hidden lg:flex` sidebar and were absent below `lg`.
+
+          The guidance leads, because it is the one a reader acts on; the
+          context and the forecast follow, explaining why the reading is what it
+          is and where it is going. The guidance's opening sentence is already
+          under the headline, so its panel starts at "for most people" rather
+          than repeating itself.
+
+          `grid-cols-1` is not redundant. Tailwind expands it to
+          `repeat(1,minmax(0,1fr))`, and it is that explicit 0 floor that
+          matters: with no base column declared, the implicit track is `auto`,
+          which will not shrink an item below its content's max-content width —
+          and these panels contain snap-scrolling rows far wider than a phone.
+          Same bug as the map column above. */}
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-5 px-4 pb-10 sm:px-6 sm:pb-14 lg:grid-cols-2 xl:grid-cols-3">
+        {guidance}
+        {context}
+        {forecast}
+      </div>
 
       {/* --- Narrow-screen station detail ------------------------------- */}
       <div className="lg:hidden">
