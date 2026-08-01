@@ -25,12 +25,18 @@ import {
 import { FRESHNESS_THRESHOLDS } from '@/lib/air-quality/freshness';
 import { categoryLabelKey, getDictionary, hasKey, t } from '@/lib/i18n';
 
+const PAGE_TITLE = 'Methodology';
+const PAGE_DESCRIPTION =
+  'How maqua.app collects Maltese air-quality data, calculates the European Air Quality Index, ' +
+  'handles missing and modelled values, and decides what it will and will not claim.';
+
 export const metadata: Metadata = {
-  title: 'Methodology',
-  description:
-    'How maqua.app collects Maltese air-quality data, calculates the European Air Quality Index, ' +
-    'handles missing and modelled values, and decides what it will and will not claim.',
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: { canonical: '/methodology' },
+  // Stated per page so a shared link previews as this page, not as the
+  // layout's generic banner.
+  openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
 };
 
 /**

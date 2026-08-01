@@ -22,6 +22,7 @@ import {
 import { findStation, type StationDefinition } from '@/config/stations';
 import { EU_LIMIT_VALUES, isElevatedCategory, type AirQualityCategory } from '@/config/thresholds';
 import { compareToThresholds } from '@/lib/air-quality/calculate-index';
+import { absoluteUrl } from '@/lib/analytics';
 import { getLatestReadings, getStationHistory } from '@/lib/air-quality/service';
 import type { PollutantReading, StationReading } from '@/lib/air-quality/types';
 import { buildFallbackExplanation } from '@/lib/ai/fallback';
@@ -152,6 +153,30 @@ export async function generateMetadata({
     // not create a duplicate.
     alternates: { canonical: `/station/${station.slug}` },
     openGraph: { title, description, type: 'website' },
+  };
+}
+
+/**
+ * Breadcrumb structured data.
+ *
+ * Two levels — home, then this station — matching the "back to all stations"
+ * link the page actually renders. Like the metadata above, it carries no
+ * current reading: a band cached in a search result would be a claim about the
+ * present that we cannot stand behind.
+ */
+function breadcrumbData(station: StationDefinition, homeLabel: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: homeLabel, item: absoluteUrl('/') },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: station.name,
+        item: absoluteUrl(`/station/${station.slug}`),
+      },
+    ],
   };
 }
 
@@ -644,6 +669,21 @@ export default async function StationPage({
     /* `id="main"` is the skip link's target — every page in this app owns its
        own main landmark; the root layout deliberately does not. */
     <main id="main" className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6">
+      <script
+        type="application/ld+json"
+        /* Serialised from a literal object built in this file — station names
+           come from the checked-in registry, not from user input — and `<` is
+           escaped the same way as the layout's structured data. */
+        dangerouslySetInnerHTML={{
+          /* `app.name`, not `nav.home`: "Now" names the tab inside the site,
+             but in a search-result breadcrumb the first crumb names the site. */
+          __html: JSON.stringify(breadcrumbData(station, t(dict, 'app.name'))).replace(
+            /</g,
+            '\\u003c',
+          ),
+        }}
+      />
+
       <nav aria-label={t(dict, 'station.allStations')}>
         <Link
           href="/"

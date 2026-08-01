@@ -25,10 +25,17 @@ import { AIR_QUALITY_CATEGORIES, type AirQualityCategory } from '@/config/thresh
 import { getDictionary, hasKey, t, categoryLabelKey } from '@/lib/i18n';
 import { MEDICAL_DISCLAIMER, DATA_ATTRIBUTION } from '@/lib/notifications/templates';
 
+// No brand in the title: the root layout's template already appends it, and
+// "— maqua.app | maqua.app" is what a hardcoded suffix produces.
+const PAGE_TITLE = 'Air-quality alerts';
+const PAGE_DESCRIPTION =
+  'Get an email when air quality at a Maltese monitoring station reaches a band you care about.';
+
 export const metadata: Metadata = {
-  title: 'Air-quality alerts — maqua.app',
-  description:
-    'Get an email when air quality at a Maltese monitoring station reaches a band you care about.',
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: { canonical: '/alerts' },
+  openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
 };
 
 /**

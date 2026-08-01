@@ -13,11 +13,17 @@ import {
 import { STATIONS } from '@/config/stations';
 import { getDictionary, hasKey, t } from '@/lib/i18n';
 
+const PAGE_TITLE = 'About';
+const PAGE_DESCRIPTION =
+  'What maqua.app is, who runs it, where the data comes from, and the limitations it will not paper over.';
+
 export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'What maqua.app is, who runs it, where the data comes from, and the limitations it will not paper over.',
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: { canonical: '/about' },
+  // Stated per page so a shared link previews as this page, not as the
+  // layout's generic banner.
+  openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
 };
 
 const SOURCE_REPOSITORY = 'https://github.com/maqua-app/malta-air-quality';

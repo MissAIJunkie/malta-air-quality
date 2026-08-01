@@ -33,12 +33,18 @@ function readCapabilities(): Capabilities | null {
   }
 }
 
+const PAGE_TITLE = 'Privacy';
+const PAGE_DESCRIPTION =
+  'What maqua.app does and does not collect: analytics, geolocation, email alerts, AI processing, ' +
+  'map tiles, retention and how to have your data removed.';
+
 export const metadata: Metadata = {
-  title: 'Privacy',
-  description:
-    'What maqua.app does and does not collect: analytics, geolocation, email alerts, AI processing, ' +
-    'map tiles, retention and how to have your data removed.',
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: { canonical: '/privacy' },
+  // Stated per page so a shared link previews as this page, not as the
+  // layout's generic banner.
+  openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
 };
 
 /**
