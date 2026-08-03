@@ -2,6 +2,7 @@ import type * as React from 'react';
 
 import { BandRail } from '@/components/air-quality/band-rail';
 import { FreshnessIndicator } from '@/components/air-quality/freshness-indicator';
+import { Card } from '@/components/ui/card';
 import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { POLLUTANTS } from '@/config/pollutants';
 import { findStation } from '@/config/stations';
@@ -66,9 +67,9 @@ export type MaltaSummaryProps = Omit<React.ComponentProps<'section'>, 'children'
  * The reporting and total counts are always shown, so "Good across Malta and
  * Gozo" can never be read as five stations agreeing when in fact it was one.
  *
- * Deliberately not a card. It is the first thing on the page and has nothing to
- * be grouped against; boxing it gave it the same visual weight as the legend
- * below it, which is how a page ends up with no hierarchy at all.
+ * The statement itself is deliberately not boxed — it is the first thing on the
+ * page and has nothing to be grouped against. Only the scale gets a surface: it
+ * is an instrument, and an instrument earns a housing where a headline does not.
  */
 export function MaltaSummary({
   summary,
@@ -104,42 +105,42 @@ export function MaltaSummary({
   ].filter((entry): entry is string => entry !== null);
 
   return (
+    /* An asymmetric split, not a stack: the statement owns the wide column and
+       the scale sits beside it as an instrument on its own surface. Stacked
+       full-width, the headline, the rail and the aggregation note all carried
+       the same visual weight — three same-width bands is how a hero stops
+       being a hero. */
     <section
       data-slot="malta-summary"
       data-aq-category={summary.category ?? 'none'}
       aria-label={t(dict, 'a11y.statusRegion')}
-      className={cn('flex flex-col gap-5', className)}
+      className={cn(
+        'grid items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-10',
+        className,
+      )}
       {...props}
     >
-      {/* --- Eyebrow: where, when, how current -------------------------------
-          Consolidated into one line on purpose. "Live · 1 hour old · Measured
-          at · Retrieved at" was previously repeated on the summary and on each
-          of the five station cards, which is the same four facts printed six
-          times for readings that all share an hour. */}
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <p className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
-          {t(dict, 'header.overallLabel')}
-        </p>
-        <span className="bg-border h-3 w-px shrink-0" aria-hidden="true" />
-        <FreshnessIndicator
-          freshness={summary.freshness}
-          measuredAt={summary.measuredAt}
-          fetchedAt={fetchedAt}
-          ageHours={ageHours}
-          nowIso={nowIso}
-          size="sm"
-          dict={dict}
-        />
-      </div>
+      {/* --- The statement ------------------------------------------------- */}
+      <div className="flex flex-col gap-5">
+        {/* Eyebrow: where, when, how current. Consolidated into one line on
+            purpose. "Live · 1 hour old · Measured at · Retrieved at" was
+            previously repeated on the summary and on each of the five station
+            cards, which is the same four facts printed six times for readings
+            that all share an hour. */}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <p className="text-muted-foreground eyebrow">{t(dict, 'header.overallLabel')}</p>
+          <span className="bg-border h-3 w-px shrink-0" aria-hidden="true" />
+          <FreshnessIndicator
+            freshness={summary.freshness}
+            measuredAt={summary.measuredAt}
+            fetchedAt={fetchedAt}
+            ageHours={ageHours}
+            nowIso={nowIso}
+            size="sm"
+            dict={dict}
+          />
+        </div>
 
-      {/* --- The statement -------------------------------------------------
-          One column, full width. The advice was tried in a second column here
-          and did not work: the guidance panel runs to some seven hundred pixels
-          and a headline does not, so the pair left a hole the height of a
-          screen between them. What the reader needs above the fold is the one
-          sentence, which sits below — the groups and the caveats keep their
-          panel further down, where there is room for them. */}
-      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Heading className="text-3xl leading-[1.05] font-bold text-balance sm:text-4xl lg:text-5xl">
             {hasCategory
@@ -198,36 +199,36 @@ export function MaltaSummary({
         ) : null}
       </div>
 
-      {/* --- The scale -------------------------------------------------------
-          Spans the whole hero rather than sitting in the text column. At this
-          width the six bands are legible enough to name themselves, which is
-          what allowed the separate legend panel to be reduced to a footnote —
-          and a rail the width of the page reads as an instrument rather than a
-          progress bar.
+      {/* --- The instrument --------------------------------------------------
+          The scale on its own sunken surface, with the aggregation rule wired
+          to it — the rule is a property of the reading the pointer marks, so
+          the two travel together.
 
-          The sub-index is deliberately NOT printed beside it. `formatSubIndex`
-          rounds to one decimal, so a reading of 2.97 prints as "3.0" next to a
-          headline that correctly says Fair, and the two look like a
-          contradiction. The pointer already states the position exactly; the
-          rounded figure remains where it has room to be explained, on the
+          The sub-index is deliberately NOT printed beside the rail.
+          `formatSubIndex` rounds to one decimal, so a reading of 2.97 prints
+          as "3.0" next to a headline that correctly says Fair, and the two look
+          like a contradiction. The pointer already states the position exactly;
+          the rounded figure remains where it has room to be explained, on the
           station panel. */}
-      <div className="flex flex-col gap-2">
-        <BandRail subIndex={subIndex ?? null} category={summary.category} size="lg" dict={dict} />
-        <p className="text-subtle text-xs">
-          {copy('rail.scaleName', 'European Air Quality Index')}
-        </p>
-      </div>
+      <Card className="bg-surface-sunken shadow-none">
+        <div className="flex flex-col gap-2">
+          <BandRail subIndex={subIndex ?? null} category={summary.category} size="lg" dict={dict} />
+          <p className="text-subtle text-xs">
+            {copy('rail.scaleName', 'European Air Quality Index')}
+          </p>
+        </div>
 
-      {/* The aggregation method is stated, not implied. `summary.aggregation`
-          is currently only ever 'worst-station'; if another method is ever
-          added, this copy must be branched rather than reused, because the
-          sentence describes this specific rule. */}
-      <div className="border-border flex flex-col gap-1 border-t pt-4">
-        <p className="text-sm font-medium">{t(dict, 'header.aggregation')}</p>
-        <p className="text-muted-foreground max-w-prose text-xs leading-relaxed">
-          {t(dict, 'header.aggregationExplain')}
-        </p>
-      </div>
+        {/* The aggregation method is stated, not implied. `summary.aggregation`
+            is currently only ever 'worst-station'; if another method is ever
+            added, this copy must be branched rather than reused, because the
+            sentence describes this specific rule. */}
+        <div className="border-border flex flex-col gap-1 border-t pt-3">
+          <p className="text-sm font-medium">{t(dict, 'header.aggregation')}</p>
+          <p className="text-muted-foreground text-xs leading-relaxed">
+            {t(dict, 'header.aggregationExplain')}
+          </p>
+        </div>
+      </Card>
     </section>
   );
 }

@@ -130,6 +130,45 @@ describe('DangerBanner — health guidance is cautious and qualified', () => {
   });
 });
 
+describe('DangerBanner — compact strip for pages that carry the detail elsewhere', () => {
+  const COMPACT = { ...BASE, variant: 'compact', detailsHref: '#home-guidance' } as const;
+
+  it('still names the place, the band, the pollutant and the time', () => {
+    render(<DangerBanner {...COMPACT} category="Poor" pollutant="O3" stationName="Għarb" />);
+
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText(/Għarb: Poor/)).toBeInTheDocument();
+    expect(screen.getByText('Leading pollutant')).toBeInTheDocument();
+    const time = screen.getByText(/Sun 26 Jul/);
+    expect(time.tagName.toLowerCase()).toBe('time');
+  });
+
+  it('keeps the band id, texture and icon, so the alarm is not colour alone', () => {
+    const { container } = render(<DangerBanner {...COMPACT} category="Very poor" pollutant="O3" />);
+    const banner = container.querySelector('[data-slot="danger-banner"]');
+
+    expect(banner).toHaveAttribute('data-aq-band', '5');
+    expect(banner?.className).toMatch(/aq-pattern-/);
+    expect(banner?.querySelector('svg')).toBeTruthy();
+  });
+
+  it('keeps the provenance claims — compactness does not soften them', () => {
+    render(<DangerBanner {...COMPACT} category="Poor" pollutant="PM10" />);
+    expect(screen.getByText('Measured')).toBeInTheDocument();
+    expect(screen.getByText('Provisional')).toBeInTheDocument();
+  });
+
+  it('links to the page section that holds the advice it deliberately omits', () => {
+    render(<DangerBanner {...COMPACT} category="Poor" pollutant="PM10" />);
+
+    const link = screen.getByRole('link', { name: 'What this means for you' });
+    expect(link).toHaveAttribute('href', '#home-guidance');
+    // The advice and its medical disclaimer live at the link's target. The
+    // strip itself gives no advice, so it owes no disclaimer of its own.
+    expect(screen.queryByText('Advice for the current band')).not.toBeInTheDocument();
+  });
+});
+
 describe('DangerBanner — provenance of the number behind the warning', () => {
   it('states when the reading was taken, in a machine-readable form', () => {
     render(<DangerBanner {...BASE} category="Poor" pollutant="PM10" />);

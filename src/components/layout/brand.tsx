@@ -128,7 +128,9 @@ export function MaquaMark({ variant = 'disc', title, className, ...props }: Maqu
  */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn('font-semibold tracking-tight', className)}>
+    /* Set in the display face: the wordmark is the one place the heading voice
+       appears at text size, which is what separates a brand from a label. */
+    <span className={cn('font-display font-semibold tracking-tight', className)}>
       <span>ma</span>
       <span className="text-accent font-bold">qua</span>
       <span className="text-muted-foreground font-normal">.app</span>

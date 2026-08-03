@@ -61,6 +61,24 @@ export type DangerBannerProps = Omit<React.ComponentProps<'div'>, 'children'> & 
    * banner for the same event further down the page.
    */
   announce?: boolean;
+  /**
+   * `full` is the complete warning: advice, sensitive groups, provenance and
+   * both disclaimers. `compact` is a one-strip status line for pages that
+   * already carry every one of those facts elsewhere — it states the place,
+   * the band, the pollutant, the time and the provenance, and points at the
+   * page's guidance section for the rest via `detailsHref`.
+   *
+   * The medical disclaimer is required wherever ADVICE appears. The compact
+   * strip deliberately contains no advice — the section it links to carries
+   * the advice and the disclaimer together — so the rule is kept, not skipped.
+   */
+  variant?: 'full' | 'compact';
+  /**
+   * In-page anchor of the section holding the full advice. Rendered as the
+   * compact strip's one link; ignored by the full variant, which needs no
+   * pointer to content it already contains.
+   */
+  detailsHref?: string;
   dict?: Dictionary;
 };
 
@@ -89,6 +107,8 @@ export function DangerBanner({
   forecast = false,
   stationName,
   announce = true,
+  variant = 'full',
+  detailsHref,
   dict = getDictionary(),
   className,
   ...props
@@ -116,6 +136,97 @@ export function DangerBanner({
 
   const measuredDateTime = toDateTimeAttribute(measuredAt);
 
+  /* Measured, estimated and forecast are three different claims, and the badge
+     states which one this is rather than leaving the reader to assume the
+     strongest. Shared by both variants: provenance is not detail, it is part
+     of the warning itself. */
+  const provenanceBadges = (
+    <>
+      {forecast ? (
+        <Badge variant="outline" size="sm" title={t(dict, 'forecast.notObservation')}>
+          {t(dict, 'forecast.estimateBadge')}
+        </Badge>
+      ) : modelled ? (
+        <Badge variant="outline" size="sm" title={t(dict, 'pollutant.modelledExplain')}>
+          {t(dict, 'pollutant.modelledLabel')}
+        </Badge>
+      ) : (
+        <Badge variant="outline" size="sm">
+          {t(dict, 'pollutant.measuredLabel')}
+        </Badge>
+      )}
+
+      {provisional ? (
+        <Badge variant="outline" size="sm" title={t(dict, 'station.provisionalExplain')}>
+          {t(dict, 'station.provisional')}
+        </Badge>
+      ) : null}
+    </>
+  );
+
+  if (variant === 'compact') {
+    return (
+      <div
+        data-slot="danger-banner"
+        data-aq-band={bandIdFor(category)}
+        data-aq-category={category}
+        role={announce ? 'alert' : undefined}
+        className={cn(
+          'aq-outline rounded-panel border-l-4 [border-left-color:var(--aq-color)] px-4 py-3',
+          patternClassFor(category),
+          className,
+        )}
+        {...props}
+      >
+        {/* The texture overlay is painted above the background, so the content
+            is lifted onto its own layer to stay legible. */}
+        <div className="relative z-10 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <Icon className="size-5 shrink-0" aria-hidden="true" />
+            <p className="leading-tight font-semibold">{headline}</p>
+            <CategoryBadge category={category} size="sm" dict={dict} />
+
+            {pollutant ? (
+              <span className="text-sm">
+                <span className="text-foreground/80">{t(dict, 'pollutant.dominantBadge')}</span>{' '}
+                <PollutantName pollutant={pollutant} className="font-medium" />
+                <span className="sr-only">
+                  {' '}
+                  {t(dict, 'pollutant.bandFor', {
+                    pollutant: POLLUTANTS[pollutant].ariaLabel,
+                    category: categoryLabel,
+                  })}
+                </span>
+              </span>
+            ) : null}
+
+            <span className="text-sm">
+              <span className="text-foreground/80">{t(dict, 'freshness.measuredAtLabel')}</span>{' '}
+              {measuredDateTime ? (
+                <time dateTime={measuredDateTime} className="tabular">
+                  {formatMeasuredAt(measuredAt, dict)}
+                </time>
+              ) : (
+                t(dict, 'common.notAvailable')
+              )}
+            </span>
+
+            {provenanceBadges}
+          </div>
+
+          {detailsHref ? (
+            <a
+              href={detailsHref}
+              className="text-primary shrink-0 text-sm font-medium underline decoration-from-font underline-offset-4"
+            >
+              {t(dict, 'health.sectionTitle')}
+            </a>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       data-slot="danger-banner"
@@ -138,7 +249,22 @@ export function DangerBanner({
           <CategoryBadge category={category} size="sm" dict={dict} />
         </div>
 
-        <dl className="flex flex-col gap-3 text-sm">
+        {/* Two columns of facts on anything wider than a phone. Stacked, the
+            four entries ran the banner to a full screen and pushed the map a
+            viewport down. */}
+        <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+          {/* The advice keeps the wide left slot — it is the entry a reader
+              acts on — and the remaining facts stack beside it. `row-span-3`
+              rather than a wrapper div: a `dl`'s div children must each hold
+              their own dt/dd pair to stay conforming HTML. */}
+          <div className="flex flex-col gap-1 sm:row-span-3">
+            <dt className="font-medium">{t(dict, 'health.currentAdvice')}</dt>
+            <dd className="flex flex-col gap-1 leading-relaxed">
+              <span>{t(dict, categoryShortAdviceKey(category))}</span>
+              <span>{t(dict, categoryHealthKey(category, 'sensitive'))}</span>
+            </dd>
+          </div>
+
           {pollutant ? (
             <div className="flex flex-wrap items-baseline gap-x-2">
               <dt className="font-medium">{t(dict, 'pollutant.dominantBadge')}</dt>
@@ -160,14 +286,6 @@ export function DangerBanner({
             <dd className="leading-relaxed">{affected}</dd>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <dt className="font-medium">{t(dict, 'health.currentAdvice')}</dt>
-            <dd className="flex flex-col gap-1 leading-relaxed">
-              <span>{t(dict, categoryShortAdviceKey(category))}</span>
-              <span>{t(dict, categoryHealthKey(category, 'sensitive'))}</span>
-            </dd>
-          </div>
-
           <div className="flex flex-wrap items-baseline gap-x-2">
             <dt className="font-medium">{t(dict, 'freshness.measuredAtLabel')}</dt>
             <dd className="tabular">
@@ -180,30 +298,7 @@ export function DangerBanner({
           </div>
         </dl>
 
-        <div className="flex flex-wrap items-center gap-2">
-          {/* Measured, estimated and forecast are three different claims, and
-              the badge states which one this is rather than leaving the reader
-              to assume the strongest. */}
-          {forecast ? (
-            <Badge variant="outline" size="sm" title={t(dict, 'forecast.notObservation')}>
-              {t(dict, 'forecast.estimateBadge')}
-            </Badge>
-          ) : modelled ? (
-            <Badge variant="outline" size="sm" title={t(dict, 'pollutant.modelledExplain')}>
-              {t(dict, 'pollutant.modelledLabel')}
-            </Badge>
-          ) : (
-            <Badge variant="outline" size="sm">
-              {t(dict, 'pollutant.measuredLabel')}
-            </Badge>
-          )}
-
-          {provisional ? (
-            <Badge variant="outline" size="sm" title={t(dict, 'station.provisionalExplain')}>
-              {t(dict, 'station.provisional')}
-            </Badge>
-          ) : null}
-        </div>
+        <div className="flex flex-wrap items-center gap-2">{provenanceBadges}</div>
 
         <div className="flex flex-col gap-1 text-xs leading-relaxed">
           {forecast ? <p>{t(dict, 'forecast.notObservation')}</p> : null}

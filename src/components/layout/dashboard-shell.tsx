@@ -29,7 +29,7 @@ import { cn } from '@/lib/utils/cn';
  * list view, which IS server-rendered, so a reader whose map never loads has
  * lost a convenience rather than the information.
  */
-const MAP_HEIGHT = 'h-[60vh] min-h-[24rem] lg:h-[32rem] xl:h-[36rem]';
+const MAP_HEIGHT = 'h-[60vh] min-h-[24rem] lg:h-[36rem] xl:h-[42rem]';
 
 const AirQualityMap = dynamic(
   () => import('@/components/map/air-quality-map').then((module) => module.AirQualityMap),
@@ -149,21 +149,32 @@ export function DashboardShell({
       {/* --- Headline, always server-rendered and always first -------------
           Drawn on its own surface with a rule beneath it, so the page opens
           with one clearly-bounded answer instead of a stack of same-weight
-          cards. The health guidance sits beside the headline rather than in a
-          panel far below it: "is it safe to go out" is the question the
-          headline raises, and the answer belongs in the same eyeful. */}
+          cards.
+
+          The h1 leads and the danger banner follows it. The banner expands on
+          the same facts the headline states, and opening the page with a
+          screen-high striped box pushed the actual answer below the fold; as a
+          `role="alert"` region it is announced on arrival regardless of where
+          it sits in the column. */}
+      {/* Tight vertical rhythm on purpose: with the alert as a strip rather
+          than a dossier, the whole headline band fits in well under half a
+          laptop viewport and the map's top edge is visible without scrolling —
+          the reader gets the answer AND the instrument in one glance. */}
       <div className="border-border bg-surface border-b">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8">
           {serviceStatus}
-          {banner}
           {summary}
+          {banner}
         </div>
       </div>
 
       <Tabs
         value={view}
         onValueChange={(next) => setView(next === 'list' ? 'list' : 'map')}
-        className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8"
+        /* Wider than the headline band on purpose: the map is the workbench and
+           earns more of the viewport than the prose does. Below ~96rem the two
+           share the same gutters, so nothing misaligns on ordinary screens. */
+        className="mx-auto flex w-full max-w-[96rem] flex-1 flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8"
       >
         {/* --- Controls --------------------------------------------------- */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -222,46 +233,6 @@ export function DashboardShell({
                 dict={dict}
               />
 
-              {/* A snap-scrolling row of stations under the map.
-                  Shown at every width, and deliberately so. On a phone it is the
-                  swipe affordance that reaches a station without hitting a
-                  marker; on a desktop it is what a reader with JavaScript
-                  disabled sees, since the map never loads for them and the list
-                  view sits behind a tab control that needs scripting. Every
-                  station therefore appears in the server-rendered HTML.
-                  The scroll container is focusable so it can be panned from the
-                  keyboard as well as by touch. */}
-              <div>
-                <h2 className="text-muted-foreground mb-2.5 font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
-                  {t(dict, 'station.allStations')}
-                </h2>
-                <ul
-                  tabIndex={0}
-                  aria-label={t(dict, 'station.allStations')}
-                  /* `relative` for the same reason as the list table: these
-                     cards carry absolutely-positioned `sr-only` pollutant
-                     labels, which escape the clip without a containing block
-                     here. */
-                  className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
-                >
-                  {entries.map((entry) => (
-                    <li key={entry.station.id} className="w-[17rem] shrink-0 snap-start">
-                      <StationCard
-                        station={entry.station}
-                        reading={entry.reading}
-                        pollutant={pollutant}
-                        headingLevel="h3"
-                        dict={dict}
-                        className={cn(
-                          'h-full',
-                          entry.station.id === selectedId && 'ring-ring ring-2',
-                        )}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               <MapLegend pollutant={pollutant} headingLevel={2} dict={dict} />
             </div>
 
@@ -294,6 +265,52 @@ export function DashboardShell({
               {stationPanel}
             </aside>
           </div>
+
+          {/* The station row, full width beneath the map and its sidebar.
+              Shown at every width, and deliberately so. On a phone it is the
+              swipe affordance that reaches a station without hitting a marker;
+              on a desktop it is what a reader with JavaScript disabled sees,
+              since the map never loads for them and the list view sits behind
+              a tab control that needs scripting. Every station therefore
+              appears in the server-rendered HTML.
+
+              Below `md` it is a snap-scrolling row — a swipe is how a thumb
+              browses five cards. From `md` up it becomes a wrap grid instead:
+              the cards all fit, so a horizontal scrollbar under the map was a
+              scrollbar with nothing to scroll for, and the fifth station was
+              clipped at the viewport edge as if the network had four and a
+              half members. It once lived inside the map column, where five
+              17rem cards could never fit; at full shell width they do.
+              The container keeps `tabIndex` for the widths where it still
+              scrolls, so it can be panned from the keyboard as well as by
+              touch. */}
+          <div>
+            <h2 className="text-muted-foreground eyebrow mb-2.5">
+              {t(dict, 'station.allStations')}
+            </h2>
+            <ul
+              tabIndex={0}
+              aria-label={t(dict, 'station.allStations')}
+              /* `relative` for the same reason as the list table: these
+                 cards carry absolutely-positioned `sr-only` pollutant
+                 labels, which escape the clip without a containing block
+                 here. */
+              className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:gap-4 md:overflow-x-visible md:pb-0 xl:grid-cols-5"
+            >
+              {entries.map((entry) => (
+                <li key={entry.station.id} className="w-[17rem] shrink-0 snap-start md:w-auto">
+                  <StationCard
+                    station={entry.station}
+                    reading={entry.reading}
+                    pollutant={pollutant}
+                    headingLevel="h3"
+                    dict={dict}
+                    className={cn('h-full', entry.station.id === selectedId && 'ring-ring ring-2')}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </TabsContent>
 
         {/* --- List view -------------------------------------------------- */}
@@ -316,10 +333,13 @@ export function DashboardShell({
           `hidden lg:flex` sidebar and were absent below `lg`.
 
           The guidance leads, because it is the one a reader acts on; the
-          context and the forecast follow, explaining why the reading is what it
-          is and where it is going. The guidance's opening sentence is already
-          under the headline, so its panel starts at "for most people" rather
-          than repeating itself.
+          context follows beside it in a narrower column, and the forecast runs
+          the full width beneath — a 48-hour outlook is a timeline, and a
+          timeline wants the horizontal room the two panels above it do not.
+          Three equal columns gave all three the same weight, which none of
+          them share. The guidance's opening sentence is already under the
+          headline, so its panel starts at "for most people" rather than
+          repeating itself.
 
           `grid-cols-1` is not redundant. Tailwind expands it to
           `repeat(1,minmax(0,1fr))`, and it is that explicit 0 floor that
@@ -327,10 +347,12 @@ export function DashboardShell({
           which will not shrink an item below its content's max-content width —
           and these panels contain snap-scrolling rows far wider than a phone.
           Same bug as the map column above. */}
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-5 px-4 pb-10 sm:px-6 sm:pb-14 lg:grid-cols-2 xl:grid-cols-3">
-        {guidance}
-        {context}
-        {forecast}
+      <div className="border-border bg-surface-sunken/60 border-t">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-5 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+          {guidance}
+          {context}
+          {forecast ? <div className="lg:col-span-2">{forecast}</div> : null}
+        </div>
       </div>
 
       {/* --- Narrow-screen station detail ------------------------------- */}

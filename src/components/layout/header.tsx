@@ -54,7 +54,9 @@ export function SiteHeader() {
   return (
     <header
       className={[
-        'border-border bg-background/85 sticky top-0 z-40 border-b backdrop-blur-md',
+        // A deeper blur over a more transparent ground than before: the bar
+        // reads as an instrument panel floating over the map, not a solid slab.
+        'border-border/70 bg-background/70 sticky top-0 z-40 border-b backdrop-blur-xl',
         'pt-[env(safe-area-inset-top)]',
       ].join(' ')}
     >
@@ -85,7 +87,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-card text-muted-foreground hover:bg-muted hover:text-foreground inline-flex min-h-11 items-center px-3 text-sm font-medium transition-colors"
+              className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex min-h-11 items-center rounded-full px-3.5 text-sm font-medium whitespace-nowrap transition-colors"
             >
               {t(dict, item.labelKey)}
             </Link>

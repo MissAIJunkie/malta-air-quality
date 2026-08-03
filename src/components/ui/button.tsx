@@ -15,8 +15,11 @@ import { cn } from '@/lib/utils/cn';
  */
 const buttonVariants = cva(
   [
-    'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-card',
-    'font-medium transition-colors',
+    // Pills: the one soft shape against the tight-radius surfaces, which is
+    // what makes a control read as a control at a glance.
+    'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full',
+    // The press state is a nearly-instant 2% shrink — felt, not watched.
+    'font-medium transition-colors active:scale-[0.98]',
     'disabled:pointer-events-none disabled:opacity-60',
     'aria-disabled:pointer-events-none aria-disabled:opacity-60',
     '[&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4',
@@ -32,9 +35,9 @@ const buttonVariants = cva(
         link: 'text-primary underline decoration-from-font underline-offset-4 hover:text-primary-hover',
       },
       size: {
-        sm: 'h-11 px-3 text-sm',
-        md: 'h-11 px-4 text-sm',
-        lg: 'h-12 px-6 text-base',
+        sm: 'h-11 px-4 text-sm',
+        md: 'h-11 px-5 text-sm',
+        lg: 'h-12 px-7 text-base',
         icon: 'size-11 p-0',
       },
     },

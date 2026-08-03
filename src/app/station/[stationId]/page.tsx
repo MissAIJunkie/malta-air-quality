@@ -694,9 +694,13 @@ export default async function StationPage({
         </Link>
       </nav>
 
-      <header className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold sm:text-3xl">{station.name}</h1>
-        <p className="text-muted-foreground text-sm">
+      {/* The mast: display-weight name, the station's vocabulary in a quiet
+          mono strip beneath, a rule to close it. Same shape as the content
+          pages' masthead, so a station page reads as a chapter of the same
+          document rather than a different site. */}
+      <header className="border-border flex flex-col gap-2 border-b pb-5">
+        <h1 className="text-3xl tracking-tight sm:text-4xl">{station.name}</h1>
+        <p className="text-muted-foreground eyebrow">
           {station.locality} · {t(dict, `station.island.${station.island.toLowerCase()}`)} ·{' '}
           {t(dict, stationTypeKey(station))} · {t(dict, areaKey(station))}
         </p>

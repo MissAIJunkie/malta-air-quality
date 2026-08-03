@@ -46,7 +46,10 @@ const CATEGORY_ROWS: LegendRow[] = AIR_QUALITY_CATEGORIES.map((category) => ({
 const NO_DATA_ROW: LegendRow = {
   key: 'no-data',
   bandId: 0,
-  labelKey: 'map.legendNoData',
+  /* The same label every other surface gives band 0. The legend used to say
+     "No reading" here while the badges and the header said "No data" — two
+     names for one state, on the page whose whole job is naming states. */
+  labelKey: categoryLabelKey(null),
   patternClass: patternClassFor(null),
   iconName: NO_DATA_PRESENTATION.icon,
 };
@@ -95,10 +98,7 @@ export function MapLegend({
       {...props}
     >
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <Heading
-          id={headingId}
-          className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase"
-        >
+        <Heading id={headingId} className="text-muted-foreground eyebrow">
           {t(dict, 'map.legendTitle')}
         </Heading>
 
