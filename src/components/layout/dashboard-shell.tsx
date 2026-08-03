@@ -29,7 +29,7 @@ import { cn } from '@/lib/utils/cn';
  * list view, which IS server-rendered, so a reader whose map never loads has
  * lost a convenience rather than the information.
  */
-const MAP_HEIGHT = 'h-[60vh] min-h-[24rem] lg:h-[32rem] xl:h-[36rem]';
+const MAP_HEIGHT = 'h-[60vh] min-h-[24rem] lg:h-[36rem] xl:h-[42rem]';
 
 const AirQualityMap = dynamic(
   () => import('@/components/map/air-quality-map').then((module) => module.AirQualityMap),
@@ -149,21 +149,28 @@ export function DashboardShell({
       {/* --- Headline, always server-rendered and always first -------------
           Drawn on its own surface with a rule beneath it, so the page opens
           with one clearly-bounded answer instead of a stack of same-weight
-          cards. The health guidance sits beside the headline rather than in a
-          panel far below it: "is it safe to go out" is the question the
-          headline raises, and the answer belongs in the same eyeful. */}
+          cards.
+
+          The h1 leads and the danger banner follows it. The banner expands on
+          the same facts the headline states, and opening the page with a
+          screen-high striped box pushed the actual answer below the fold; as a
+          `role="alert"` region it is announced on arrival regardless of where
+          it sits in the column. */}
       <div className="border-border bg-surface border-b">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
           {serviceStatus}
-          {banner}
           {summary}
+          {banner}
         </div>
       </div>
 
       <Tabs
         value={view}
         onValueChange={(next) => setView(next === 'list' ? 'list' : 'map')}
-        className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8"
+        /* Wider than the headline band on purpose: the map is the workbench and
+           earns more of the viewport than the prose does. Below ~96rem the two
+           share the same gutters, so nothing misaligns on ordinary screens. */
+        className="mx-auto flex w-full max-w-[96rem] flex-1 flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8"
       >
         {/* --- Controls --------------------------------------------------- */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -316,10 +323,13 @@ export function DashboardShell({
           `hidden lg:flex` sidebar and were absent below `lg`.
 
           The guidance leads, because it is the one a reader acts on; the
-          context and the forecast follow, explaining why the reading is what it
-          is and where it is going. The guidance's opening sentence is already
-          under the headline, so its panel starts at "for most people" rather
-          than repeating itself.
+          context follows beside it in a narrower column, and the forecast runs
+          the full width beneath — a 48-hour outlook is a timeline, and a
+          timeline wants the horizontal room the two panels above it do not.
+          Three equal columns gave all three the same weight, which none of
+          them share. The guidance's opening sentence is already under the
+          headline, so its panel starts at "for most people" rather than
+          repeating itself.
 
           `grid-cols-1` is not redundant. Tailwind expands it to
           `repeat(1,minmax(0,1fr))`, and it is that explicit 0 floor that
@@ -327,10 +337,12 @@ export function DashboardShell({
           which will not shrink an item below its content's max-content width —
           and these panels contain snap-scrolling rows far wider than a phone.
           Same bug as the map column above. */}
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-5 px-4 pb-10 sm:px-6 sm:pb-14 lg:grid-cols-2 xl:grid-cols-3">
-        {guidance}
-        {context}
-        {forecast}
+      <div className="border-border bg-surface-sunken/60 border-t">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-5 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+          {guidance}
+          {context}
+          {forecast ? <div className="lg:col-span-2">{forecast}</div> : null}
+        </div>
       </div>
 
       {/* --- Narrow-screen station detail ------------------------------- */}

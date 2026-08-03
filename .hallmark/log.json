@@ -9,6 +9,19 @@
     "enrichment": "none",
     "nav": "N1b app bar (status-forward)",
     "footer": "Ft4 dense colophon",
+    "knobs": "hero=asymmetric-7/5 statement+instrument · alert=demoted-below-h1, 2-col dl · workbench=96rem, taller map · panels=asymmetric-7/5 + full-width forecast on sunken band · content=2-col masthead, left-aligned reading column",
+    "brief": "maqua.app · layout restructure pass (same locked system)"
+  },
+  {
+    "date": "2026-08-03",
+    "scope": "app",
+    "macrostructure": "Workbench (app) / Long Document (content)",
+    "theme": "custom",
+    "theme_axes": "light / grotesk-sans / cool",
+    "vibe": "civic instrument, Mediterranean cool, precise",
+    "enrichment": "none",
+    "nav": "N1b app bar (status-forward)",
+    "footer": "Ft4 dense colophon",
     "brief": "maqua.app · multi-page modern revamp, dark/light switcher kept"
   }
 ]

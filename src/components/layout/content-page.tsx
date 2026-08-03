@@ -5,10 +5,15 @@ import { cn } from '@/lib/utils/cn';
 /**
  * Shared shell for the long-form pages: About, Methodology and Privacy.
  *
- * These pages are read rather than scanned, so the measure is capped at roughly
- * 70 characters and the vertical rhythm is generous. Headings are real `h1`/`h2`
- * elements in document order — the outline is how a screen-reader user moves
- * through a page this long.
+ * These pages are read rather than scanned, so the body measure is capped at
+ * roughly 70 characters and the vertical rhythm is generous. Headings are real
+ * `h1`/`h2` elements in document order — the outline is how a screen-reader
+ * user moves through a page this long.
+ *
+ * The masthead runs wider than the body: title in the left column, lede in the
+ * right, a rule beneath the pair. The reading column then sits flush left under
+ * the title rather than centred — a document with a masthead, not a centred
+ * blog post.
  */
 export function ContentPage({
   title,
@@ -25,18 +30,22 @@ export function ContentPage({
   return (
     <main
       id="main"
-      className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-14"
+      className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-16"
     >
-      <header className="flex flex-col gap-3">
+      <header className="border-border grid gap-4 border-b pb-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-start lg:gap-12">
         {/* Weight comes from the base heading rule (700, display face) — the
             title is the one display moment a content page gets. */}
         <h1 className="text-foreground text-4xl tracking-tight text-balance sm:text-5xl">
           {title}
         </h1>
-        {lead ? <p className="text-muted-foreground text-lg leading-relaxed">{lead}</p> : null}
-        {aside}
+        {lead || aside ? (
+          <div className="flex flex-col gap-3 lg:pt-2">
+            {lead ? <p className="text-muted-foreground text-lg leading-relaxed">{lead}</p> : null}
+            {aside}
+          </div>
+        ) : null}
       </header>
-      {children}
+      <div className="flex w-full max-w-3xl flex-col gap-10">{children}</div>
     </main>
   );
 }

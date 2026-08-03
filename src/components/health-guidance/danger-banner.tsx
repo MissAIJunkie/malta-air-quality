@@ -138,7 +138,23 @@ export function DangerBanner({
           <CategoryBadge category={category} size="sm" dict={dict} />
         </div>
 
-        <dl className="flex flex-col gap-3 text-sm">
+        {/* Two columns of facts on anything wider than a phone. Stacked, the
+            four entries ran the banner to a full screen and pushed the map a
+            viewport down; the advice keeps the wide slot because it is the
+            entry a reader acts on. */}
+        <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+          {/* The advice keeps the wide left slot — it is the entry a reader
+              acts on — and the remaining facts stack beside it. `row-span-3`
+              rather than a wrapper div: a `dl`'s div children must each hold
+              their own dt/dd pair to stay conforming HTML. */}
+          <div className="flex flex-col gap-1 sm:row-span-3">
+            <dt className="font-medium">{t(dict, 'health.currentAdvice')}</dt>
+            <dd className="flex flex-col gap-1 leading-relaxed">
+              <span>{t(dict, categoryShortAdviceKey(category))}</span>
+              <span>{t(dict, categoryHealthKey(category, 'sensitive'))}</span>
+            </dd>
+          </div>
+
           {pollutant ? (
             <div className="flex flex-wrap items-baseline gap-x-2">
               <dt className="font-medium">{t(dict, 'pollutant.dominantBadge')}</dt>
@@ -158,14 +174,6 @@ export function DangerBanner({
           <div className="flex flex-col gap-1">
             <dt className="font-medium">{t(dict, 'health.forSensitiveGroups')}</dt>
             <dd className="leading-relaxed">{affected}</dd>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <dt className="font-medium">{t(dict, 'health.currentAdvice')}</dt>
-            <dd className="flex flex-col gap-1 leading-relaxed">
-              <span>{t(dict, categoryShortAdviceKey(category))}</span>
-              <span>{t(dict, categoryHealthKey(category, 'sensitive'))}</span>
-            </dd>
           </div>
 
           <div className="flex flex-wrap items-baseline gap-x-2">
