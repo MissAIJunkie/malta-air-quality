@@ -239,7 +239,7 @@ export function DashboardShell({
                   The scroll container is focusable so it can be panned from the
                   keyboard as well as by touch. */}
               <div>
-                <h2 className="text-muted-foreground mb-2.5 font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
+                <h2 className="text-muted-foreground eyebrow mb-2.5">
                   {t(dict, 'station.allStations')}
                 </h2>
                 <ul

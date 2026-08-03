@@ -95,10 +95,7 @@ export function MapLegend({
       {...props}
     >
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <Heading
-          id={headingId}
-          className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase"
-        >
+        <Heading id={headingId} className="text-muted-foreground eyebrow">
           {t(dict, 'map.legendTitle')}
         </Heading>
 

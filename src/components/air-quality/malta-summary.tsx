@@ -2,6 +2,7 @@ import type * as React from 'react';
 
 import { BandRail } from '@/components/air-quality/band-rail';
 import { FreshnessIndicator } from '@/components/air-quality/freshness-indicator';
+import { Card } from '@/components/ui/card';
 import { VisuallyHidden } from '@/components/ui/visually-hidden';
 import { POLLUTANTS } from '@/config/pollutants';
 import { findStation } from '@/config/stations';
@@ -127,9 +128,7 @@ export function MaltaSummary({
             cards, which is the same four facts printed six times for readings
             that all share an hour. */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <p className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
-            {t(dict, 'header.overallLabel')}
-          </p>
+          <p className="text-muted-foreground eyebrow">{t(dict, 'header.overallLabel')}</p>
           <span className="bg-border h-3 w-px shrink-0" aria-hidden="true" />
           <FreshnessIndicator
             freshness={summary.freshness}
@@ -211,7 +210,7 @@ export function MaltaSummary({
           like a contradiction. The pointer already states the position exactly;
           the rounded figure remains where it has room to be explained, on the
           station panel. */}
-      <div className="rounded-panel border-border bg-surface-sunken flex flex-col gap-4 border p-5">
+      <Card className="bg-surface-sunken shadow-none">
         <div className="flex flex-col gap-2">
           <BandRail subIndex={subIndex ?? null} category={summary.category} size="lg" dict={dict} />
           <p className="text-subtle text-xs">
@@ -229,7 +228,7 @@ export function MaltaSummary({
             {t(dict, 'header.aggregationExplain')}
           </p>
         </div>
-      </div>
+      </Card>
     </section>
   );
 }

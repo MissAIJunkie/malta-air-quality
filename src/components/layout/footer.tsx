@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type * as React from 'react';
 
 import { MaquaMark, Wordmark } from '@/components/layout/brand';
 import { INFORMATION_NAV, PRIMARY_NAV } from '@/components/layout/nav-items';
@@ -7,9 +8,38 @@ import { getDictionary, hasKey, t } from '@/lib/i18n';
 const EEA_INDEX_URL = 'https://airindex.eea.europa.eu/AQI/index.html';
 const ERA_URL = 'https://era.org.mt/topic/real-time-air-quality-network/';
 
+const footerLinkClass =
+  'text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors';
+
 function copy(key: string, fallback: string): string {
   const dict = getDictionary();
   return hasKey(dict, key) ? t(dict, key) : fallback;
+}
+
+/**
+ * One labelled colophon row: a mono eyebrow heading beside a wrapping inline
+ * list. Rendered as a `<nav>` when `navLabel` is given.
+ */
+function FooterRow({
+  heading,
+  navLabel,
+  children,
+}: {
+  heading: string;
+  navLabel?: string;
+  children: React.ReactNode;
+}) {
+  const Component = navLabel ? 'nav' : 'div';
+
+  return (
+    <Component
+      aria-label={navLabel}
+      className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
+    >
+      <h2 className="text-muted-foreground eyebrow sm:w-28 sm:shrink-0">{heading}</h2>
+      <ul className="flex flex-wrap items-center gap-x-5">{children}</ul>
+    </Component>
+  );
 }
 
 /**
@@ -49,64 +79,48 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <nav
-            aria-label={copy('footer.navLabel', 'Footer navigation')}
-            className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
+          <FooterRow
+            heading={copy('footer.exploreHeading', 'Explore')}
+            navLabel={copy('footer.navLabel', 'Footer navigation')}
           >
-            <h2 className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase sm:w-28 sm:shrink-0">
-              {copy('footer.exploreHeading', 'Explore')}
-            </h2>
-            <ul className="flex flex-wrap items-center gap-x-5">
-              {[...PRIMARY_NAV, ...INFORMATION_NAV].map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
-                  >
-                    {t(dict, item.labelKey)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
-            <h2 className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase sm:w-28 sm:shrink-0">
-              {t(dict, 'footer.dataSourceHeading')}
-            </h2>
-            <ul className="flex flex-wrap items-center gap-x-5">
-              <li>
-                <a
-                  href={ERA_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
-                >
-                  {copy('footer.eraLink', 'Environment and Resources Authority')}
-                  <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={EEA_INDEX_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
-                >
-                  {copy('footer.eeaLink', 'European Air Quality Index')}
-                  <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
-                </a>
-              </li>
-              <li>
-                <Link
-                  href="/methodology"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
-                >
-                  {t(dict, 'footer.methodologyLink')}
+            {[...PRIMARY_NAV, ...INFORMATION_NAV].map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={footerLinkClass}>
+                  {t(dict, item.labelKey)}
                 </Link>
               </li>
-            </ul>
-          </div>
+            ))}
+          </FooterRow>
+
+          <FooterRow heading={t(dict, 'footer.dataSourceHeading')}>
+            <li>
+              <a
+                href={ERA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={footerLinkClass}
+              >
+                {copy('footer.eraLink', 'Environment and Resources Authority')}
+                <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={EEA_INDEX_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={footerLinkClass}
+              >
+                {copy('footer.eeaLink', 'European Air Quality Index')}
+                <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
+              </a>
+            </li>
+            <li>
+              <Link href="/methodology" className={footerLinkClass}>
+                {t(dict, 'footer.methodologyLink')}
+              </Link>
+            </li>
+          </FooterRow>
         </div>
 
         <div className="border-border flex flex-col gap-3 border-t pt-6">

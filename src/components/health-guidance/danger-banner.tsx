@@ -140,8 +140,7 @@ export function DangerBanner({
 
         {/* Two columns of facts on anything wider than a phone. Stacked, the
             four entries ran the banner to a full screen and pushed the map a
-            viewport down; the advice keeps the wide slot because it is the
-            entry a reader acts on. */}
+            viewport down. */}
         <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
           {/* The advice keeps the wide left slot — it is the entry a reader
               acts on — and the remaining facts stack beside it. `row-span-3`

@@ -466,7 +466,6 @@
   }
 
   body {
-    overflow-x: clip;
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
@@ -969,6 +968,19 @@
 @utility tabular {
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum';
+}
+
+/**
+ * The small uppercase mono label — the mono face's second sanctioned role
+ * (alongside numerals). Defined once so every eyebrow on the site keeps the
+ * exact same size and tracking; colour stays at the call site.
+ */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 /* -------------------------------------------------------------------------- */

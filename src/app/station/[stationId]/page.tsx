@@ -700,7 +700,7 @@ export default async function StationPage({
           document rather than a different site. */}
       <header className="border-border flex flex-col gap-2 border-b pb-5">
         <h1 className="text-3xl tracking-tight sm:text-4xl">{station.name}</h1>
-        <p className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
+        <p className="text-muted-foreground eyebrow">
           {station.locality} · {t(dict, `station.island.${station.island.toLowerCase()}`)} ·{' '}
           {t(dict, stationTypeKey(station))} · {t(dict, areaKey(station))}
         </p>
