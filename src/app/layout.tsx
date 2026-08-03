@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo, IBM_Plex_Mono, Public_Sans } from 'next/font/google';
+import { IBM_Plex_Mono, Public_Sans, Space_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { SiteFooter } from '@/components/layout/footer';
@@ -15,10 +15,11 @@ import './globals.css';
 /**
  * Three faces, three jobs.
  *
- * Archivo states the reading. It is a grotesque drawn for signage and headlines,
- * and it gives the one sentence at the top of the page the flat, civic authority
- * of a public notice rather than the soft neutrality of a product dashboard.
- * Used large and sparingly — headings only, never body copy.
+ * Space Grotesk states the reading. A grotesque with instrument-panel character
+ * — its slightly quirky terminals keep a heading from reading as generic
+ * dashboard chrome — and enough weight at 600–700 to give the one sentence at
+ * the top of the page civic authority. Used large and sparingly — headings
+ * only, never body copy.
  *
  * Public Sans carries the prose. It was commissioned for public-information text
  * and is drawn for legibility at small sizes, which is what long health guidance
@@ -36,7 +37,7 @@ import './globals.css';
  * all three are self-hosted by `next/font` — no request leaves the browser for
  * Google Fonts, which is one fewer third party for the privacy page to declare.
  */
-const display = Archivo({
+const display = Space_Grotesk({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-app-display',
   display: 'swap',

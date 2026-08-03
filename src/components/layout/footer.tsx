@@ -33,29 +33,35 @@ export function SiteFooter() {
       className="border-border bg-surface-sunken mt-auto border-t pb-[env(safe-area-inset-bottom)]"
       data-print-hidden
     >
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(2,minmax(0,1fr))]">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2.5">
-              <MaquaMark className="size-8" />
-              <Wordmark className="text-base" />
-            </div>
-            <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-              {t(dict, 'app.description')}
-            </p>
-            <p className="text-muted-foreground text-sm">{t(dict, 'footer.independent')}</p>
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 sm:py-12">
+        {/* Mast: the wordmark and what the site is, in one quiet band. The link
+            strips below run as labelled inline rows — a colophon, not a sitemap
+            of columns. */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2.5">
+            <MaquaMark className="size-8" />
+            <Wordmark className="text-lg" />
           </div>
+          <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
+            {t(dict, 'app.description')}
+          </p>
+          <p className="text-muted-foreground text-sm">{t(dict, 'footer.independent')}</p>
+        </div>
 
-          <nav aria-label={copy('footer.navLabel', 'Footer navigation')}>
-            <h2 className="text-foreground mb-3 text-sm font-semibold">
+        <div className="flex flex-col gap-2">
+          <nav
+            aria-label={copy('footer.navLabel', 'Footer navigation')}
+            className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
+          >
+            <h2 className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase sm:w-28 sm:shrink-0">
               {copy('footer.exploreHeading', 'Explore')}
             </h2>
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-wrap items-center gap-x-5">
               {[...PRIMARY_NAV, ...INFORMATION_NAV].map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors"
+                    className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
                   >
                     {t(dict, item.labelKey)}
                   </Link>
@@ -64,17 +70,17 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <div>
-            <h2 className="text-foreground mb-3 text-sm font-semibold">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6">
+            <h2 className="text-muted-foreground font-mono text-[0.6875rem] font-medium tracking-[0.14em] uppercase sm:w-28 sm:shrink-0">
               {t(dict, 'footer.dataSourceHeading')}
             </h2>
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-wrap items-center gap-x-5">
               <li>
                 <a
                   href={ERA_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
                 >
                   {copy('footer.eraLink', 'Environment and Resources Authority')}
                   <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
@@ -85,7 +91,7 @@ export function SiteFooter() {
                   href={EEA_INDEX_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
                 >
                   {copy('footer.eeaLink', 'European Air Quality Index')}
                   <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
@@ -94,7 +100,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/methodology"
-                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm transition-colors"
+                  className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center text-sm whitespace-nowrap transition-colors"
                 >
                   {t(dict, 'footer.methodologyLink')}
                 </Link>

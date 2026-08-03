@@ -28,7 +28,9 @@ export function ContentPage({
       className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-14"
     >
       <header className="flex flex-col gap-3">
-        <h1 className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        {/* Weight comes from the base heading rule (700, display face) — the
+            title is the one display moment a content page gets. */}
+        <h1 className="text-foreground text-4xl tracking-tight text-balance sm:text-5xl">
           {title}
         </h1>
         {lead ? <p className="text-muted-foreground text-lg leading-relaxed">{lead}</p> : null}
@@ -58,7 +60,7 @@ export function ContentSection({
 }) {
   return (
     <section aria-labelledby={id} className={cn('flex flex-col gap-4', className)}>
-      <h2 id={id} className="text-foreground text-xl font-semibold tracking-tight sm:text-2xl">
+      <h2 id={id} className="text-foreground text-xl tracking-tight sm:text-2xl">
         {heading}
       </h2>
       {children}

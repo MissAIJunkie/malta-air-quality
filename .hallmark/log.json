@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-08-03",
+    "scope": "app",
+    "macrostructure": "Workbench (app) / Long Document (content)",
+    "theme": "custom",
+    "theme_axes": "light / grotesk-sans / cool",
+    "vibe": "civic instrument, Mediterranean cool, precise",
+    "enrichment": "none",
+    "nav": "N1b app bar (status-forward)",
+    "footer": "Ft4 dense colophon",
+    "brief": "maqua.app · multi-page modern revamp, dark/light switcher kept"
+  }
+]

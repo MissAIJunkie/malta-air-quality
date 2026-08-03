@@ -1,0 +1,17 @@
+{
+  "scannedAt": "2026-08-03",
+  "framework": "Next.js 16.2 (app router)",
+  "fonts": "Space Grotesk (display) + Public Sans (body) + IBM Plex Mono (figures), next/font, latin-ext",
+  "palette": "semantic light/dark tokens in src/app/globals.css; reserved EEA aq-band colours, never theme-inverted",
+  "motion": "no motion library; hand-rolled @theme keyframes, 120-180ms, reduced-motion honoured",
+  "spacing": "Tailwind v4 default 4pt scale; --size-tap 2.75rem",
+  "themeSwitcher": "next-themes class strategy, light/dark/system radio group — permanent feature",
+  "preserved": [
+    "EEA band colours + textures",
+    "Public Sans body",
+    "IBM Plex Mono",
+    "next-themes toggle",
+    "a11y scaffolding",
+    "brand mark geometry"
+  ]
+}
