@@ -23,5 +23,18 @@
     "nav": "N1b app bar (status-forward)",
     "footer": "Ft4 dense colophon",
     "brief": "maqua.app · multi-page modern revamp, dark/light switcher kept"
+  },
+  {
+    "date": "2026-08-03",
+    "scope": "app",
+    "macrostructure": "Workbench (app) / Long Document (content)",
+    "theme": "custom",
+    "theme_axes": "light / grotesk-sans / cool",
+    "vibe": "civic instrument, Mediterranean cool, precise",
+    "enrichment": "none",
+    "nav": "N1b app bar (status-forward)",
+    "footer": "Ft4 dense colophon",
+    "knobs": "alert=compact strip on home (dossier stays on station surfaces) · hero=py-6/8, answer+instrument+map-edge above 900px fold · stations=full-width wrap grid ≥md (3-col md, 5-col xl), snap row below · scrollbars=thin themed, none where content fits · legend no-data label unified to 'No data'",
+    "brief": "maqua.app · fit-and-fold pass: fold compression, alert strip, station grid, scrollbar discipline"
   }
 ]

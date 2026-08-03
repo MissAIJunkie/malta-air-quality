@@ -276,6 +276,14 @@ export default async function HomePage() {
           provisional={drivingReading?.provisional ?? true}
           modelled={drivingPollutant?.modelled ?? false}
           stationName={drivingStation?.name}
+          /* The strip, not the dossier. Everything the full banner would add —
+             the advice, the sensitive groups, the disclaimers — is already on
+             this page: the advice sentence sits under the headline, and the
+             guidance section the strip links to carries the rest. The full
+             variant here printed those facts a second time and pushed the map
+             an entire viewport down. */
+          variant="compact"
+          detailsHref="#home-guidance"
           dict={dict}
         />
       }
@@ -299,11 +307,14 @@ export default async function HomePage() {
       }
       guidance={
         <HealthGuidance
+          /* Anchor for the alert strip's "What this means for you" link;
+             `scroll-mt` keeps the heading clear of the sticky header. */
+          id="home-guidance"
           category={summary.category}
           headingLevel="h2"
           detail="brief"
           showLead={false}
-          className="rounded-panel border-border bg-surface p-5"
+          className="rounded-panel border-border bg-surface scroll-mt-24 p-5"
           dict={dict}
         />
       }

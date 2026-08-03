@@ -156,8 +156,12 @@ export function DashboardShell({
           screen-high striped box pushed the actual answer below the fold; as a
           `role="alert"` region it is announced on arrival regardless of where
           it sits in the column. */}
+      {/* Tight vertical rhythm on purpose: with the alert as a strip rather
+          than a dossier, the whole headline band fits in well under half a
+          laptop viewport and the map's top edge is visible without scrolling —
+          the reader gets the answer AND the instrument in one glance. */}
       <div className="border-border bg-surface border-b">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:py-12">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8">
           {serviceStatus}
           {summary}
           {banner}
@@ -229,46 +233,6 @@ export function DashboardShell({
                 dict={dict}
               />
 
-              {/* A snap-scrolling row of stations under the map.
-                  Shown at every width, and deliberately so. On a phone it is the
-                  swipe affordance that reaches a station without hitting a
-                  marker; on a desktop it is what a reader with JavaScript
-                  disabled sees, since the map never loads for them and the list
-                  view sits behind a tab control that needs scripting. Every
-                  station therefore appears in the server-rendered HTML.
-                  The scroll container is focusable so it can be panned from the
-                  keyboard as well as by touch. */}
-              <div>
-                <h2 className="text-muted-foreground eyebrow mb-2.5">
-                  {t(dict, 'station.allStations')}
-                </h2>
-                <ul
-                  tabIndex={0}
-                  aria-label={t(dict, 'station.allStations')}
-                  /* `relative` for the same reason as the list table: these
-                     cards carry absolutely-positioned `sr-only` pollutant
-                     labels, which escape the clip without a containing block
-                     here. */
-                  className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
-                >
-                  {entries.map((entry) => (
-                    <li key={entry.station.id} className="w-[17rem] shrink-0 snap-start">
-                      <StationCard
-                        station={entry.station}
-                        reading={entry.reading}
-                        pollutant={pollutant}
-                        headingLevel="h3"
-                        dict={dict}
-                        className={cn(
-                          'h-full',
-                          entry.station.id === selectedId && 'ring-ring ring-2',
-                        )}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               <MapLegend pollutant={pollutant} headingLevel={2} dict={dict} />
             </div>
 
@@ -300,6 +264,52 @@ export function DashboardShell({
             >
               {stationPanel}
             </aside>
+          </div>
+
+          {/* The station row, full width beneath the map and its sidebar.
+              Shown at every width, and deliberately so. On a phone it is the
+              swipe affordance that reaches a station without hitting a marker;
+              on a desktop it is what a reader with JavaScript disabled sees,
+              since the map never loads for them and the list view sits behind
+              a tab control that needs scripting. Every station therefore
+              appears in the server-rendered HTML.
+
+              Below `md` it is a snap-scrolling row — a swipe is how a thumb
+              browses five cards. From `md` up it becomes a wrap grid instead:
+              the cards all fit, so a horizontal scrollbar under the map was a
+              scrollbar with nothing to scroll for, and the fifth station was
+              clipped at the viewport edge as if the network had four and a
+              half members. It once lived inside the map column, where five
+              17rem cards could never fit; at full shell width they do.
+              The container keeps `tabIndex` for the widths where it still
+              scrolls, so it can be panned from the keyboard as well as by
+              touch. */}
+          <div>
+            <h2 className="text-muted-foreground eyebrow mb-2.5">
+              {t(dict, 'station.allStations')}
+            </h2>
+            <ul
+              tabIndex={0}
+              aria-label={t(dict, 'station.allStations')}
+              /* `relative` for the same reason as the list table: these
+                 cards carry absolutely-positioned `sr-only` pollutant
+                 labels, which escape the clip without a containing block
+                 here. */
+              className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:gap-4 md:overflow-x-visible md:pb-0 xl:grid-cols-5"
+            >
+              {entries.map((entry) => (
+                <li key={entry.station.id} className="w-[17rem] shrink-0 snap-start md:w-auto">
+                  <StationCard
+                    station={entry.station}
+                    reading={entry.reading}
+                    pollutant={pollutant}
+                    headingLevel="h3"
+                    dict={dict}
+                    className={cn('h-full', entry.station.id === selectedId && 'ring-ring ring-2')}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </TabsContent>
 

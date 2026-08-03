@@ -93,6 +93,30 @@ utility classes; never raw pixel values.
 - Secondary: pill, hairline border on `--surface`.
 - Links in prose: `--primary`, underline `decoration-from-font`, offset 4.
 
+## Alert voice
+
+The elevated-band warning has two registers, both `DangerBanner`:
+
+- **Strip** (`variant="compact"`): place, band, leading pollutant, time,
+  provenance badges, and one link to the page's guidance section. Used where
+  every omitted fact (advice, sensitive groups, disclaimers) already appears on
+  the same page — the home hero. The strip carries no advice, so the medical
+  disclaimer travels with the guidance it links to, not with the strip.
+- **Dossier** (default): the full warning with advice, groups, provenance and
+  both disclaimers. Used on station surfaces (panel, sheet, station page),
+  which are the detail views.
+
+Never render two dossiers in one viewport; the second surface takes the strip
+or is dropped.
+
+## Scrollbars
+
+Thin (`scrollbar-width: thin`), thumb from `--border-strong`, transparent
+track — styled once in `globals.css`. Scrollbars are never hidden; instead,
+layouts avoid being scroll containers at widths where the content fits (the
+station row is a snap scroller below `md` and a wrap grid above it). Root keeps
+`scrollbar-gutter: stable`.
+
 ## Per-page allowances
 
 - App pages: no enrichment — the map, the band rail and the charts are the

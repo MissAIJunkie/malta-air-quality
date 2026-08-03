@@ -63,12 +63,12 @@ describe('AirQualityMap without WebGL', () => {
     expect(within(fallback).queryByText('Good')).not.toBeInTheDocument();
   });
 
-  it('keeps the legend, including its no-reading entry', () => {
+  it('keeps the legend, including its no-data entry, under the band name every other surface uses', () => {
     resetWebGLProbe();
     render(<AirQualityMap readings={[reading]} />);
 
     const legend = screen.getByRole('region', { name: /air-quality bands/i });
-    expect(within(legend).getByText('No reading')).toBeInTheDocument();
+    expect(within(legend).getByText('No data')).toBeInTheDocument();
     expect(within(legend).getByText('Extremely poor')).toBeInTheDocument();
     expect(within(legend).getByText('All pollutants')).toBeInTheDocument();
   });

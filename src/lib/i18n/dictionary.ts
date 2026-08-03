@@ -207,7 +207,6 @@ const en = {
   'map.basemap': 'Base map style',
   'map.legendTitle': 'Air-quality bands',
   'map.legendDescription': 'Colour, texture and icon all carry the same band.',
-  'map.legendNoData': 'No reading',
   'map.markerLabel': '{station}: {category}',
   'map.markerNoData': '{station}: no reading',
   'map.selectStation': 'Select {station}',

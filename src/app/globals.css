@@ -535,6 +535,22 @@
   :where(h1, h2, h3, h4, p, li, dd, dt, figcaption) {
     overflow-wrap: break-word;
   }
+
+  /**
+   * Scrollbars are thin and quiet wherever one is genuinely needed.
+   *
+   * The thumb colour comes from the theme so it holds in dark mode, and the
+   * track stays transparent so an idle scroller reads as content rather than
+   * chrome. This styles the scrollbars the layout still has (the page, the
+   * phone-width station row, the station sheet) — it does not hide them: a
+   * hidden scrollbar is a missing affordance, not a cleaner design. Regions
+   * with nothing to scroll are handled in the layout instead, by not being
+   * scroll containers at those widths.
+   */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--border-strong) 65%, transparent) transparent;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
