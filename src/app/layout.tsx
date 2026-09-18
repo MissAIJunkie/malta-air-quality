@@ -172,6 +172,19 @@ function structuredData() {
     description:
       'An independent, non-commercial project publishing Maltese air-quality measurements. ' +
       'Not operated by, affiliated with, or endorsed by ERA or the EEA.',
+    /**
+     * The one external place this project can be checked.
+     *
+     * `sameAs` is for identity, not for citation, so it carries the repository
+     * and nothing else: there is no social account, no Wikidata item and no
+     * registry entry to point at, and listing a profile that does not exist
+     * would be the same overclaim the rest of this file avoids.
+     *
+     * Kept in step with `SOURCE_REPOSITORY` in `src/app/about/page.tsx` — the
+     * two are the same assertion, and a reader who follows either must not land
+     * on a 404.
+     */
+    sameAs: ['https://github.com/MissAIJunkie/malta-air-quality'],
   };
 
   const application = {

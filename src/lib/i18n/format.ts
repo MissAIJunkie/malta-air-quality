@@ -188,8 +188,21 @@ export const DATE_PATTERNS = {
   date: 'd MMM',
   /** 26 July 2026 */
   dateLong: 'd MMMM yyyy',
-  /** Sun 26 Jul, 14:00 */
-  dateTime: 'EEE d MMM, HH:mm',
+  /**
+   * Sun 26 Jul 2026, 14:00
+   *
+   * The year is not decoration. This is the pattern `formatMeasuredAt` uses, so
+   * it is what renders the measurement instant wherever a reading is shown —
+   * and a concentration lifted out of the page without its year can be
+   * presented as current at any later date. That is the one misreading this
+   * project exists to prevent, so the value and a fully-qualified time travel
+   * together.
+   *
+   * Deliberately NOT applied to `axisDayTime`, `time` or `date`: those label
+   * dense chart axes where the year is already established by the surrounding
+   * copy and would only cost legibility.
+   */
+  dateTime: 'EEE d MMM yyyy, HH:mm',
   /** Sunday 26 July 2026 at 14:00 */
   dateTimeLong: "EEEE d MMMM yyyy 'at' HH:mm",
   /** Sun 14:00 — for dense chart axes */

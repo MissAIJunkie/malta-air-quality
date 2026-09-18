@@ -67,11 +67,11 @@ describe('OfflineIndicator', () => {
 
     await waitFor(() => {
       // Malta is UTC+2 in July, so 09:00Z is 11:00 local.
-      expect(screen.getByText(/measured at Sun 26 Jul, 11:00/i)).toBeInTheDocument();
+      expect(screen.getByText(/measured at Sun 26 Jul 2026, 11:00/i)).toBeInTheDocument();
     });
 
     // The download instant, which is a different fact from the measurement.
-    const downloaded = screen.getByText(/Sun 26 Jul, 12:15/);
+    const downloaded = screen.getByText(/Sun 26 Jul 2026, 12:15/);
     expect(downloaded).toBeInTheDocument();
     expect(downloaded).toHaveAttribute('datetime', '2026-07-26T10:15:00.000Z');
   });

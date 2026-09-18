@@ -90,9 +90,11 @@ describe('FreshnessIndicator', () => {
     );
 
     expect(screen.getByText('8 hours old')).toBeInTheDocument();
-    // Malta time, not UTC: 06:00Z is 08:00 in July.
-    expect(screen.getByText('Sun 26 Jul, 08:00')).toBeInTheDocument();
-    expect(screen.getByText('Sun 26 Jul, 16:29')).toBeInTheDocument();
+    // Malta time, not UTC: 06:00Z is 08:00 in July. The year is part of the
+    // pattern: a concentration quoted without one can be read as current at any
+    // later date, which is the misreading this component exists to prevent.
+    expect(screen.getByText('Sun 26 Jul 2026, 08:00')).toBeInTheDocument();
+    expect(screen.getByText('Sun 26 Jul 2026, 16:29')).toBeInTheDocument();
   });
 
   it('omits a timestamp it cannot parse rather than printing "Not available" inside a <time>', () => {

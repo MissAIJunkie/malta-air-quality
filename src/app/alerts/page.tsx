@@ -31,12 +31,41 @@ const PAGE_TITLE = 'Air-quality alerts';
 const PAGE_DESCRIPTION =
   'Get an email when air quality at a Maltese monitoring station reaches a band you care about.';
 
-export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  alternates: { canonical: '/alerts' },
-  openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
-};
+/** Used when this deployment cannot send email, so the description stays true. */
+const PAGE_DESCRIPTION_UNAVAILABLE =
+  'Email alerts are not enabled on this deployment. Live readings for all five Maltese ' +
+  'monitoring stations remain available on maqua.app.';
+
+/**
+ * Metadata follows the capability, not the intent.
+ *
+ * `PAGE_DESCRIPTION` promises an email when a station reaches a chosen band. On
+ * a deployment without email that promise is false, and it is exactly the kind
+ * of claim this project refuses to make about a reading — so it must not be made
+ * about the product either. A search result or a chat preview is read long
+ * before the page body that would have corrected it.
+ *
+ * So when alerts are off the page describes what it actually is and asks not to
+ * be indexed. `follow: true`: there is nothing here worth a result, but the
+ * links to the stations and the privacy note are still worth following. The
+ * sitemap drops the route on the same condition — see `src/app/sitemap.ts`.
+ */
+export function generateMetadata(): Metadata {
+  const { email, database } = getCapabilities();
+  const enabled = email && database;
+
+  return {
+    title: PAGE_TITLE,
+    description: enabled ? PAGE_DESCRIPTION : PAGE_DESCRIPTION_UNAVAILABLE,
+    alternates: { canonical: '/alerts' },
+    openGraph: {
+      title: PAGE_TITLE,
+      description: enabled ? PAGE_DESCRIPTION : PAGE_DESCRIPTION_UNAVAILABLE,
+      type: 'website',
+    },
+    ...(enabled ? {} : { robots: { index: false, follow: true } }),
+  };
+}
 
 /**
  * Bands offered as an alerting threshold.
@@ -208,17 +237,22 @@ export default async function AlertsPage({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* Name the missing piece rather than a generic "misconfigured":
-                whoever runs the deployment is the one reading this. */}
+            {/* Name the missing SUBSYSTEM, not the variables that configure it.
+                The operator still learns which half is absent, which is the
+                point of saying anything at all — but this page is public and
+                indexable, and an application's configuration surface is not
+                something to publish to everyone who visits. The variable names
+                stay in the comment above and in the README, which is where
+                somebody fixing the deployment is already looking. */}
             <p className="text-muted-foreground text-sm leading-relaxed">
               {!capabilities.email
                 ? s(
                     'alerts.unavailableEmail',
-                    'This deployment has no email service configured (RESEND_API_KEY and ALERT_TOKEN_SECRET).',
+                    'This deployment has no email service configured, so no confirmation could be sent.',
                   )
                 : s(
                     'alerts.unavailableDatabase',
-                    'This deployment has no database configured (DATABASE_URL), so a subscription could not be recorded.',
+                    'This deployment has no database configured, so a subscription could not be recorded.',
                   )}
             </p>
           </CardContent>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 import { ALL_NAV } from '@/components/layout/nav-items';
+import { getCapabilities } from '@/config/env';
 import { STATIONS } from '@/config/stations';
 import { absoluteUrl } from '@/lib/analytics';
 
@@ -18,7 +19,24 @@ import { absoluteUrl } from '@/lib/analytics';
 const BUILT_AT = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages: MetadataRoute.Sitemap = ALL_NAV.filter((item) => item.sitemap).map((item) => ({
+  /**
+   * A route is listed only if it can do what it says.
+   *
+   * `/alerts` describes a feature that needs both email and a database. On a
+   * deployment without them the page states so plainly and asks not to be
+   * indexed (`generateMetadata` in `src/app/alerts/page.tsx`); submitting it
+   * here anyway would be the sitemap contradicting the page it points at.
+   *
+   * Gated on exactly the same expression as the page — though note it is
+   * evaluated at build time here and per request there, so a credential added
+   * without a redeploy would still leave this file a rebuild behind.
+   */
+  const { email, database } = getCapabilities();
+  const alertsEnabled = email && database;
+
+  const pages: MetadataRoute.Sitemap = ALL_NAV.filter(
+    (item) => item.sitemap && (item.href !== '/alerts' || alertsEnabled),
+  ).map((item) => ({
     url: absoluteUrl(item.href),
     lastModified: BUILT_AT,
     changeFrequency: item.changeFrequency,

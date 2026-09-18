@@ -36,6 +36,38 @@ export const metadata: Metadata = {
  * rendered per request rather than served as static HTML. Caching happens in the
  * service layer, which is where the upstream cadence is actually known.
  */
+/**
+ * Still dynamic, and the reason is now on record.
+ *
+ * `force-dynamic` makes Next emit `private, no-cache, no-store`, so this page is
+ * never held by the CDN and every visit pays an origin render. Replacing it with
+ * `export const revalidate` was tried and does NOT work here: the route segment
+ * value cannot override an individual `no-store` fetch, and the data path has
+ * two of them — the Upstash pipeline call and the upstream provider request. The
+ * build says so directly:
+ *
+ *   Route / couldn't be rendered statically because it used no-store fetch
+ *   https://…upstash.io/pipeline
+ *
+ * So the page stayed `ƒ (Dynamic)` with the ISR config attached but inert, which
+ * is worse than leaving it dynamic — a config that reads as caching and is not.
+ *
+ * Getting `/` onto the CDN needs a real change, not a flag:
+ *
+ *  - `cacheComponents` (Partial Prerendering) is the intended route. It is
+ *    currently blocked because that flag rejects the `runtime` and `dynamic`
+ *    route segment configs used by all sixteen API route handlers, so it is a
+ *    migration rather than a one-line switch.
+ *  - Failing that, the readings would have to reach this component through a
+ *    Next-cacheable boundary rather than a `no-store` fetch. Note that this
+ *    would ALSO freeze `nowIso` below, and the age and liveness shown to the
+ *    reader are derived from it — so any such change has to move the age onto
+ *    the reader's clock first, or it will quietly start claiming that a stale
+ *    reading is live.
+ *
+ * The data itself is already cached in Upstash for fifteen minutes, so what is
+ * being paid per request is the render and the round trip — not upstream load.
+ */
 export const dynamic = 'force-dynamic';
 
 const METHODOLOGY_HREF = '/methodology';
