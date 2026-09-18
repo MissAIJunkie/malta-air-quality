@@ -92,8 +92,23 @@ import { ExplainButton } from '@/components/ai-explain/explain-button';
  */
 
 export const runtime = 'nodejs';
-// Air quality changes hourly and the page states its own freshness; a build-time
-// snapshot would be stale before it was deployed.
+/**
+ * Air quality changes hourly and the page states its own freshness; a build-time
+ * snapshot would be stale before it was deployed.
+ *
+ * Unlike the homepage this page CANNOT move to `revalidate`: the window and
+ * pollutant selectors are links carrying query parameters, and the component
+ * awaits `searchParams`. Reading a request-time API makes the route dynamic
+ * whatever this value says, so ISR here would be a comment that lies.
+ *
+ * Getting these pages onto the CDN needs one of two things, neither of them a
+ * one-line change: `cacheComponents` (Partial Prerendering), so the shell
+ * prerenders and only the `searchParams`-dependent part defers — currently
+ * blocked because that flag rejects the `runtime` and `dynamic` route segment
+ * configs used across the sixteen API route handlers — or moving the two
+ * selectors off query parameters, which would cost the addressable, shareable
+ * URLs they were chosen for. Left explicit rather than silently ineffective.
+ */
 export const dynamic = 'force-dynamic';
 
 const METHODOLOGY_HREF = '/methodology';

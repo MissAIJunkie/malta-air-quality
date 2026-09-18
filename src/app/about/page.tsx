@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'website' },
 };
 
-const SOURCE_REPOSITORY = 'https://github.com/maqua-app/malta-air-quality';
+const SOURCE_REPOSITORY = 'https://github.com/MissAIJunkie/malta-air-quality';
 
 export default function AboutPage() {
   const dict = getDictionary();

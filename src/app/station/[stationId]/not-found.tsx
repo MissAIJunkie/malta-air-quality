@@ -1,8 +1,26 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 
 import { STATIONS } from '@/config/stations';
 import { getDictionary, t } from '@/lib/i18n';
+
+/**
+ * Stated here rather than inherited.
+ *
+ * Without its own export this file fell back to the root layout's metadata, so a
+ * mistyped station slug answered 404 while presenting the homepage's title and
+ * the homepage's canonical — and carried BOTH the framework's injected `noindex`
+ * and the layout's `index, follow`, which contradict each other.
+ *
+ * `follow: true` because the page is a list of the five real stations: there is
+ * nothing here to index, but every link on it is worth following. Matches
+ * `src/app/not-found.tsx`.
+ */
+export const metadata: Metadata = {
+  title: 'Station not found',
+  robots: { index: false, follow: true },
+};
 
 /**
  * An address that does not name one of the five stations.
