@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone motion-graphics generator: plain browser/Node scripts that the
+    // application never imports, so the app's rules do not apply to them.
+    "medias/**",
   ]),
 ]);
 
