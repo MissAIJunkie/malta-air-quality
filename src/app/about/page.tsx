@@ -52,8 +52,12 @@ export default function AboutPage() {
           conventionally means for health.
         </Paragraph>
         <Paragraph>
-          It is free, carries no advertising, and sells nothing. There is no account to create, and
-          the map works without giving anything away about yourself.
+          It is free to read and there is no account to create. It carries advertising, which is
+          what pays for running it; what that means for your data is set out on the{' '}
+          <Link href="/privacy" className="text-primary underline underline-offset-4">
+            privacy page
+          </Link>
+          {'. '}Nothing is sold, and the advertising has no bearing on the readings or the guidance.
         </Paragraph>
       </ContentSection>
 

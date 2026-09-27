@@ -179,8 +179,8 @@ function structuredData() {
     url: siteUrl,
     logo: absoluteUrl('/icon-512.png'),
     description:
-      'An independent, non-commercial project publishing Maltese air-quality measurements. ' +
-      'Not operated by, affiliated with, or endorsed by ERA or the EEA.',
+      'An independent project publishing Maltese air-quality measurements, free to read and ' +
+      'supported by advertising. Not operated by, affiliated with, or endorsed by ERA or the EEA.',
     /**
      * The one external place this project can be checked.
      *
