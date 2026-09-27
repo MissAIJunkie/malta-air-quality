@@ -709,7 +709,7 @@ const en = {
   'footer.contactLink': 'Contact',
   'footer.sourceCodeLink': 'Source code',
   'footer.copyright': '© {year} maqua.app',
-  'footer.independent': 'An independent, non-commercial project.',
+  'footer.independent': 'An independent project, supported by advertising.',
   'footer.lastUpdated': 'Readings last updated {time}',
   'footer.builtWith': 'Built with open data.',
 

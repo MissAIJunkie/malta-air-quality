@@ -17,10 +17,28 @@ import type { NextConfig } from 'next';
  * The nonce alternative means generating a value per request in middleware and
  * threading it through the root layout. That contradicts keeping middleware free
  * of per-request work, and the theme script lives in a layout this module does
- * not control. So: `'unsafe-inline'` for inline scripts, and NO external script
- * host whatsoever. The realistic threat to a page that renders public
- * environmental data is a third-party script, and an origin allowlist of exactly
- * `'self'` is what addresses it.
+ * not control. So: `'unsafe-inline'` for inline scripts, and the external script
+ * allowlist kept as short as it can be — currently one host, for AdSense, below.
+ *
+ * ## Google AdSense
+ *
+ * `pagead2.googlesyndication.com` is the AdSense loader. It is here so the tag
+ * in the root layout can execute: without it the CSP blocks that script in every
+ * browser, and only Google's crawler — which reads the markup rather than
+ * running it — would ever see it.
+ *
+ * This is the first external script host this policy has allowed, and it is a
+ * real widening, not a technicality: a third-party script is precisely the
+ * threat the paragraph above is written against, and this one is an ad loader
+ * that can pull further code of its own choosing. It is here because the site is
+ * being monetised, not because that reasoning stopped applying.
+ *
+ * The loader alone is enough for AdSense to verify the site. It is NOT enough to
+ * serve an ad. Ad slots render in cross-origin iframes, so serving will also
+ * need `frame-src` opened from `'none'` to the ad hosts
+ * (`googleads.g.doubleclick.net`, `tpc.googlesyndication.com`), plus those hosts
+ * in `img-src` and `connect-src`. Make that change when ads are switched on, and
+ * update /privacy in the same commit — see the note in `src/lib/analytics`.
  *
  * ## Map tiles
  *
@@ -42,6 +60,9 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const OPENSTREETMAP_TILES = 'https://tile.openstreetmap.org https://*.tile.openstreetmap.org';
 
+/** The AdSense loader, and nothing else. See the note above. */
+const ADSENSE_LOADER = 'https://pagead2.googlesyndication.com';
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -52,7 +73,7 @@ const contentSecurityPolicy = [
   "form-action 'self'",
   // `unsafe-eval` in development only: the dev bundler compiles modules through
   // eval and Fast Refresh does not work without it. It is never shipped.
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline' ${ADSENSE_LOADER}${isDevelopment ? " 'unsafe-eval'" : ''}`,
   // Tailwind emits a stylesheet, but Radix and MapLibre both set inline styles
   // on the elements they position, which `style-src` governs.
   "style-src 'self' 'unsafe-inline'",

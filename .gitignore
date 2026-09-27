@@ -16,3 +16,11 @@ next-env.d.ts
 coverage/
 playwright-report/
 test-results/
+
+# Misc
+maqua.app-audit/
+
+# Silent variants of the motion reels. Byte-identical video streams to the cuts
+# that carry audio (`-c:v copy`), so they are redundant in history;
+# `medias/source` rebuilds either in about three minutes.
+medias/*-silent.mp4

@@ -57,6 +57,15 @@ const mono = IBM_Plex_Mono({
   display: 'swap',
 });
 
+/**
+ * Google AdSense publisher ID.
+ *
+ * Held as one named constant so the account this site is monetised under is
+ * greppable and can be swapped in a single place, rather than being buried in a
+ * URL query string.
+ */
+const ADSENSE_CLIENT = 'ca-pub-4146344643461466';
+
 const TITLE = 'Malta Air Quality Map | maqua.app';
 const DESCRIPTION =
   'Live air quality for Malta and Gozo. Hourly readings from all five official monitoring stations, ' +
@@ -170,8 +179,8 @@ function structuredData() {
     url: siteUrl,
     logo: absoluteUrl('/icon-512.png'),
     description:
-      'An independent, non-commercial project publishing Maltese air-quality measurements. ' +
-      'Not operated by, affiliated with, or endorsed by ERA or the EEA.',
+      'An independent project publishing Maltese air-quality measurements, free to read and ' +
+      'supported by advertising. Not operated by, affiliated with, or endorsed by ERA or the EEA.',
     /**
      * The one external place this project can be checked.
      *
@@ -228,6 +237,33 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        {/**
+         * Google AdSense.
+         *
+         * A plain element, NOT `next/script`. React hoists an async external
+         * script into the document head from anywhere in the tree, which emits
+         * the literal tag Google asks publishers to paste. `next/script` does
+         * not: every strategy — `beforeInteractive` included, despite what its
+         * documentation implies — emits a `<link rel="preload">` plus an inline
+         * `self.__next_s.push([...])` bootstrap that constructs the tag at
+         * runtime. Verified against a production build, not assumed. AdSense
+         * verification looks for the snippet in the markup, so a tag that only
+         * exists after hydration is a bet on the crawler rendering the page.
+         *
+         * Being in the root layout is what puts it on every page rather than on
+         * one route.
+         *
+         * The loader host is allowed in `script-src` in `next.config.ts`.
+         * Without that entry the CSP blocks this in every browser, and only
+         * Google's crawler — which reads the markup rather than running it —
+         * would ever see it.
+         */}
+        <script
+          async
+          crossOrigin="anonymous"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        />
+
         <script
           type="application/ld+json"
           /* Serialised from a literal object built in this file — no user input

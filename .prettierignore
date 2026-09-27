@@ -3,3 +3,7 @@ node_modules
 pnpm-lock.yaml
 fixtures/*.json
 public/sw.js
+
+# Standalone motion-graphics generator. Its own file, its own style; it is not
+# part of the application bundle and Prettier reformatting it would only churn.
+medias

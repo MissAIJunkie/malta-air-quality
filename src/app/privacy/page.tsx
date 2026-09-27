@@ -35,8 +35,8 @@ function readCapabilities(): Capabilities | null {
 
 const PAGE_TITLE = 'Privacy';
 const PAGE_DESCRIPTION =
-  'What maqua.app does and does not collect: analytics, geolocation, email alerts, AI processing, ' +
-  'map tiles, retention and how to have your data removed.';
+  'What maqua.app does and does not collect: advertising, analytics, geolocation, email alerts, ' +
+  'AI processing, map tiles, retention and how to have your data removed.';
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
       title={s('privacy.title', 'Privacy')}
       lead={s(
         'privacy.lead',
-        'maqua.app is a public-information site. It has no accounts, no advertising and no tracking profiles. This page describes the small amount of data that does move, and who handles it.',
+        'maqua.app is a public-information site. It has no accounts and builds no profile of you itself, and it carries advertising, which does. This page describes the data that moves, and who handles it.',
       )}
       aside={
         <p className="text-subtle text-sm">
@@ -97,8 +97,13 @@ export default function PrivacyPage() {
         <BulletList>
           <li>No account is needed, and none can be created.</li>
           <li>
-            No advertising, no ad networks, no cross-site tracking, no data sold or shared for
-            marketing.
+            Advertising is served by Google, which sets cookies and reads device identifiers on
+            every page. That is the one thing here that can follow you beyond this site, and it is
+            described in full below.
+          </li>
+          <li>
+            Nothing this site stores about you — an email address, and only if you asked for alerts
+            — is passed to Google, to any advertiser, or sold to anyone.
           </li>
           <li>
             The only personal data the site can ever store is an email address, and only if you ask
@@ -108,7 +113,10 @@ export default function PrivacyPage() {
             Your location, if you choose to share it, stays in your browser. It is never transmitted
             to this site and never stored.
           </li>
-          <li>No cookies are set for analytics or advertising.</li>
+          <li>
+            maqua.app sets no cookies of its own. The advertising cookies are set by Google, under
+            Google&apos;s policy rather than this one.
+          </li>
         </BulletList>
         <Callout>
           {anyAnalytics
@@ -147,15 +155,48 @@ export default function PrivacyPage() {
         </Paragraph>
       </ContentSection>
 
+      <ContentSection id="advertising" heading={s('privacy.advertisingHeading', 'Advertising')}>
+        <Paragraph>
+          maqua.app carries advertising through Google AdSense. Google&apos;s advertising script is
+          loaded on every page of this site, including this one.
+        </Paragraph>
+        <Paragraph>
+          Google uses cookies and similar device identifiers to choose which advertisements to show,
+          to limit how often you are shown the same one, and to measure whether it worked. This is
+          not the anonymous, cookieless measurement described above and it is not confined to this
+          site: Google may combine what it observes here with what it observes elsewhere. What it
+          collects, and what it does with it, is governed by Google&apos;s own privacy policy rather
+          than by this page.
+        </Paragraph>
+        <Callout tone="warning">
+          {s(
+            'privacy.advertisingConsent',
+            'Advertising cookies are not strictly necessary, so under the EU ePrivacy rules they require your consent before they are set. A consent tool for visitors in the EEA and the UK is being put in place. Until it is, you can turn off personalised advertising in Google\u2019s own Ads Settings, or block third-party cookies in your browser \u2014 neither affects anything else on this site.',
+          )}
+        </Callout>
+        <Paragraph>
+          Advertising is what pays for running this site. It does not influence the readings: the
+          measurements, the bands and the health guidance come from ERA and the EEA and from the
+          published European index, and no advertiser sees, supplies or affects any of them.
+        </Paragraph>
+      </ContentSection>
+
       <ContentSection
         id="cookies"
         heading={s('privacy.cookiesHeading', 'Cookies and local storage')}
       >
         <Paragraph>
-          maqua.app sets no cookies for analytics, advertising or tracking. There is therefore no
-          consent banner, because there is nothing to consent to.
+          maqua.app sets no cookies of its own, and the usage measurement described above is
+          cookieless. The advertising is not: Google sets cookies and reads device identifiers from
+          your browser, and it does so directly rather than through this site.
         </Paragraph>
         <DefinitionList>
+          <Definition term={s('privacy.advertisingCookies', 'Advertising cookies')}>
+            Set by Google to select and measure advertisements, and readable by Google across other
+            sites that carry its advertising. These are the only cookies on this site, they are the
+            only thing here that is not strictly necessary, and they are covered by Google&apos;s
+            policy rather than this one.
+          </Definition>
           <Definition term={s('privacy.themeStorage', 'Appearance preference')}>
             Choosing light, dark or &ldquo;match device&rdquo; stores a single value in your
             browser&apos;s local storage so the page does not flash the wrong theme on your next
@@ -260,6 +301,14 @@ export default function PrivacyPage() {
             {off(capabilities?.ai)
               ? 'Not configured on this deployment. No request is made to any AI provider, and explanations are assembled from the measured data without one.'
               : 'Routes requests for plain-language explanations to a language model. What is sent is the air-quality figures already shown on the page — station, pollutant, concentration, band and time. Nothing that identifies you is included: no IP address, no email address, no location, no request history. Explanations are cached so that the same reading is not sent repeatedly.'}
+          </Definition>
+          <Definition term="Google AdSense — advertising">
+            Serves the advertising. Your browser requests Google&apos;s code directly, so Google
+            sees your IP address, which page you are on, and whatever its own cookies and
+            identifiers already tell it about you — here and on every other site carrying its
+            advertising. It is the only third party on this list that your browser contacts for a
+            purpose other than delivering the page, and the only one that can build a profile
+            spanning other sites. Subject to Google&apos;s privacy policy rather than this one.
           </Definition>
           <Definition term="Environment and Resources Authority and the European Environment Agency">
             The source of the measurements. Requests to the upstream feed are made by our server, on
