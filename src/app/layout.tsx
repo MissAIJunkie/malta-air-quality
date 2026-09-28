@@ -63,6 +63,10 @@ const mono = IBM_Plex_Mono({
  * Held as one named constant so the account this site is monetised under is
  * greppable and can be swapped in a single place, rather than being buried in a
  * URL query string.
+ *
+ * `public/ads.txt` carries the same ID in the bare `pub-` form that the
+ * Authorised Digital Sellers spec requires. Google checks the two against each
+ * other, so changing this one means changing that one.
  */
 const ADSENSE_CLIENT = 'ca-pub-4146344643461466';
 

@@ -1,0 +1,12 @@
+# Authorised Digital Sellers for maqua.app.
+#
+# This file declares who is allowed to sell ad space on this domain. AdSense
+# serves ads without it, so its absence is not what stops a page monetising —
+# but buyers that check ads.txt may pass on inventory nobody has declared, which
+# is why the AdSense console reports a missing file as earnings at risk.
+#
+# The ID below is the same account as ADSENSE_CLIENT in src/app/layout.tsx, minus
+# the "ca-" prefix — ads.txt uses the bare "pub-" form. Change one and change the
+# other. The trailing value is Google's certification authority ID, copied as the
+# console's own snippet gives it.
+google.com, pub-4146344643461466, DIRECT, f08c47fec0942fa0
