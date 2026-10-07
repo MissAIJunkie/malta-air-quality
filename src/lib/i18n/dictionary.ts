@@ -131,6 +131,8 @@ const en = {
   'nav.about': 'About',
   'nav.faq': 'Questions',
   'nav.privacy': 'Privacy',
+  'nav.contact': 'Contact',
+  'nav.terms': 'Terms',
   'nav.openMenu': 'Open menu',
   'nav.closeMenu': 'Close menu',
   'nav.menu': 'Menu',
@@ -694,6 +696,13 @@ const en = {
   'offline.backOnline': 'You are back online. Refreshing.',
 
   /* --- Footer, attribution and legal ------------------------------------- */
+
+  /* --- Contact and terms ------------------------------------------------- */
+
+  'contact.lead':
+    'How to reach the person who runs maqua.app — for corrections, data questions, or anything the site gets wrong.',
+  'terms.lead':
+    'The terms this site is offered under: whose data it carries, what it does not promise, and what you may do with it.',
 
   /**
    * VERBATIM. Required by the upstream terms of use — do not reword, shorten or

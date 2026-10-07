@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { ALL_NAV } from '@/components/layout/nav-items';
+import { ALL_NAV, availableNav } from '@/components/layout/nav-items';
 import { getCapabilities } from '@/config/env';
 import { STATIONS } from '@/config/stations';
 import { absoluteUrl } from '@/lib/analytics';
@@ -27,21 +27,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
    * indexed (`generateMetadata` in `src/app/alerts/page.tsx`); submitting it
    * here anyway would be the sitemap contradicting the page it points at.
    *
-   * Gated on exactly the same expression as the page — though note it is
-   * evaluated at build time here and per request there, so a credential added
-   * without a redeploy would still leave this file a rebuild behind.
+   * `availableNav` is the same predicate the header and footer menus use, so
+   * the sitemap and the menus cannot disagree about which routes exist — though
+   * note it is evaluated at build time here and per request there, so a
+   * credential added without a redeploy would still leave this file a rebuild
+   * behind.
    */
-  const { email, database } = getCapabilities();
-  const alertsEnabled = email && database;
-
-  const pages: MetadataRoute.Sitemap = ALL_NAV.filter(
-    (item) => item.sitemap && (item.href !== '/alerts' || alertsEnabled),
-  ).map((item) => ({
-    url: absoluteUrl(item.href),
-    lastModified: BUILT_AT,
-    changeFrequency: item.changeFrequency,
-    priority: item.priority,
-  }));
+  const pages: MetadataRoute.Sitemap = availableNav(ALL_NAV, getCapabilities())
+    .filter((item) => item.sitemap)
+    .map((item) => ({
+      url: absoluteUrl(item.href),
+      lastModified: BUILT_AT,
+      changeFrequency: item.changeFrequency,
+      priority: item.priority,
+    }));
 
   /**
    * One entry per station.

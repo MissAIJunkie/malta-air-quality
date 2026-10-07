@@ -2,7 +2,8 @@ import Link from 'next/link';
 import type * as React from 'react';
 
 import { MaquaMark, Wordmark } from '@/components/layout/brand';
-import { INFORMATION_NAV, PRIMARY_NAV } from '@/components/layout/nav-items';
+import { INFORMATION_NAV, PRIMARY_NAV, availableNav } from '@/components/layout/nav-items';
+import { getCapabilities } from '@/config/env';
 import { getDictionary, hasKey, t } from '@/lib/i18n';
 
 const EEA_INDEX_URL = 'https://airindex.eea.europa.eu/AQI/index.html';
@@ -58,6 +59,12 @@ export function SiteFooter() {
   const dict = getDictionary();
   const year = new Date().getUTCFullYear();
 
+  /* Same predicate as the header and the sitemap — see `availableNav`. The
+     footer carries every available route, including the colophon pages the
+     header leaves out. */
+  const capabilities = getCapabilities();
+  const explore = availableNav([...PRIMARY_NAV, ...INFORMATION_NAV], capabilities);
+
   return (
     <footer
       className="border-border bg-surface-sunken mt-auto border-t pb-[env(safe-area-inset-bottom)]"
@@ -83,7 +90,7 @@ export function SiteFooter() {
             heading={copy('footer.exploreHeading', 'Explore')}
             navLabel={copy('footer.navLabel', 'Footer navigation')}
           >
-            {[...PRIMARY_NAV, ...INFORMATION_NAV].map((item) => (
+            {explore.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={footerLinkClass}>
                   {t(dict, item.labelKey)}
