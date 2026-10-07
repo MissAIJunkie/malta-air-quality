@@ -180,10 +180,8 @@ export default function ContactPage() {
             <Link href="/privacy" className="text-primary underline underline-offset-4">
               {t(dict, 'nav.privacy')}
             </Link>{' '}
-            page covers what the site itself collects. It does not describe email sent to the
-            address above, because that is an ordinary mailbox rather than something this site
-            processes: a message stays in it until it is dealt with, and it is used to reply to you
-            and for nothing else.
+            page covers what the site itself collects. It does not yet describe what happens to
+            email sent to the address above.
           </li>
         </BulletList>
       </ContentSection>

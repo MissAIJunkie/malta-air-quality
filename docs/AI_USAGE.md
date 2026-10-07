@@ -131,10 +131,15 @@ What constrains it, and what does not:
   `src/config/stations.ts` and `classify-event.ts` at request time. Both config
   files carry a header prohibiting any claim the station records cannot support —
   no named roads, traffic counts or industrial sites.
-- **Errors were found by checking, which is the point.** Three station claims and
-  two band comparisons were wrong in draft and were caught against the registry
-  and `AQI_BREAKPOINTS`. That is evidence the constraints work, and equally
-  evidence that unreviewed model prose about health should not be assumed sound.
+- **Errors were found by checking, and kept being found.** Across three review
+  passes: three station claims wrong against the registry, two band comparisons
+  arithmetically wrong, four claims asserting things the station records do not
+  contain, one unsourced sensory claim, one frequency figure not in the source,
+  and one code comment citing these guides for a number they do not state. Every
+  pass found more, and the last one still found three. The prose has NOT
+  converged. Treat the constraints as working — each error was caught by checking
+  against a file in this repository — and treat the drafts as unverified until a
+  human has read them end to end.
 - **The medical disclaimer is carried verbatim** on every page that gives
   guidance, as §2 requires.
 - **It has not been read end to end by a human.** That is the outstanding item.
