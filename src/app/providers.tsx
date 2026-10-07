@@ -42,8 +42,16 @@ function makeQueryClient(): QueryClient {
  * `ThemeProvider` uses the class strategy to match the `@custom-variant dark`
  * rule in globals.css, and `disableTransitionOnChange` so switching theme does
  * not animate every colour on the page at once.
+ *
+ * `nonce` is the per-request CSP nonce, threaded down from the root layout.
+ * next-themes emits an inline script into the document head to resolve the
+ * theme before first paint — without it the page flashes the wrong theme on
+ * every load — and under the nonce-based policy in `src/proxy.ts` an inline
+ * script without the nonce is blocked. So this prop is what keeps the theme
+ * from flashing, and dropping it would not fail loudly: the site would render
+ * correctly and merely flicker white on every navigation in dark mode.
  */
-export function Providers({ children }: { children: ReactNode }) {
+export function Providers({ children, nonce }: { children: ReactNode; nonce?: string }) {
   const [queryClient] = useState(makeQueryClient);
 
   return (
@@ -53,6 +61,7 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
       storageKey="maqua-theme"
+      nonce={nonce}
     >
       <QueryClientProvider client={queryClient}>
         {/* 500 ms is long enough not to fire on a pointer passing through, short
