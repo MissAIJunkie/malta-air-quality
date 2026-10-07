@@ -1,4 +1,4 @@
-import { POLLUTANTS, type PollutantCode } from '@/config/pollutants';
+import { POLLUTANTS } from '@/config/pollutants';
 import { STATION_PROFILES } from '@/config/station-profiles';
 import type { StationDefinition } from '@/config/stations';
 import { type DiurnalProfile, describeAmplitude, formatHourOfDay } from '@/lib/air-quality/diurnal';
@@ -126,7 +126,7 @@ export function StationProfile({
  * locally emitted one.
  */
 function DiurnalSentence({ profile }: { profile: DiurnalProfile }) {
-  const pollutant = POLLUTANTS[profile.pollutant as PollutantCode];
+  const pollutant = POLLUTANTS[profile.pollutant];
   const shape = describeAmplitude(profile.amplitudeRatio);
   const unit = pollutant.unit;
 
