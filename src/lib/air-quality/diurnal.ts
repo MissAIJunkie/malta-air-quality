@@ -35,11 +35,39 @@
  */
 
 import type { PollutantCode } from '@/config/pollutants';
+import { AQI_BREAKPOINTS } from '@/config/thresholds';
 import type { HistoricalReading } from '@/lib/air-quality/types';
 import { MaltaDate } from '@/lib/i18n';
 
 /** Hours of real, measured data required before a profile is reported at all. */
 export const MIN_OBSERVED_HOURS = 48;
+
+/**
+ * Fraction of a pollutant's Good-band ceiling below which its daily shape is
+ * not characterised.
+ *
+ * `amplitudeRatio` is scale-free, which is what makes it comparable across
+ * pollutants and also what makes it dangerous near zero. Sulphur dioxide in
+ * Malta routinely averages well under 1 µg/m³ — the guides say so — and at
+ * those levels the difference between two hours is instrument noise around a
+ * detection limit. A trough of 0.2 and a peak of 0.6 is a ratio of 3, which
+ * would otherwise be described to a reader as "a pronounced daily cycle" in a
+ * pollutant that is, for practical purposes, absent.
+ *
+ * Twenty per cent of the Good ceiling: 4 µg/m³ for SO₂, 1 for PM2.5, 2 for NO₂,
+ * 3 for PM10, 12 for O₃. Below that the profile reports its mean and says the
+ * series stays low, which is both true and more useful than a ratio.
+ */
+export const LOW_CONCENTRATION_FRACTION = 0.2;
+
+/**
+ * Smallest trough that can be stated at one decimal place.
+ *
+ * Below this a rendered trough reads "0.0 µg/m³", which looks like the zero
+ * this project refuses to print for a missing value. Such a profile is treated
+ * as low-concentration instead.
+ */
+const MIN_STATEABLE_VALUE = 0.1;
 
 /**
  * Distinct hours-of-day that must be covered before the peak and trough are
@@ -72,8 +100,16 @@ export type DiurnalProfile = {
    * part that genuinely distinguishes a traffic site from a rural one: a
    * roadside nitrogen dioxide series swings hard, a regional dust signal
    * barely swings at all.
+   *
+   * Meaningless when `lowConcentration` is true. Check that first.
    */
   amplitudeRatio: number;
+  /**
+   * True when the series sits too low for its shape to mean anything — see
+   * `LOW_CONCENTRATION_FRACTION`. Callers must not describe an amplitude for
+   * these; report the mean and say the series stays low.
+   */
+  lowConcentration: boolean;
 };
 
 /**
@@ -137,6 +173,16 @@ export function diurnalProfile(
 
   const spanMs = latest - earliest;
   const windowDays = Math.max(1, Math.ceil(spanMs / (24 * 60 * 60 * 1000)));
+  const overallMean = overallTotal / samples;
+
+  /*
+   * Two ways a series can be too small to characterise: it averages a small
+   * fraction of what counts as Good for this pollutant, or its trough cannot
+   * be printed at one decimal without reading as zero.
+   */
+  const goodCeiling = AQI_BREAKPOINTS[pollutant].breakpoints[0]?.max ?? 0;
+  const lowConcentration =
+    overallMean < goodCeiling * LOW_CONCENTRATION_FRACTION || trough.mean < MIN_STATEABLE_VALUE;
 
   return {
     pollutant,
@@ -145,8 +191,9 @@ export function diurnalProfile(
     windowDays,
     peak,
     trough,
-    overallMean: overallTotal / samples,
+    overallMean,
     amplitudeRatio: peak.mean / trough.mean,
+    lowConcentration,
   };
 }
 

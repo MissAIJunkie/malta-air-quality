@@ -43,11 +43,11 @@ export type StationProfile = {
 
 export const STATION_PROFILES: Record<string, StationProfile> = {
   msida: {
-    lead: 'The most traffic-exposed monitor in the network, and the lowest-lying: Msida is where Maltese roadside air is measured.',
+    lead: 'One of the network’s two roadside monitors, and the lowest-lying of the five: Msida is where Maltese kerbside air is measured.',
     siting: [
       'Msida is classified as a Traffic station in an Urban area — one of two such sites in the network. A Traffic classification is a deliberate choice about where the instrument goes: it is placed where exposure is high, close to the source, rather than somewhere that represents the general air of the surrounding area. Its readings are supposed to be worse than the islands at large, and when they are, the station is working as designed.',
-      'At 2 metres above sea level it is also the lowest station in the network by a wide margin — Għarb, the highest, sits 112 metres above it. Low-lying sites near the coast have less scope for pollutants to disperse downward and away, and a shallow nocturnal inversion can trap vehicle emissions near the ground for hours.',
-      'Msida is the one station that does not report ozone. That is consistent with its classification rather than a defect: fresh nitric oxide from vehicle exhaust destroys ozone locally, so the most traffic-exposed site on the islands is the one where an ozone instrument would have least to measure.',
+      'At 2 metres above sea level it is also the lowest station in the network by a wide margin — Għarb, the highest, sits 112 metres above it. What the station record supports is the elevation itself; how much that affects dispersion here is not something five monitors and a coordinate can settle, so this page does not claim it.',
+      'Msida is the one station that does not report ozone. Why is not recorded anywhere this site can see — the registry notes only that no ozone has been observed from it. It is worth knowing that fresh nitric oxide from vehicle exhaust destroys ozone locally, which would give a roadside site less ozone to measure; but St Paul’s Bay is also a Traffic site and does report ozone, so that is a mechanism worth mentioning and not an explanation anyone here can stand behind.',
     ],
     bestFor:
       'What the air is like beside a busy Maltese road — the exposure of someone walking, cycling, waiting or living at the kerbside, rather than the general urban background.',
@@ -62,7 +62,7 @@ export const STATION_PROFILES: Record<string, StationProfile> = {
     lead: 'The network’s second Traffic station, and the only roadside site that reports all five pollutants — the most complete picture of kerbside air on the islands.',
     siting: [
       'St Paul’s Bay is the other Traffic site in an Urban area, so like Msida it is sited for exposure rather than for representativeness. Having two Traffic stations rather than one matters more than it sounds: a single roadside monitor cannot be distinguished from a local peculiarity, while two in different parts of Malta can be compared.',
-      'It sits 7 metres above sea level, close to the coast. Coastal sites get more ventilation than inland ones when there is any sea breeze at all, which can offset some of what the traffic classification would otherwise imply — so this station is not simply a second copy of Msida.',
+      'It sits 7 metres above sea level. That is close to Msida’s 2 metres and far below Attard’s 86, so the two Traffic sites are also the two lowest — which is worth knowing when comparing them against the Background stations, since siting classification and elevation are not independent in this network.',
       'Three of the five stations report every one of the index pollutants, and this is the only Traffic site among them — Għarb and Żejtun are the other two, and both are Background. So for a kerbside question this is the one station where the index is never set by default because a pollutant was not measured.',
     ],
     bestFor:

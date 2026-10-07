@@ -80,6 +80,13 @@ export default function PrivacyPage() {
 
   const off = (flag: boolean | undefined): boolean => capabilities !== null && flag === false;
 
+  /*
+   * Alerts need both halves. Where this page offers an action a reader can
+   * take, it must not point at `/alerts` on a deployment that cannot send one —
+   * the same gate the header, footer, sitemap and 404 now apply.
+   */
+  const alertsEnabled = Boolean(capabilities?.email && capabilities?.database);
+
   return (
     <ContentPage
       title={s('privacy.title', 'Privacy')}
@@ -357,12 +364,23 @@ export default function PrivacyPage() {
         </Paragraph>
         <BulletList>
           <li>
-            <strong className="text-foreground font-medium">Stop and delete:</strong> use the
-            unsubscribe link in any alert email, or the{' '}
-            <Link href="/alerts" className="text-primary underline underline-offset-4">
-              {t(dict, 'nav.alerts')}
-            </Link>{' '}
-            page. Unsubscribing removes the subscription record, including the address.
+            <strong className="text-foreground font-medium">Stop and delete:</strong>{' '}
+            {alertsEnabled ? (
+              <>
+                use the unsubscribe link in any alert email, or the{' '}
+                <Link href="/alerts" className="text-primary underline underline-offset-4">
+                  {t(dict, 'nav.alerts')}
+                </Link>{' '}
+                page. Unsubscribing removes the subscription record, including the address.
+              </>
+            ) : (
+              <>
+                there is nothing to stop or delete on this deployment. Alerts are not enabled, no
+                address can be submitted, and none is stored. The link to the alerts page is
+                withheld here for the same reason it is absent from the menus: it describes a
+                feature this deployment cannot provide.
+              </>
+            )}
           </li>
           <li>
             <strong className="text-foreground font-medium">Anything else:</strong> raise an issue

@@ -138,6 +138,28 @@ function DiurnalSentence({ profile }: { profile: DiurnalProfile }) {
     </span>
   );
 
+  /*
+   * Too low to have a shape. Reported rather than hidden: "sulphur dioxide
+   * stays near zero here" is a real and useful statement about Maltese air,
+   * and it is the one the guides make too. What must not happen is dressing
+   * detection-limit noise up as a daily cycle, which a scale-free ratio will
+   * happily do at 0.4 µg/m³.
+   */
+  if (profile.lowConcentration) {
+    return (
+      <p className="text-muted-foreground text-base leading-relaxed">
+        <strong className="text-foreground font-medium">{pollutant.label}</strong> stays very low
+        here throughout the day, averaging{' '}
+        <span className="font-mono">
+          {profile.overallMean.toFixed(1)} {unit}
+        </span>{' '}
+        — far below the top of its Good band. At these levels the hour-to-hour differences are
+        within the range of instrument noise, so no daily pattern is claimed from them.
+        {provenance}
+      </p>
+    );
+  }
+
   if (shape === 'flat') {
     return (
       <p className="text-muted-foreground text-base leading-relaxed">

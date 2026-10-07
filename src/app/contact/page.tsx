@@ -36,7 +36,17 @@ export const metadata: Metadata = {
 const CONTACT_EMAIL = 'hello@maqua.app';
 
 const SOURCE_REPOSITORY = 'https://github.com/MissAIJunkie/malta-air-quality';
-const ERA_CONTACT = 'https://era.org.mt/contact-us/';
+/**
+ * ERA's own site.
+ *
+ * The root, deliberately — not a guessed `/contact-us` path. ERA blocks
+ * automated requests site-wide (every path returns 403 to a non-browser client,
+ * which is also why `docs/CONTEXT_SOURCES.md` records its licensing as "not
+ * established"), so a deep link cannot be verified from here and a 404 on a
+ * monetised site's contact page is exactly the unfinished-site signal this work
+ * set out to remove. `docs/CONTEXT_SOURCES.md` names this origin.
+ */
+const ERA_SITE = 'https://era.org.mt/';
 
 export default function ContactPage() {
   const dict = getDictionary();
@@ -115,19 +125,24 @@ export default function ContactPage() {
             authority on Maltese air quality. For anything official — a compliance question, an
             incident, a formal complaint, a data request with legal weight — approach{' '}
             <a
-              href={ERA_CONTACT}
+              href={ERA_SITE}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary underline underline-offset-4"
             >
               ERA directly
               <span className="sr-only"> ({t(dict, 'a11y.newWindow')})</span>
-            </a>
-            . Its own publications take precedence over anything here.
+            </a>{' '}
+            — its site carries its own contact routes. Its publications take precedence over
+            anything here.
           </Definition>
           <Definition term="Medical questions">
-            The health guidance on this site is the conventional wording attached to each index
-            band. It is general information about the air, not advice about you.
+            The band-by-band guidance is the conventional wording attached to each index level, and
+            the pollutant guides add general precautions of the kind public-health bodies publish —
+            moving strenuous exercise off a hot bright afternoon, keeping a reliever inhaler to hand
+            during an episode. All of it is general information about the air and about populations.
+            None of it is advice about you, your condition or your medication, and none of it is
+            written by a clinician.
           </Definition>
           <Definition term="Emergencies">{t(dict, 'disclaimer.emergency')}</Definition>
         </DefinitionList>
@@ -161,11 +176,14 @@ export default function ContactPage() {
             .
           </li>
           <li>
-            For how your data is handled when you write in, see the{' '}
+            The{' '}
             <Link href="/privacy" className="text-primary underline underline-offset-4">
               {t(dict, 'nav.privacy')}
             </Link>{' '}
-            page.
+            page covers what the site itself collects. It does not describe email sent to the
+            address above, because that is an ordinary mailbox rather than something this site
+            processes: a message stays in it until it is dealt with, and it is used to reply to you
+            and for nothing else.
           </li>
         </BulletList>
       </ContentSection>

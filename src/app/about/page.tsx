@@ -181,8 +181,13 @@ export default function AboutPage() {
       <ContentSection id="contact" heading={t(dict, 'about.contactHeading')}>
         <Paragraph>
           Corrections are welcome, particularly about station siting, Maltese place names and
-          orthography, or anything on this site that overstates what the data can support. The
-          fastest route is an issue on the source repository.
+          orthography, or anything on this site that overstates what the data can support. The{' '}
+          <Link href="/contact" className="text-primary underline underline-offset-4">
+            {t(dict, 'nav.contact')}
+          </Link>{' '}
+          page has an email address and says what is most useful to report; an issue on the source
+          repository works too, and has the advantage of staying findable for the next person who
+          hits the same thing.
         </Paragraph>
         <Paragraph>{t(dict, 'footer.attribution')}</Paragraph>
         <Callout>{t(dict, 'disclaimer.medical')}</Callout>

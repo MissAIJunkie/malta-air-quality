@@ -32,8 +32,14 @@ export const metadata: Metadata = {
  * This is not a link list with a sentence at the top. The comparison table is
  * the thing that cannot be got from any of the five child pages individually,
  * and the point it makes is the one readers most often get wrong: the bands are
- * not a common scale. 20 µg/m³ is Poor as PM2.5, Fair as PM10 and Good as
+ * not a common scale. 20 µg/m³ is Moderate as PM2.5, Fair as PM10 and Good as
  * ozone, and that is visible here in a way it is not anywhere else on the site.
+ *
+ * Those three bands are read off `AQI_BREAKPOINTS` — PM2.5 Moderate is 16–50,
+ * PM10 Fair is 16–45, ozone Good is 1–60 — and not from an impression of how
+ * the scales compare. An earlier draft of this comment said "Poor as PM2.5",
+ * which is two bands out, in the one paragraph on the site whose whole job is
+ * to stop people misreading a band.
  */
 export default function PollutantsIndexPage() {
   const dict = getDictionary();

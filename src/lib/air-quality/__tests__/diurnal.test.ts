@@ -1,13 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
+import type { PollutantCode } from '@/config/pollutants';
 import type { HistoricalReading } from '@/lib/air-quality/types';
 import {
+  LOW_CONCENTRATION_FRACTION,
   MIN_COVERED_HOURS_OF_DAY,
   MIN_OBSERVED_HOURS,
   describeAmplitude,
   diurnalProfile,
   formatHourOfDay,
 } from '@/lib/air-quality/diurnal';
+import { AQI_BREAKPOINTS } from '@/config/thresholds';
 
 /**
  * Build a history series.
@@ -20,8 +23,13 @@ import {
 function series(
   days: number,
   valueAt: (hour: number) => number | null,
-  overrides: Partial<Pick<HistoricalReading, 'forecast'>> & { modelled?: boolean } = {},
+  overrides: Partial<Pick<HistoricalReading, 'forecast'>> & {
+    modelled?: boolean;
+    /** Defaults to NO₂. Set it where the pollutant's own band scale matters. */
+    pollutant?: PollutantCode;
+  } = {},
 ): HistoricalReading[] {
+  const code: PollutantCode = overrides.pollutant ?? 'NO2';
   const out: HistoricalReading[] = [];
   const start = Date.UTC(2026, 0, 5, 0, 0, 0);
 
@@ -38,8 +46,8 @@ function series(
         value === null
           ? {}
           : {
-              NO2: {
-                pollutant: 'NO2',
+              [code]: {
+                pollutant: code,
                 value,
                 unit: 'µg/m³',
                 category: 'Good',
@@ -50,7 +58,7 @@ function series(
               },
             },
       overallCategory: 'Good',
-      dominantPollutant: 'NO2',
+      dominantPollutant: code,
       forecast: overrides.forecast ?? false,
     });
   }
@@ -164,6 +172,77 @@ describe('diurnalProfile', () => {
         'O3',
       ),
     ).toBeNull();
+  });
+});
+
+describe('diurnalProfile — concentrations too low to have a shape', () => {
+  /*
+   * The defect this guards. `amplitudeRatio` is scale-free, so SO₂ swinging
+   * between 0.2 and 0.6 µg/m³ — instrument noise around a detection limit, in
+   * a pollutant the guides describe as near-absent in Malta — produced a ratio
+   * of 3 and rendered as "a pronounced daily cycle".
+   */
+  it('flags a near-zero series rather than describing its cycle', () => {
+    const profile = diurnalProfile(
+      series(10, (hour) => (hour === 9 ? 0.6 : hour === 3 ? 0.2 : 0.3), { pollutant: 'SO2' }),
+      'SO2',
+    );
+
+    expect(profile).not.toBeNull();
+    expect(profile!.lowConcentration).toBe(true);
+    // The ratio is still computed; it is simply not to be described.
+    expect(profile!.amplitudeRatio).toBeGreaterThan(2.5);
+  });
+
+  it('flags a series whose trough would render as "0.0"', () => {
+    /*
+     * Mean is high enough to clear the fractional floor, but the trough is
+     * 0.04 — which `toFixed(1)` prints as "0.0", indistinguishable from the
+     * zero this project refuses to print for a missing value.
+     */
+    const profile = diurnalProfile(
+      series(10, (hour) => (hour === 3 ? 0.04 : 30), { pollutant: 'SO2' }),
+      'SO2',
+    );
+
+    expect(profile).not.toBeNull();
+    expect(profile!.lowConcentration).toBe(true);
+  });
+
+  it('does not flag a series comfortably above the floor', () => {
+    const profile = diurnalProfile(
+      series(10, (hour) => (hour === 9 ? 24 : hour === 3 ? 8 : 15), { pollutant: 'SO2' }),
+      'SO2',
+    );
+
+    expect(profile).not.toBeNull();
+    expect(profile!.lowConcentration).toBe(false);
+    expect(profile!.amplitudeRatio).toBeCloseTo(3, 5);
+  });
+
+  it('scales the floor to each pollutant’s own Good ceiling', () => {
+    /*
+     * 1.2 µg/m³ is below the floor for SO₂ (Good ends at 20, so the floor is
+     * 4) and above it for PM2.5 (Good ends at 5, so the floor is 1). The same
+     * concentration is therefore describable for one pollutant and not the
+     * other, which is the whole point of scaling it.
+     */
+    const so2Floor = AQI_BREAKPOINTS.SO2.breakpoints[0]!.max * LOW_CONCENTRATION_FRACTION;
+    const pm25Floor = AQI_BREAKPOINTS['PM2.5'].breakpoints[0]!.max * LOW_CONCENTRATION_FRACTION;
+    expect(1.2).toBeLessThan(so2Floor);
+    expect(1.2).toBeGreaterThan(pm25Floor);
+
+    const so2 = diurnalProfile(
+      series(10, (hour) => (hour === 9 ? 1.4 : 1.2), { pollutant: 'SO2' }),
+      'SO2',
+    );
+    const pm25 = diurnalProfile(
+      series(10, (hour) => (hour === 9 ? 1.4 : 1.2), { pollutant: 'PM2.5' }),
+      'PM2.5',
+    );
+
+    expect(so2!.lowConcentration).toBe(true);
+    expect(pm25!.lowConcentration).toBe(false);
   });
 });
 

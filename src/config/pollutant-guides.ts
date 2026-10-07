@@ -92,7 +92,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
       'The long-term evidence is where PM2.5 earns its attention. Sustained exposure is associated with cardiovascular and respiratory disease. The WHO’s annual guideline is far stricter than the EU’s legally binding limit, and the gap between those two numbers is a policy gap, not a measurement disagreement.',
     ],
     reading: [
-      'The fine-particle scale is the tightest of the five. Good ends at 5 µg/m³ and Fair at 15 — so a figure that would be comfortably Good for PM10 can be two bands worse as PM2.5. The bands are not comparable across pollutants, and a PM2.5 of 20 is a genuinely different statement from a PM10 of 20.',
+      'The fine-particle scale is the tightest of the five. Good ends at 5 µg/m³ against 15 for PM10, so any figure at the top of PM10’s Good band is already Fair as PM2.5. The bands are not comparable across pollutants: 20 µg/m³ is Fair as PM10 and Moderate as PM2.5, which are genuinely different statements about the same air.',
       'Because the index takes the worst pollutant at a station, a modest fine-particle number is often what sets the band on a day when nothing else is elevated.',
     ],
     watchFor: ['asthma', 'respiratory', 'heart', 'older', 'children'],
@@ -165,7 +165,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
     ],
     inMalta: [
       'Malta has the sunlight and the summer temperatures that ozone formation needs, so the islands see their highest ozone on hot, still, bright afternoons — typically late spring through summer. This is the pollutant where the season matters most.',
-      'The network reflects the chemistry in a way worth noticing: Msida is the one station that does not report ozone at all, and it is the most traffic-exposed site on the islands. That is consistent with the suppression effect above — though it is a single case rather than a rule, since St Paul’s Bay is also a Traffic site and does measure ozone.',
+      'The network reflects the chemistry in a way worth noticing: Msida, one of the two Traffic sites, is the only station that does not report ozone at all. The suppression effect above would explain that — but it is one case and not a rule, because St Paul’s Bay is the other Traffic site and does measure ozone. The registry records only that no ozone has been observed from Msida, not why.',
       'Għarb matters especially here. A rural site on Gozo, away from the traffic that would destroy ozone locally, is exactly where the regional photochemical signal shows up most clearly — and often where the highest figure on the islands is found.',
     ],
     health: [
@@ -183,7 +183,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
     lead: 'Sulphur dioxide is normally the quietest of the five in Malta — low for long stretches, then briefly not. It is the pollutant where an episode means more than an average.',
     what: [
       'Sulphur dioxide is a sharp-smelling gas produced when fuel containing sulphur is burnt. Unlike nitrogen dioxide, it is a property of the fuel rather than of the flame temperature, so it responds directly to what is being burnt — which is why fuel sulphur regulation has driven it down across Europe over decades.',
-      'It is detectable by smell at concentrations near the upper index bands, which makes it one of the few pollutants a person can notice without an instrument. It also dissolves readily in water, so it is absorbed in the upper airways rather than reaching deep into the lung.',
+      'It dissolves readily in water, which is why it is absorbed in the upper airways rather than reaching deep into the lung — the opposite of fine particles, and the reason its effects appear as airway tightening rather than as long-term cardiovascular risk.',
       'Its behaviour is episodic rather than cyclical. Where nitrogen dioxide follows traffic and ozone follows the sun, sulphur dioxide tends to sit near the bottom of its scale and then spike when a specific source is upwind.',
     ],
     sources: [

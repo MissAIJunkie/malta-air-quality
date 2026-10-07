@@ -102,6 +102,47 @@ health-adjacent output carries, verbatim:
 > maqua.app provides general environmental information and does not replace
 > medical advice or official emergency guidance.
 
+### Static editorial copy — AI-drafted, AWAITING HUMAN REVIEW
+
+> **This row is not an approval.** It records a use that has happened and names
+> the review it still needs. Do not move it into the table above until that
+> review is done, and do not let its presence here read as sign-off.
+
+Added 2026-10-07, on branch `adsense/low-value-remediation`. Roughly 5,000 words
+of health-adjacent editorial prose were AI-drafted offline and committed as
+static content, not generated at request time:
+
+| File                                                       | What it holds                                                                                              |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `src/config/pollutant-guides.ts`                           | Per-pollutant guides: what each pollutant is, Maltese sources, health effects, how to read its band scale. |
+| `src/config/station-profiles.ts`                           | Per-station siting prose and what each monitor is good for.                                                |
+| `src/app/saharan-dust/page.tsx`                            | Dust intrusions, how to recognise one, what to do.                                                         |
+| `src/app/pollutants/*`, `src/app/contact`, `src/app/terms` | Page frames and surrounding copy.                                                                          |
+
+Closest existing row is **Translation assistance** — offline authoring, never at
+request time — but that row describes translating copy a human wrote, and this
+is copy a model drafted. The distinction matters enough to state rather than
+elide.
+
+What constrains it, and what does not:
+
+- **No number is invented.** Band tables, legal limits, WHO guidelines, station
+  classifications and dust thresholds all render from `src/config/thresholds.ts`,
+  `src/config/stations.ts` and `classify-event.ts` at request time. Both config
+  files carry a header prohibiting any claim the station records cannot support —
+  no named roads, traffic counts or industrial sites.
+- **Errors were found by checking, which is the point.** Three station claims and
+  two band comparisons were wrong in draft and were caught against the registry
+  and `AQI_BREAKPOINTS`. That is evidence the constraints work, and equally
+  evidence that unreviewed model prose about health should not be assumed sound.
+- **The medical disclaimer is carried verbatim** on every page that gives
+  guidance, as §2 requires.
+- **It has not been read end to end by a human.** That is the outstanding item.
+  These pages give precautionary advice — moving exercise off a hot afternoon,
+  keeping a reliever inhaler to hand during an episode — which is the kind of
+  general public-health wording this policy permits, but permitting a category is
+  not the same as having checked the sentences.
+
 ---
 
 ## 3. Forbidden uses
