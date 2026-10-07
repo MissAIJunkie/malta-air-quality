@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -26,6 +27,8 @@ import { absoluteUrl } from '@/lib/analytics';
 import { getLatestReadings, getStationHistory } from '@/lib/air-quality/service';
 import type { PollutantReading, StationReading } from '@/lib/air-quality/types';
 import { buildFallbackExplanation } from '@/lib/ai/fallback';
+import { StationProfile } from '@/components/stations/station-profile';
+import { diurnalProfile } from '@/lib/air-quality/diurnal';
 import { buildExplainInput } from '@/lib/ai/redact';
 import { getContextEvents, getContextForForecast } from '@/lib/environmental-context/service';
 import { buildStationOutlook } from '@/lib/forecast/calculate';
@@ -356,6 +359,18 @@ function PollutantRow({
           <p className="text-muted-foreground text-xs">{t(dict, 'pollutant.noValueHint')}</p>
         </>
       )}
+
+      {/* The guide, from the card. A reader who has just seen a number they do
+          not recognise is at exactly the moment they want to know what the
+          pollutant is — and it keeps the guides linked from the pages that
+          carry the readings rather than only from the menu. */}
+      <Link
+        href={`/pollutants/${definition.slug}`}
+        className="text-primary mt-auto text-xs underline underline-offset-4"
+      >
+        What is <span aria-hidden="true">{definition.label}</span>
+        <span className="sr-only">{definition.ariaLabel}</span>?
+      </Link>
     </li>
   );
 }
@@ -540,6 +555,12 @@ export default async function StationPage({
   const query = await searchParams;
   const nowIso = new Date().toISOString();
 
+  /* The per-request CSP nonce (see `src/proxy.ts`). JSON-LD is a data block, not
+     executable, so `script-src` does not actually govern it — this is here so
+     that "every script tag we emit carries the nonce" holds without exception,
+     and nobody has to rediscover which script types are exempt. */
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
+
   // Independent reads, issued together: four sequential round trips would put
   // three avoidable waits in front of the reader.
   const [readingsResult, history, forecastResult, forecastContext, contextResult] =
@@ -565,6 +586,19 @@ export default async function StationPage({
       reading?.pollutants[code] !== undefined ||
       history.some((point) => point.pollutants[code] !== undefined),
   );
+
+  /*
+   * This station's own daily shape, per pollutant.
+   *
+   * Reuses the `history` already fetched above — no extra round trip, and no
+   * database required, which matters because production has none configured.
+   * `diurnalProfile` filters out forecast points and gap-filled estimates
+   * itself and returns null where the sample cannot support a claim, so this
+   * list is only as long as the evidence allows.
+   */
+  const diurnalProfiles = availablePollutants
+    .map((code) => diurnalProfile(history, code))
+    .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
   const requested = pollutantFromSlug(firstParam(query.pollutant));
   const selectedPollutant: PollutantCode =
@@ -686,6 +720,7 @@ export default async function StationPage({
     <main id="main" className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6">
       <script
         type="application/ld+json"
+        nonce={nonce}
         /* Serialised from a literal object built in this file — station names
            come from the checked-in registry, not from user input — and `<` is
            escaped the same way as the layout's structured data. */
@@ -1176,6 +1211,14 @@ export default async function StationPage({
           </CardContent>
         </Card>
       </div>
+
+      {/* --- Station profile ---------------------------------------------- *
+       * Standing description of this monitor plus the measured daily shape of
+       * its own series. Full width and below the live cards: a reader comes for
+       * the current number, and this is the context they want once they have
+       * it. It is also the part of the page that is genuinely about THIS
+       * station rather than about the template. */}
+      <StationProfile station={station} profiles={diurnalProfiles} />
     </main>
   );
 }

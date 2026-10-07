@@ -67,6 +67,24 @@ export const PRIMARY_NAV: NavItem[] = [
 
 export const INFORMATION_NAV: NavItem[] = [
   {
+    href: '/pollutants',
+    labelKey: 'nav.pollutants',
+    descriptionKey: 'pollutants.indexLead',
+    sitemap: true,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+    inHeader: true,
+  },
+  {
+    href: '/saharan-dust',
+    labelKey: 'nav.saharanDust',
+    descriptionKey: 'saharanDust.lead',
+    sitemap: true,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+    inHeader: false,
+  },
+  {
     href: '/about',
     labelKey: 'nav.about',
     descriptionKey: 'about.whatBody',

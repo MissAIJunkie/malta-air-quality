@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { ALL_NAV, availableNav } from '@/components/layout/nav-items';
 import { getCapabilities } from '@/config/env';
+import { POLLUTANTS, POLLUTANT_CODES } from '@/config/pollutants';
 import { STATIONS } from '@/config/stations';
 import { absoluteUrl } from '@/lib/analytics';
 
@@ -58,5 +59,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...pages, ...stations];
+  /**
+   * One entry per pollutant guide.
+   *
+   * Listed explicitly because these are children of `/pollutants` rather than
+   * navigation entries of their own, so `ALL_NAV` does not and should not carry
+   * them — the same reason the station pages above are listed separately.
+   * Generated from the pollutant registry, so a sixth pollutant cannot be added
+   * to the index and left out of the sitemap.
+   *
+   * `monthly` and 0.7: the prose changes when the site is deployed, not when a
+   * reading arrives, and these rank below the live pages that carry readings.
+   */
+  const pollutants: MetadataRoute.Sitemap = POLLUTANT_CODES.map((code) => ({
+    url: absoluteUrl(`/pollutants/${POLLUTANTS[code].slug}`),
+    lastModified: BUILT_AT,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
+  return [...pages, ...pollutants, ...stations];
 }

@@ -133,6 +133,7 @@ const en = {
   'nav.privacy': 'Privacy',
   'nav.contact': 'Contact',
   'nav.terms': 'Terms',
+  'nav.saharanDust': 'Saharan dust',
   'nav.openMenu': 'Open menu',
   'nav.closeMenu': 'Close menu',
   'nav.menu': 'Menu',
@@ -698,6 +699,11 @@ const en = {
   /* --- Footer, attribution and legal ------------------------------------- */
 
   /* --- Contact and terms ------------------------------------------------- */
+
+  'pollutants.indexLead':
+    'The European Air Quality Index is built from five pollutants, and a location takes the band of whichever one is worst. One guide each: what it is, where it comes from in Malta, and how it becomes a band.',
+  'saharanDust.lead':
+    'Malta sits on the main dust corridor between the Sahara and southern Europe. What an intrusion does to the readings, how to recognise one, and why “it was only dust” is both true and a bad excuse.',
 
   'contact.lead':
     'How to reach the person who runs maqua.app — for corrections, data questions, or anything the site gets wrong.',

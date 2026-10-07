@@ -234,6 +234,14 @@ export default function MethodologyPage() {
           Each station reports what its instruments actually measure. Coverage differs by site, and
           a pollutant is never shown for a station merely because similar stations report it.
         </Paragraph>
+        <Paragraph>
+          Summarised below. Each one also has{' '}
+          <Link href="/pollutants" className="text-primary underline underline-offset-4">
+            a guide of its own
+          </Link>{' '}
+          covering where it comes from on these islands, who it affects, its own band scale, and the
+          legal limits that apply to it.
+        </Paragraph>
         <DefinitionList>
           {POLLUTANT_CODES.map((code) => {
             const pollutant = POLLUTANTS[code];
