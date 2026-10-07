@@ -37,6 +37,29 @@
  * rather than our own measurement, and `'unsafe-eval'` in particular is there
  * on Google's say-so — it is a real loosening, it is theirs to require, and it
  * should be removed the moment Google's guidance stops asking for it.
+ *
+ * ## Where this policy is STRICTER than Google's example, and why that is a risk
+ *
+ * "Follows Google's guidance" is true of `script-src` and of nothing else.
+ * Google's published example sets no `default-src` at all, which leaves
+ * `style-src`, `font-src`, `media-src` and `manifest-src` entirely unrestricted
+ * in their policy and restricted here — `style-src` to `'self' 'unsafe-inline'`,
+ * `font-src` to `'self' data:`, `media-src` to `'none'`.
+ *
+ * That matters because a consent dialog and Auto-ads containers render in the
+ * TOP-LEVEL document, not inside the ad iframe, so these directives apply to
+ * them. A certified CMP that pulls a stylesheet or a webfont from a Google
+ * origin would be blocked by this policy while `script-src` happily allows its
+ * code — and the symptom would be an unstyled or fontless consent banner rather
+ * than an obvious failure.
+ *
+ * It is deliberately NOT pre-widened. Guessing which hosts a CMP will want, for
+ * a CMP not yet chosen, would loosen the policy today against a benefit that may
+ * never arrive. The correct sequence is: enable the CMP and Auto ads in the
+ * AdSense console, open the live site, read the browser console, and widen
+ * whichever directive is actually named in a violation. A CSP violation names
+ * the directive and the blocked URL, so the fix is mechanical once there is
+ * something real to fix.
  */
 
 import { NextResponse, type NextRequest } from 'next/server';
