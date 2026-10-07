@@ -52,7 +52,7 @@ export default function SaharanDustPage() {
   return (
     <ContentPage
       title={PAGE_TITLE}
-      lead="Several times a year, dust lifted from North Africa reaches the central Mediterranean. Malta sits directly on the corridor, so an intrusion is a recurring feature of the islands’ climate rather than an exceptional event — and it is the single biggest driver of the highest coarse-particle readings on this site."
+      lead="Dust lifted from North Africa recurs over the central Mediterranean through the year, and Malta sits directly on the corridor between the Sahara and southern Europe. An intrusion is a feature of the islands’ climate rather than an exceptional event, and it is the regional source behind most of the highest coarse-particle readings on this site."
     >
       <ContentSection id="what" heading="What a dust intrusion actually is">
         <Paragraph>

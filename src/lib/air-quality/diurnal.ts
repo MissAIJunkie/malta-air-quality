@@ -47,10 +47,11 @@ export const MIN_OBSERVED_HOURS = 48;
  * not characterised.
  *
  * `amplitudeRatio` is scale-free, which is what makes it comparable across
- * pollutants and also what makes it dangerous near zero. Sulphur dioxide in
- * Malta routinely averages well under 1 µg/m³ — the guides say so — and at
- * those levels the difference between two hours is instrument noise around a
- * detection limit. A trough of 0.2 and a peak of 0.6 is a ratio of 3, which
+ * pollutants and also what makes it dangerous near zero. Sulphur dioxide at the
+ * Maltese stations was observed sitting around 0.3–1.5 µg/m³ across an 11-day
+ * window on 2026-10-07 — a sample, not a climatology, and the reason this floor
+ * exists rather than a figure to quote at a reader. At those levels the
+ * difference between two hours is instrument noise around a detection limit. A trough of 0.2 and a peak of 0.6 is a ratio of 3, which
  * would otherwise be described to a reader as "a pronounced daily cycle" in a
  * pollutant that is, for practical purposes, absent.
  *
