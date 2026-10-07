@@ -166,7 +166,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
     inMalta: [
       'Malta has the sunlight and the summer temperatures that ozone formation needs, so the islands see their highest ozone on hot, still, bright afternoons — typically late spring through summer. This is the pollutant where the season matters most.',
       'The network reflects the chemistry in a way worth noticing: Msida, one of the two Traffic sites, is the only station that does not report ozone at all. The suppression effect above would explain that — but it is one case and not a rule, because St Paul’s Bay is the other Traffic site and does measure ozone. The registry records only that no ozone has been observed from Msida, not why.',
-      'Għarb matters especially here. A rural site on Gozo, away from the traffic that would destroy ozone locally, is exactly where the regional photochemical signal shows up most clearly — and often where the highest figure on the islands is found.',
+      'Għarb matters especially here. A rural site on Gozo, away from the traffic that would destroy ozone locally, is where the regional photochemical signal should show up most clearly — that is what the chemistry predicts. Whether it carries the highest figure on the islands on any given day is a question for the readings rather than for this page, and each station page now shows its own measured daily ozone pattern, so the prediction can be checked rather than taken on trust.',
     ],
     health: [
       'Higher ozone can cause throat irritation, coughing and measurably reduced lung function during exercise. Symptoms typically ease as levels fall in the evening.',
