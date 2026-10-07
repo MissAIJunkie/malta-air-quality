@@ -24,6 +24,15 @@
  *    (`pollutant.*.description` / `.sources` / `.healthEffects`), and the prose
  *    here expands on them rather than contradicting them.
  *
+ * One deliberate exception, and its cost. The `reading` entries name band
+ * ceilings in prose — "Good ends at 5 µg/m³" — because the point being made is
+ * about the SHAPE of a pollutant's scale, and that cannot be made without the
+ * numbers. Those figures are rendered from `AQI_BREAKPOINTS` in a table
+ * directly beneath the prose on the same page, so a divergence is visible at a
+ * glance rather than hidden. Legal limits are deliberately NOT named in prose:
+ * Directive (EU) 2024/2881 tightens several of them from 2030, and a stale
+ * number in a sentence about compliance is a worse error than a vague one.
+ *
  * Do NOT add local colour that cannot be sourced — named roads, traffic counts,
  * industrial sites, fleet statistics, harbour throughput. A guide page that
  * invents specifics to sound authoritative is worse than a shorter one that
@@ -138,7 +147,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
     ],
     reading: [
       'The nitrogen dioxide band scale is the narrowest after fine particles — Good ends at 10 µg/m³, Fair at 25 — reflecting that it is a directly toxic gas rather than a mass of inert material.',
-      'Note the gap between the index and the law. The hourly EU limit value sits at 200 µg/m³, which is above the top of the Very poor band, and it permits 18 exceedances a year before the limit is breached. An hour near that figure is a serious index reading and still establishes nothing legally, and this site will not describe it as a breach.',
+      'Note the gap between the index and the law. The hourly EU limit value — set out in full further down this page, read from the same table the application computes against — sits above the top of the Very poor band, and it permits a number of exceedances each year before the limit is breached at all. An hour near it is a serious index reading and still establishes nothing legally, and this site will not describe it as a breach.',
     ],
     watchFor: ['asthma', 'respiratory', 'children', 'outdoorWorkers', 'athletes'],
   },
@@ -192,7 +201,7 @@ export const POLLUTANT_GUIDES: Record<PollutantCode, PollutantGuide> = {
     ],
     reading: [
       'The sulphur dioxide scale is comparatively wide at the bottom — Good to 20 µg/m³, Fair to 40 — and the Moderate band jumps to 125, which is a large step. A reading moving from Fair to Moderate therefore represents a bigger absolute change than the same band move would for nitrogen dioxide.',
-      'The EU limits are stricter in structure than the index suggests: an hourly limit of 350 µg/m³ permitting 24 exceedances a year, and a daily limit of 125 permitting three. Neither can be settled by one hour, and the daily one cannot be assessed from an hourly series at all.',
+      'The EU limits are stricter in structure than the index suggests, and both are set out in full further down this page: an hourly limit that permits a substantial number of exceedances a year, and a daily limit that permits very few. Neither can be settled by one hour, and the daily one cannot be assessed from an hourly series at all.',
     ],
     watchFor: ['asthma', 'respiratory', 'children'],
   },
