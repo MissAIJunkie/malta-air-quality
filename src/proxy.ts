@@ -51,6 +51,19 @@ const isDevelopment = process.env.NODE_ENV === 'development';
  * needs, as opposed to what Google's ad code needs: if the broad `https:`
  * fallbacks are ever tightened — because AdSense is dropped, or because Google
  * publishes a stable host list — these are the entries that must survive.
+ *
+ * MapLibre fetches raster tiles from inside its own worker, so OpenStreetMap
+ * has to appear in BOTH `connect-src` (the fetch) and `img-src` (the decode) —
+ * listing it in one is a map that half-loads. The worker itself is created from
+ * a blob URL, hence `worker-src 'self' blob:`. MapLibre v6 does not need
+ * `'unsafe-eval'`.
+ *
+ * Vercel Analytics and Speed Insights need no host entry at all: in production
+ * both are served same-origin under `/_vercel/…` and beacon back to the same
+ * place, so `'self'` already covers them. Do not add `va.vercel-scripts.com` —
+ * nothing loads from it in production. Locally those paths 404, and the console
+ * then reports a MIME-type refusal rather than a CSP one; that message is
+ * expected and `e2e/content-pages.spec.ts` lists it as known-benign.
  */
 const OPENSTREETMAP_TILES = 'https://tile.openstreetmap.org https://*.tile.openstreetmap.org';
 
