@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { ALL_NAV } from '@/components/layout/nav-items';
+import { ALL_NAV, availableNav } from '@/components/layout/nav-items';
+import { getCapabilities } from '@/config/env';
 import { STATIONS } from '@/config/stations';
 import { getDictionary, hasKey, t } from '@/lib/i18n';
 
@@ -16,6 +17,12 @@ export const metadata: Metadata = {
  *
  * Offers the routes that do exist and names the five stations, because the most
  * common way to land here is a mistyped or out-of-date station URL.
+ *
+ * "Routes that do exist" is gated through `availableNav`, like the header, the
+ * footer and the sitemap. Sending someone who already hit a dead URL on to
+ * `/alerts` — which, without email and a database, only explains that it cannot
+ * work — would be a second dead end in the place built to rescue them from the
+ * first.
  */
 export default function NotFound() {
   const dict = getDictionary();
@@ -39,7 +46,7 @@ export default function NotFound() {
           {s('errors.notFoundPages', 'Pages on maqua.app')}
         </h2>
         <ul className="flex flex-col gap-1">
-          {ALL_NAV.map((item) => (
+          {availableNav(ALL_NAV, getCapabilities()).map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}

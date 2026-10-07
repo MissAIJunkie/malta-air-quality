@@ -2,115 +2,33 @@ import { networkInterfaces } from 'node:os';
 import type { NextConfig } from 'next';
 
 /**
- * Security headers, and a Content-Security-Policy that permits exactly what this
- * application uses.
+ * Security headers.
  *
- * ## Why `'unsafe-inline'` is in `script-src`
+ * ## The Content-Security-Policy is NOT here
  *
- * Not laziness — a deliberate trade, and the alternative was considered first.
- * The App Router serves its streaming payload through inline
- * `self.__next_f.push(...)` scripts, and `next-themes` injects an inline script
- * in the document head to pick the theme before first paint (without it the page
- * flashes the wrong theme on every load). A plain `script-src 'self'` blocks
- * both and the application does not render at all.
+ * It used to be, with everything else in this list, so that exactly one place
+ * decided the security headers. It now lives in `src/proxy.ts`, and the rule it
+ * was protecting is intact: each header still has exactly one source of truth,
+ * and nothing in this file sets a CSP any more.
  *
- * The nonce alternative means generating a value per request in middleware and
- * threading it through the root layout. That contradicts keeping middleware free
- * of per-request work, and the theme script lives in a layout this module does
- * not control. So: `'unsafe-inline'` for inline scripts, and the external script
- * allowlist kept as short as it can be — currently one host, for AdSense, below.
+ * It had to move because the policy stopped being a constant. Google documents
+ * that AdSense supports only a strict, nonce-based CSP — explicitly because the
+ * hosts its ad code loads from change over time, so any allowlist we wrote here
+ * would go stale and quietly stop ads serving. A nonce must be unique and
+ * unpredictable per request, which a static `headers()` entry cannot be.
  *
- * ## Google AdSense
+ * The reasoning that used to live here — why `'unsafe-inline'` was needed for
+ * the App Router's streaming payload and the `next-themes` theme script, what
+ * the map worker requires, why Vercel Analytics needs no host — has moved to
+ * `src/proxy.ts` alongside the policy it explains. The nonce resolves most of
+ * it: inline scripts we emit are now trusted by nonce rather than by blanket
+ * `'unsafe-inline'`.
  *
- * `pagead2.googlesyndication.com` is the AdSense loader. It is here so the tag
- * in the root layout can execute: without it the CSP blocks that script in every
- * browser, and only Google's crawler — which reads the markup rather than
- * running it — would ever see it.
- *
- * This is the first external script host this policy has allowed, and it is a
- * real widening, not a technicality: a third-party script is precisely the
- * threat the paragraph above is written against, and this one is an ad loader
- * that can pull further code of its own choosing. It is here because the site is
- * being monetised, not because that reasoning stopped applying.
- *
- * The loader alone is enough for AdSense to verify the site. It is NOT enough to
- * serve an ad. Ad slots render in cross-origin iframes, so serving will also
- * need `frame-src` opened from `'none'` to the ad hosts
- * (`googleads.g.doubleclick.net`, `tpc.googlesyndication.com`), plus those hosts
- * in `img-src` and `connect-src`. Make that change when ads are switched on, and
- * update /privacy in the same commit — see the note in `src/lib/analytics`.
- *
- * ## Map tiles
- *
- * MapLibre fetches raster tiles through its worker, so OpenStreetMap has to
- * appear in BOTH `connect-src` (the fetch) and `img-src` (the decode), and the
- * worker itself is created from a blob URL — hence `worker-src 'self' blob:`.
- * MapLibre v6 does not need `'unsafe-eval'`.
- *
- * ## Vercel Analytics and Speed Insights
- *
- * Both are served same-origin under `/_vercel/…` in production and beacon back
- * to the same place, so `'self'` already covers them. Do not add
- * `va.vercel-scripts.com`: in production nothing loads from it. In development
- * the packages fall back to a debug script on that host, which this policy
- * blocks — the resulting console message is expected, and analytics is not
- * wanted locally anyway.
+ * Everything below is genuinely static and stays.
  */
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-const OPENSTREETMAP_TILES = 'https://tile.openstreetmap.org https://*.tile.openstreetmap.org';
-
-/** The AdSense loader, and nothing else. See the note above. */
-const ADSENSE_LOADER = 'https://pagead2.googlesyndication.com';
-
-const contentSecurityPolicy = [
-  "default-src 'self'",
-  "base-uri 'self'",
-  "object-src 'none'",
-  // Nothing may frame this application, and it frames nothing.
-  "frame-src 'none'",
-  "frame-ancestors 'none'",
-  "form-action 'self'",
-  // `unsafe-eval` in development only: the dev bundler compiles modules through
-  // eval and Fast Refresh does not work without it. It is never shipped.
-  `script-src 'self' 'unsafe-inline' ${ADSENSE_LOADER}${isDevelopment ? " 'unsafe-eval'" : ''}`,
-  // Tailwind emits a stylesheet, but Radix and MapLibre both set inline styles
-  // on the elements they position, which `style-src` governs.
-  "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: blob: ${OPENSTREETMAP_TILES}`,
-  "font-src 'self' data:",
-  // MapLibre instantiates its worker from a blob URL.
-  "worker-src 'self' blob:",
-  "child-src 'self' blob:",
-  // `ws:` in development is the Fast Refresh socket.
-  `connect-src 'self' ${OPENSTREETMAP_TILES}${isDevelopment ? ' ws: wss:' : ''}`,
-  "manifest-src 'self'",
-  "media-src 'none'",
-  /**
-   * Production only, and deliberately so.
-   *
-   * This upgrades every http subresource to https. `http://localhost:3000`
-   * escapes it not through a carve-out in this directive but because loopback
-   * is already a potentially trustworthy origin (Secure Contexts §3.1), so
-   * there is nothing insecure left to upgrade. That list is `127.0.0.0/8`,
-   * `::1/128` and `localhost` — it does NOT include the RFC1918 ranges, so the
-   * LAN URL `next dev` also prints, the one you open to test on a phone, is
-   * ordinary insecure http. There every stylesheet, font and script is upgraded
-   * to https, the dev server only speaks plain HTTP, and the page arrives with
-   * no CSS at all behind a wall of ERR_SSL_PROTOCOL_ERROR.
-   */
-  isDevelopment ? null : 'upgrade-insecure-requests',
-]
-  // Drops the directive above when it is null, so the serialised policy never
-  // contains an empty segment or a trailing separator.
-  .filter(Boolean)
-  .join('; ');
-
 const securityHeaders = [
-  {
-    key: 'Content-Security-Policy',
-    value: contentSecurityPolicy,
-  },
   /**
    * Two years, subdomains included. `preload` is deliberately omitted: getting
    * onto the preload list is easy and getting off it is not, so it is a

@@ -155,7 +155,28 @@ export function EventCard({ event, dict = getDictionary(), className }: EventCar
       : t(dict, 'forecast.forecastLabel');
 
   return (
-    <article
+    /**
+     * A `<div>`, deliberately — NOT an `<article>`.
+     *
+     * `<article>` asserts "independently distributable", and these cards are
+     * not. The qualifier that makes one honest — that these are modelled values
+     * for a named locality, not measurements — lives in the parent widget,
+     * outside this element. Detach the card and it loses its "not a
+     * measurement" disclaimer, so the markup would be asserting something
+     * untrue.
+     *
+     * It was an `<article>` until 2026-10-07, and the cost was not theoretical.
+     * `<article>` is the strongest main-content signal in the readability
+     * family of heuristics that boilerplate strippers descend from, and these
+     * were the only `<article>` elements on any page. Recall-favouring
+     * extraction of `/` and `/station/<id>` therefore returned 444 characters —
+     * this card, and nothing else. No `h1`, no band, no measured value, no
+     * timestamp, no station name. Every reader saw the page; everything citing
+     * the page saw a Copernicus dust forecast.
+     *
+     * Keep this a `<div>`. A test in `__tests__/event-card.test.tsx` asserts it.
+     */
+    <div
       data-impact={event.impactDirection}
       className={cn(
         'rounded-card border-border bg-surface flex flex-col gap-2 border border-l-4 p-3',
@@ -260,6 +281,6 @@ export function EventCard({ event, dict = getDictionary(), className }: EventCar
           </p>
         ) : null}
       </div>
-    </article>
+    </div>
   );
 }

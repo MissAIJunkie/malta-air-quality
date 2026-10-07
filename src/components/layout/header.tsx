@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { MaquaMark, Wordmark } from '@/components/layout/brand';
 import { HeaderStatus } from '@/components/layout/header-status';
 import { MobileMenu, type MenuLink } from '@/components/layout/mobile-menu';
-import { INFORMATION_NAV, PRIMARY_NAV } from '@/components/layout/nav-items';
+import { INFORMATION_NAV, PRIMARY_NAV, availableNav } from '@/components/layout/nav-items';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
+import { getCapabilities } from '@/config/env';
 import { getDictionary, hasKey, t } from '@/lib/i18n';
 
 /**
@@ -32,6 +33,16 @@ function copy(key: string, fallback: string): string {
  */
 export function SiteHeader() {
   const dict = getDictionary();
+
+  /*
+   * Menus list only what this deployment can actually do. `/alerts` promises an
+   * email; without `RESEND_API_KEY` and a database it can only apologise, and a
+   * header link to a dead feature reads as an unfinished site — which is how it
+   * read to AdSense. The sitemap applies the same predicate.
+   */
+  const capabilities = getCapabilities();
+  const primary = availableNav(PRIMARY_NAV, capabilities);
+  const information = availableNav(INFORMATION_NAV, capabilities);
 
   const toLinks = (items: typeof PRIMARY_NAV): MenuLink[] =>
     items.map((item) => ({
@@ -83,23 +94,25 @@ export function SiteHeader() {
           aria-label={t(dict, 'a11y.mainNavigation')}
           className="hidden items-center gap-1 md:flex"
         >
-          {[...PRIMARY_NAV.filter((item) => item.href !== '/'), ...INFORMATION_NAV].map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex min-h-11 items-center rounded-full px-3.5 text-sm font-medium whitespace-nowrap transition-colors"
-            >
-              {t(dict, item.labelKey)}
-            </Link>
-          ))}
+          {[...primary, ...information]
+            .filter((item) => item.inHeader && item.href !== '/')
+            .map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex min-h-11 items-center rounded-full px-3.5 text-sm font-medium whitespace-nowrap transition-colors"
+              >
+                {t(dict, item.labelKey)}
+              </Link>
+            ))}
         </nav>
 
         <div className="hidden md:block">{themeToggle}</div>
 
         <div className="md:hidden">
           <MobileMenu
-            primary={toLinks(PRIMARY_NAV)}
-            information={toLinks(INFORMATION_NAV)}
+            primary={toLinks(primary)}
+            information={toLinks(information)}
             appearance={
               <div className="flex flex-col gap-2">
                 <span className="text-foreground text-sm font-medium">

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
 import { IBM_Plex_Mono, Public_Sans, Space_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 
@@ -223,8 +224,26 @@ function structuredData() {
   return { '@context': 'https://schema.org', '@graph': [website, publisher, application] };
 }
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const dict = getDictionary();
+
+  /**
+   * The per-request CSP nonce, minted in `src/proxy.ts`.
+   *
+   * Reading a request header is what makes every route in this application
+   * dynamic — there is no build-time value a nonce could take, since the whole
+   * point is that it is unguessable and never reused. That is an accepted cost
+   * rather than an oversight: `/` and `/station/[id]` were already
+   * `force-dynamic` for their live readings, and the rest of the site is prose
+   * with no data fetches, so the work per request is a render and nothing else.
+   *
+   * Falls back to `undefined` rather than to a placeholder. A literal string
+   * here would be a nonce an attacker could read out of the source and reuse,
+   * which is worse than no nonce: React omits the attribute entirely for
+   * `undefined`, so a misconfigured deployment fails loudly with blocked
+   * scripts instead of quietly accepting forged ones.
+   */
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
 
   return (
     /**
@@ -265,11 +284,13 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <script
           async
           crossOrigin="anonymous"
+          nonce={nonce}
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
         />
 
         <script
           type="application/ld+json"
+          nonce={nonce}
           /* Serialised from a literal object built in this file — no user input
              reaches it — and `<` is escaped so a future string value could not
              close the script tag. */
@@ -278,7 +299,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           }}
         />
 
-        <Providers>
+        <Providers nonce={nonce}>
           <SkipLink />
           <SiteHeader />
           {/* Above the page content and below the header: losing the connection
